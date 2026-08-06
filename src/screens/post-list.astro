@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '@/shared/layouts/BaseLayout.astro';
-import { getPublishedPosts } from '@/lib/posts';
+import { getPublishedPosts } from '@/features/posts/query';
 
 const posts = await getPublishedPosts();
 ---

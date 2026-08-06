@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '@/shared/layouts/BaseLayout.astro';
-import { getRecentPosts } from '@/lib/posts';
+import { getRecentPosts } from '@/features/posts/query';
 
 const recentPosts = await getRecentPosts();
 ---
