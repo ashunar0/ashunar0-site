@@ -59,6 +59,34 @@ const publishedOn = post.data.pubDate.toLocaleDateString('ja-JP', {
   </article>
 </BaseLayout>
 
+<script>
+  // Shiki が出す pre をラッパーで包み、右上にコピーボタンを足す。
+  // クリップボードはブラウザ API なので、ここだけは静的 HTML で完結しない。
+  for (const pre of document.querySelectorAll<HTMLPreElement>('.post-body pre')) {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'code-block';
+    pre.replaceWith(wrapper);
+    wrapper.append(pre);
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.textContent = 'copy';
+    wrapper.append(button);
+
+    button.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(pre.textContent ?? '');
+        button.textContent = 'copied';
+      } catch {
+        button.textContent = 'failed';
+      }
+      setTimeout(() => {
+        button.textContent = 'copy';
+      }, 1500);
+    });
+  }
+</script>
+
 {/* MDX が吐く HTML には scoped style が効かないので、.post-body に絞って global で当てる */}
 <style is:global>
   .post-body {
@@ -133,9 +161,12 @@ const publishedOn = post.data.pubDate.toLocaleDateString('ja-JP', {
     font-size: 0.9em;
   }
 
-  /* コードブロック。長い行は折り返さず横スクロールさせる */
+  /*
+   * コードブロック。長い行は折り返さず横スクロールさせる。
+   * 背景と文字色は Shiki がインライン style で書くので、ここでは指定しない
+   * （指定しても負ける）。配色を変えたいときは astro.config.mjs の shikiConfig。
+   */
   .post-body pre {
-    background: var(--color-surface-sunken);
     border-radius: 0.5rem;
     padding: 1rem;
     overflow-x: auto;
@@ -186,5 +217,44 @@ const publishedOn = post.data.pubDate.toLocaleDateString('ja-JP', {
 
   .post-body hr + * {
     margin-top: 3rem;
+  }
+
+  /* コピーボタン。pre 自身ではなくラッパーを基準にしないと、横スクロールで一緒に流れる */
+  .post-body .code-block {
+    position: relative;
+  }
+
+  .post-body .code-block > button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 0.2rem 0.5rem;
+    border: 1px solid rgb(255 255 255 / 0.15);
+    border-radius: 0.25rem;
+    background: rgb(255 255 255 / 0.08);
+    color: #e1e4e8;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    cursor: pointer;
+    opacity: 0;
+    transition:
+      opacity 120ms ease,
+      background 120ms ease;
+  }
+
+  .post-body .code-block:hover > button,
+  .post-body .code-block > button:focus-visible {
+    opacity: 1;
+  }
+
+  .post-body .code-block > button:hover {
+    background: rgb(255 255 255 / 0.16);
+  }
+
+  /* ホバーできない端末では出しっぱなしにする */
+  @media (hover: none) {
+    .post-body .code-block > button {
+      opacity: 1;
+    }
   }
 </style>

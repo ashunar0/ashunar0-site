@@ -13,9 +13,9 @@ export default defineConfig({
 
   markdown: {
     // Shiki はテーマの色をインライン style で書き込むため、CSS からは上書きできない。
-    // ライトのサイトなので、テーマ側をライトに合わせる。
+    // コードブロックの配色はここが唯一の指定場所になる。
     shikiConfig: {
-      theme: 'github-light',
+      theme: 'github-dark',
     },
   },
 
