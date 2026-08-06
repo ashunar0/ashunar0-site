@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import GithubIcon from '../components/github-icon.astro';
 
 interface Props {
   title: string;
@@ -29,29 +30,40 @@ const isCurrent = (href: string) => path === href || path.startsWith(`${href}/`)
   </head>
   <body class="bg-bg font-sans text-fg antialiased">
     <header class="border-b border-border">
-      <div class="mx-auto flex max-w-2xl items-center justify-between px-6 py-5">
-        <a href="/" class="font-medium tracking-tight transition-colors hover:text-fg-soft">
-          ashunar0
+      <div class="mx-auto flex max-w-5xl items-center justify-between px-6 py-5">
+        <a href="/" class="text-xl font-bold tracking-tight transition-colors hover:text-fg-soft">
+          @ashunar0
         </a>
-        <nav class="flex gap-6 text-sm">
-          {
-            navItems.map(({ href, label }) => (
-              <a
-                href={href}
-                class:list={[
-                  'transition-colors hover:text-fg',
-                  isCurrent(href) ? 'text-fg' : 'text-fg-muted',
-                ]}
-              >
-                {label}
-              </a>
-            ))
-          }
-        </nav>
+        <div class="flex items-center gap-6">
+          <nav class="flex gap-6 text-sm">
+            {
+              navItems.map(({ href, label }) => (
+                <a
+                  href={href}
+                  class:list={[
+                    'font-semibold transition-colors hover:text-fg',
+                    isCurrent(href) ? 'text-fg' : 'text-fg-muted',
+                  ]}
+                >
+                  {label}
+                </a>
+              ))
+            }
+          </nav>
+          <a
+            href="https://github.com/ashunar0"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+            class="text-fg-muted transition-colors hover:text-fg"
+          >
+            <GithubIcon class="size-5" />
+          </a>
+        </div>
       </div>
     </header>
 
-    <main class="mx-auto max-w-2xl px-6 py-14">
+    <main class="mx-auto max-w-5xl px-6 py-14">
       <slot />
     </main>
   </body>
