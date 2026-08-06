@@ -28,8 +28,8 @@ const isCurrent = (href: string) => path === href || path.startsWith(`${href}/`)
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
   </head>
-  <body class="bg-bg font-sans text-fg antialiased">
-    <header class="border-b border-border">
+  <body class="min-h-dvh font-sans text-fg antialiased">
+    <header class="border-b border-border bg-surface">
       <div class="mx-auto flex max-w-5xl items-center justify-between px-6 py-5">
         <a href="/" class="text-xl font-bold tracking-tight transition-colors hover:text-fg-soft">
           @ashunar0

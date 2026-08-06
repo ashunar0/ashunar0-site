@@ -258,3 +258,24 @@ body {
   margin-top: 0.5rem;
 }
 /* hisui-ui:tokens:end */
+
+/*
+ * このサイト固有のトークン。
+ * hisui のブロック内は `hisui init` で再生成されるので、必ず外側に置く。
+ */
+@theme {
+  /* タグ・本文中のリンクなど、読み手に「押せる／辿れる」と伝える色 */
+  --color-accent: var(--color-sky-700);
+
+  /* ページの下地。hisui の既定（無彩色の #f5f5f5）を、accent と同じ色相へ寄せる */
+  --color-canvas: #f9fbfe;
+}
+
+/*
+ * hisui が body に background を直接当てており、それが @layer の外にあるため
+ * Tailwind のユーティリティ（bg-canvas）では上書きできない。
+ * カスケードの同じ土俵に降りて、後勝ちで下地を差し替える。
+ */
+body {
+  background: var(--color-canvas);
+}

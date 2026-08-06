@@ -9,14 +9,38 @@ interface Props {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
+
+const publishedOn = post.data.pubDate.toLocaleDateString('ja-JP', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
 ---
 
 <BaseLayout title={`${post.data.title} | ashunar0`} description={post.data.description}>
-  <article>
-    <h1>{post.data.title}</h1>
-    <time datetime={post.data.pubDate.toISOString()}>
-      {post.data.pubDate.toLocaleDateString('ja-JP')}
-    </time>
+  <article class="max-w-2xl">
+    <header class="border-b border-border pb-8">
+      <h1 class="text-2xl font-bold tracking-tight text-balance">{post.data.title}</h1>
+
+      <div class="mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-fg-muted">
+        <time datetime={post.data.pubDate.toISOString()}>{publishedOn}</time>
+        {
+          post.data.tags.length > 0 && (
+            <>
+              <span aria-hidden="true" class="text-fg-subtle">
+                /
+              </span>
+              <ul class="flex flex-wrap gap-2 font-medium text-accent">
+                {post.data.tags.map((tag) => (
+                  <li>#{tag}</li>
+                ))}
+              </ul>
+            </>
+          )
+        }
+      </div>
+    </header>
+
     <Content />
   </article>
 </BaseLayout>
