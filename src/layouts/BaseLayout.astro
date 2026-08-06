@@ -7,6 +7,15 @@ interface Props {
 }
 
 const { title, description } = Astro.props;
+
+const navItems = [
+  { href: '/posts', label: 'Posts' },
+  { href: '/about', label: 'About' },
+];
+
+// 現在地のナビを濃く出す。/posts/xxx でも Posts を現在地として扱う。
+const path = Astro.url.pathname;
+const isCurrent = (href: string) => path === href || path.startsWith(`${href}/`);
 ---
 
 <!doctype html>
@@ -18,15 +27,31 @@ const { title, description } = Astro.props;
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
   </head>
-  <body>
-    <header>
-      <a href="/">ashunar0</a>
-      <nav>
-        <a href="/posts">Posts</a>
-        <a href="/about">About</a>
-      </nav>
+  <body class="bg-bg font-sans text-fg antialiased">
+    <header class="border-b border-border">
+      <div class="mx-auto flex max-w-2xl items-center justify-between px-6 py-5">
+        <a href="/" class="font-medium tracking-tight transition-colors hover:text-fg-soft">
+          ashunar0
+        </a>
+        <nav class="flex gap-6 text-sm">
+          {
+            navItems.map(({ href, label }) => (
+              <a
+                href={href}
+                class:list={[
+                  'transition-colors hover:text-fg',
+                  isCurrent(href) ? 'text-fg' : 'text-fg-muted',
+                ]}
+              >
+                {label}
+              </a>
+            ))
+          }
+        </nav>
+      </div>
     </header>
-    <main>
+
+    <main class="mx-auto max-w-2xl px-6 py-14">
       <slot />
     </main>
   </body>
