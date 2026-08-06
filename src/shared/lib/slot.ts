@@ -4,7 +4,7 @@ import {
   isValidElement,
   type ReactNode,
 } from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/shared/lib/utils";
 
 type SlotProps = {
   children?: ReactNode;

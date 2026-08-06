@@ -3,12 +3,12 @@
   "framework": "unknown",
   "css": "src/styles/global.css",
   "aliases": {
-    "ui": "@/components/ui",
-    "lib": "@/lib"
+    "ui": "@/shared/ui",
+    "lib": "@/shared/lib"
   },
   "paths": {
-    "ui": "src/components/ui",
-    "lib": "src/lib"
+    "ui": "src/shared/ui",
+    "lib": "src/shared/lib"
   },
   "packageManager": "pnpm"
 }

@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import BaseLayout from '@/shared/layouts/BaseLayout.astro';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = await getCollection('posts', ({ data }) => !data.draft);

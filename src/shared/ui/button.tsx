@@ -1,7 +1,7 @@
 import type { ButtonHTMLAttributes } from "react";
-import { Spinner } from "@/components/ui/spinner";
-import { Slot } from "@/lib/slot";
-import { cn } from "@/lib/utils";
+import { Spinner } from "@/shared/ui/spinner";
+import { Slot } from "@/shared/lib/slot";
+import { cn } from "@/shared/lib/utils";
 
 export type ButtonVariant =
   | "solid"
