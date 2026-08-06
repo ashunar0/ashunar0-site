@@ -3,6 +3,7 @@ import { render } from 'astro:content';
 import BaseLayout from '@/shared/layouts/BaseLayout.astro';
 import { Card } from '@/shared/ui/card';
 import { Badge } from '@/shared/ui/badge';
+import TableOfContents from '@/screens/parts/table-of-contents.astro';
 import type { Post } from '@/features/posts/query';
 
 interface Props {
@@ -10,7 +11,7 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const { Content } = await render(post);
+const { Content, headings } = await render(post);
 
 const publishedOn = post.data.pubDate.toLocaleDateString('ja-JP', {
   year: 'numeric',
@@ -20,8 +21,8 @@ const publishedOn = post.data.pubDate.toLocaleDateString('ja-JP', {
 ---
 
 <BaseLayout title={`${post.data.title} | ashunar0`} description={post.data.description}>
-  <article class="max-w-3xl">
-    <header>
+  <article>
+    <header class="max-w-3xl">
       <h1 class="text-2xl font-bold tracking-tight text-balance">{post.data.title}</h1>
 
       <div class="mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-fg-muted">
@@ -47,15 +48,27 @@ const publishedOn = post.data.pubDate.toLocaleDateString('ja-JP', {
       </div>
     </header>
 
+    {/* 記事ヘッダーを外に出すことで、カードと目次の上辺が揃う */}
     {/*
-      Card.Body の padding は Card.Header が上にある前提で pt が狭い。
-      本文だけを載せるここでは上下を揃えたいので、Root に直接 padding を置く。
+      items-start を付けると grid セルが目次の高さまで縮み、sticky が動く余地を失う。
+      セルを行の高さ（カードの高さ）まで伸ばしたいので、既定の stretch のままにする。
     */}
-    <Card.Root variant="outline" className="mt-8 p-6 sm:p-8">
-      <div class="post-body">
-        <Content />
+    <div class="mt-8 lg:grid lg:grid-cols-[minmax(0,1fr)_13rem] lg:gap-10">
+      {/*
+        Card.Body の padding は Card.Header が上にある前提で pt が狭い。
+        本文だけを載せるここでは上下を揃えたいので、Root に直接 padding を置く。
+      */}
+      <Card.Root variant="outline" className="max-w-3xl p-6 sm:p-8">
+        <div class="post-body">
+          <Content />
+        </div>
+      </Card.Root>
+
+      {/* 狭い画面では本文の幅を削ってしまうので出さない */}
+      <div class="hidden lg:block">
+        <TableOfContents headings={headings} />
       </div>
-    </Card.Root>
+    </div>
   </article>
 </BaseLayout>
 
