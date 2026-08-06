@@ -10,7 +10,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "deploy": "astro build && wrangler deploy"
+    "check": "astro check",
+    "deploy": "astro check && astro build && wrangler deploy"
   },
   "dependencies": {
     "@astrojs/mdx": "^7.0.5",
@@ -33,6 +34,8 @@
     ]
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "typescript": "^6.0.3",
     "wrangler": "^4.119.0"
   }
 }

@@ -1,6 +1,6 @@
 ---
 import type { GetStaticPaths } from 'astro';
-import { getPublishedPosts } from '@/features/posts/query';
+import { getPublishedPosts, type Post } from '@/features/posts/query';
 import PostDetail from '@/screens/post-detail.astro';
 
 // URL の生成はルーティングの責務なので pages に置く。画面の中身は screens が持つ。
@@ -11,6 +11,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
     props: { post },
   }));
 };
+
+// getStaticPaths の props は Astro.props に型が伝わらないので、ここで明示する。
+interface Props {
+  post: Post;
+}
 
 const { post } = Astro.props;
 ---
