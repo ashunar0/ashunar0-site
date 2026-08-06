@@ -1,0 +1,13 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "ashunar0-site",
+  "compatibility_date": "2026-08-06",
+  // 完全静的サイトなので main（Worker スクリプト）は持たない。assets だけを配信する。
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  },
+  "observability": {
+    "enabled": true
+  }
+}
