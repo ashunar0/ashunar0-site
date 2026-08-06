@@ -62,6 +62,7 @@ const publishedOn = post.data.pubDate.toLocaleDateString('ja-JP', {
 {/* MDX が吐く HTML には scoped style が効かないので、.post-body に絞って global で当てる */}
 <style is:global>
   .post-body {
+    font-size: 0.9375rem;
     line-height: 1.9;
   }
 
@@ -81,12 +82,19 @@ const publishedOn = post.data.pubDate.toLocaleDateString('ja-JP', {
 
   .post-body > h3 {
     margin-top: 2.25rem;
-    font-size: 1.125rem;
+    font-size: 1.25rem;
     font-weight: 600;
     line-height: 1.6;
   }
 
-  .post-body > :is(h2, h3) + * {
+  .post-body > h4 {
+    margin-top: 1.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.6;
+  }
+
+  .post-body > :is(h2, h3, h4) + * {
     margin-top: 0.75em;
   }
 
@@ -122,7 +130,7 @@ const publishedOn = post.data.pubDate.toLocaleDateString('ja-JP', {
     background: var(--color-surface-sunken);
     border-radius: 0.25rem;
     padding: 0.15em 0.4em;
-    font-size: 0.875em;
+    font-size: 0.9em;
   }
 
   /* コードブロック。長い行は折り返さず横スクロールさせる */
@@ -144,5 +152,39 @@ const publishedOn = post.data.pubDate.toLocaleDateString('ja-JP', {
   .post-body :is(img, video) {
     max-width: 100%;
     border-radius: 0.5rem;
+  }
+
+  /*
+   * 列が多いとカードからはみ出すので、テーブル自体を横スクロールさせる。
+   * ラッパー要素は MDX が吐かないため、table に直接持たせる。
+   */
+  .post-body table {
+    display: block;
+    overflow-x: auto;
+    border-collapse: collapse;
+    line-height: 1.7;
+  }
+
+  .post-body :is(th, td) {
+    border: 1px solid var(--color-border);
+    padding: 0.5em 0.75em;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .post-body th {
+    background: var(--color-surface-sunken);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .post-body hr {
+    border: 0;
+    border-top: 1px solid var(--color-border);
+    margin-top: 3rem;
+  }
+
+  .post-body hr + * {
+    margin-top: 3rem;
   }
 </style>
