@@ -1,26 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
-import BaseLayout from '@/shared/layouts/BaseLayout.astro';
-
-const recentPosts = (await getCollection('posts', ({ data }) => !data.draft))
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 5);
+import Home from '@/screens/home.astro';
 ---
 
-<BaseLayout title="ashunar0" description="あさひの個人サイト">
-  <h1>ashunar0</h1>
-
-  <section>
-    <h2>Recent posts</h2>
-    <ul>
-      {
-        recentPosts.map((post) => (
-          <li>
-            <a href={`/posts/${post.id}`}>{post.data.title}</a>
-          </li>
-        ))
-      }
-    </ul>
-    <a href="/posts">すべての記事</a>
-  </section>
-</BaseLayout>
+<Home />

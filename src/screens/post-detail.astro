@@ -1,0 +1,22 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '@/shared/layouts/BaseLayout.astro';
+import type { Post } from '@/lib/posts';
+
+interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<BaseLayout title={`${post.data.title} | ashunar0`} description={post.data.description}>
+  <article>
+    <h1>{post.data.title}</h1>
+    <time datetime={post.data.pubDate.toISOString()}>
+      {post.data.pubDate.toLocaleDateString('ja-JP')}
+    </time>
+    <Content />
+  </article>
+</BaseLayout>

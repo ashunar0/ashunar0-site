@@ -1,0 +1,24 @@
+---
+import BaseLayout from '@/shared/layouts/BaseLayout.astro';
+import { getRecentPosts } from '@/lib/posts';
+
+const recentPosts = await getRecentPosts();
+---
+
+<BaseLayout title="ashunar0" description="あさひの個人サイト">
+  <h1>ashunar0</h1>
+
+  <section>
+    <h2>Recent posts</h2>
+    <ul>
+      {
+        recentPosts.map((post) => (
+          <li>
+            <a href={`/posts/${post.id}`}>{post.data.title}</a>
+          </li>
+        ))
+      }
+    </ul>
+    <a href="/posts">すべての記事</a>
+  </section>
+</BaseLayout>

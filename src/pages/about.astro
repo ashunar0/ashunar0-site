@@ -1,14 +1,5 @@
 ---
-import BaseLayout from '@/shared/layouts/BaseLayout.astro';
-import { Button } from '@/shared/ui/button';
+import About from '@/screens/about.astro';
 ---
 
-<BaseLayout title="About | ashunar0" description="川野辺旭について">
-  <h1>About</h1>
-  <p>ここに自己紹介を書く。</p>
-
-  <!-- hisui の疎通確認。client directive なし = ビルド時にHTML化されてJSは乗らない -->
-  <Button variant="solid">solid</Button>
-  <Button variant="outline">outline</Button>
-  <Button variant="ghost" colorPalette="danger">ghost danger</Button>
-</BaseLayout>
+<About />
