@@ -1,0 +1,260 @@
+/* hisui-ui:tokens:start */
+@import "tailwindcss";
+@import "@fontsource-variable/wix-madefor-text";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Wix Madefor Text Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --animate-menu-open: menu-open 120ms ease-out;
+  --animate-menu-close: menu-close 120ms ease-in;
+  --animate-accordion-down: accordion-down 200ms ease-out;
+  --animate-accordion-up: accordion-up 200ms ease-out;
+  --animate-fade-in: fade-in 200ms ease-out;
+  --animate-fade-out: fade-out 200ms ease-out;
+  --animate-slide-in-right: slide-in-right 250ms cubic-bezier(0.32, 0.72, 0, 1);
+  --animate-slide-out-right: slide-out-right 250ms cubic-bezier(0.32, 0.72, 0, 1);
+  --animate-slide-in-left: slide-in-left 250ms cubic-bezier(0.32, 0.72, 0, 1);
+  --animate-slide-out-left: slide-out-left 250ms cubic-bezier(0.32, 0.72, 0, 1);
+  --animate-slide-in-up: slide-in-up 250ms cubic-bezier(0.32, 0.72, 0, 1);
+  --animate-slide-out-down: slide-out-down 250ms cubic-bezier(0.32, 0.72, 0, 1);
+  --animate-slide-in-down: slide-in-down 250ms cubic-bezier(0.32, 0.72, 0, 1);
+  --animate-slide-out-up: slide-out-up 250ms cubic-bezier(0.32, 0.72, 0, 1);
+
+  --color-bg: white;
+  --color-canvas: #f5f5f5;
+  --color-surface: white;
+  --color-surface-muted: var(--color-neutral-50);
+  --color-surface-sunken: #eaebec;
+  --color-surface-sunken-hover: #dcddde;
+  --color-hover: var(--color-neutral-100);
+  --color-active: var(--color-neutral-200);
+
+  --color-fg: var(--color-neutral-900);
+  --color-fg-soft: var(--color-neutral-700);
+  --color-fg-muted: var(--color-neutral-500);
+  --color-fg-subtle: var(--color-neutral-400);
+
+  --color-border: var(--color-neutral-200);
+  --color-border-muted: var(--color-neutral-100);
+
+  --color-success-subtle: var(--color-emerald-50);
+  --color-success-border: var(--color-emerald-200);
+  --color-success-fg: var(--color-emerald-700);
+  --color-success-solid: var(--color-emerald-600);
+  --color-success-solid-fg: white;
+
+  --color-danger-subtle: var(--color-rose-50);
+  --color-danger-border: var(--color-rose-200);
+  --color-danger-fg: var(--color-rose-700);
+  --color-danger-solid: var(--color-rose-600);
+  --color-danger-solid-fg: white;
+
+  --color-warning-subtle: var(--color-amber-50);
+  --color-warning-border: var(--color-amber-200);
+  --color-warning-fg: var(--color-amber-700);
+  --color-warning-solid: var(--color-amber-600);
+  --color-warning-solid-fg: white;
+
+  --color-info-subtle: var(--color-sky-50);
+  --color-info-border: var(--color-sky-200);
+  --color-info-fg: var(--color-sky-700);
+  --color-info-solid: var(--color-sky-600);
+  --color-info-solid-fg: white;
+}
+
+.dark {
+  --color-bg: var(--color-neutral-950);
+  --color-canvas: #050606;
+  --color-surface: var(--color-neutral-900);
+  --color-surface-muted: var(--color-neutral-900);
+  --color-surface-sunken: #272728;
+  --color-surface-sunken-hover: #34343a;
+  --color-hover: var(--color-neutral-800);
+  --color-active: var(--color-neutral-700);
+
+  --color-fg: var(--color-neutral-50);
+  --color-fg-soft: var(--color-neutral-300);
+  --color-fg-muted: var(--color-neutral-400);
+  --color-fg-subtle: var(--color-neutral-500);
+
+  --color-border: var(--color-neutral-800);
+  --color-border-muted: var(--color-neutral-800);
+
+  --color-success-subtle: var(--color-emerald-950);
+  --color-success-border: var(--color-emerald-900);
+  --color-success-fg: var(--color-emerald-400);
+  --color-success-solid: var(--color-emerald-500);
+  --color-success-solid-fg: var(--color-emerald-50);
+
+  --color-danger-subtle: var(--color-rose-950);
+  --color-danger-border: var(--color-rose-900);
+  --color-danger-fg: var(--color-rose-400);
+  --color-danger-solid: var(--color-rose-500);
+  --color-danger-solid-fg: var(--color-rose-50);
+
+  --color-warning-subtle: var(--color-amber-950);
+  --color-warning-border: var(--color-amber-900);
+  --color-warning-fg: var(--color-amber-400);
+  --color-warning-solid: var(--color-amber-500);
+  --color-warning-solid-fg: var(--color-amber-50);
+
+  --color-info-subtle: var(--color-sky-950);
+  --color-info-border: var(--color-sky-900);
+  --color-info-fg: var(--color-sky-400);
+  --color-info-solid: var(--color-sky-500);
+  --color-info-solid-fg: var(--color-sky-50);
+}
+
+@keyframes menu-open {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes menu-close {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+
+@keyframes accordion-down {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--height);
+  }
+}
+
+@keyframes accordion-up {
+  from {
+    height: var(--height);
+  }
+  to {
+    height: 0;
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes slide-in-right {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes slide-out-right {
+  from { transform: translateX(0); }
+  to { transform: translateX(100%); }
+}
+
+@keyframes slide-in-left {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes slide-out-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+
+@keyframes slide-in-up {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes slide-out-down {
+  from { transform: translateY(0); }
+  to { transform: translateY(100%); }
+}
+
+@keyframes slide-in-down {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes slide-out-up {
+  from { transform: translateY(0); }
+  to { transform: translateY(-100%); }
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-fg);
+}
+
+/* テーマ切替の瞬間だけ全 transition を無効化 (CSS 変数の入替を補間させない) */
+.theme-switching *,
+.theme-switching *::before,
+.theme-switching *::after {
+  transition: none !important;
+}
+
+@utility scrollbar-soft {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in oklab, var(--color-fg-muted) 30%, transparent)
+    transparent;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: color-mix(
+      in oklab,
+      var(--color-fg-muted) 30%,
+      transparent
+    );
+    border-radius: 9999px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: color-mix(
+      in oklab,
+      var(--color-fg-muted) 50%,
+      transparent
+    );
+  }
+}
+
+.docs-prose > * + * {
+  margin-top: 2rem;
+}
+.docs-prose > p {
+  color: var(--color-fg-muted);
+  font-size: 0.875rem;
+  line-height: 1.625;
+}
+.docs-prose > h1 + p {
+  margin-top: 1rem;
+}
+.docs-prose > h2 + p {
+  margin-top: 0.5rem;
+}
+/* hisui-ui:tokens:end */

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://raw.githubusercontent.com/ashunar0/hisui/main/registry/schema.json",
+  "framework": "unknown",
+  "css": "src/styles/global.css",
+  "aliases": {
+    "ui": "@/components/ui",
+    "lib": "@/lib"
+  },
+  "paths": {
+    "ui": "src/components/ui",
+    "lib": "src/lib"
+  },
+  "packageManager": "pnpm"
+}
