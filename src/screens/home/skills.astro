@@ -12,6 +12,12 @@ import { Icon } from 'astro-icon/components';
 const skills = [
   { name: 'TypeScript', icon: 'logos:typescript-icon' },
   { name: 'React', icon: 'logos:react' },
+  { name: 'Vue', icon: 'logos:vue' },
+  // logos:nextjs-icon は白＋グラデで暗い地専用。元から黒一色のロゴなので
+  // currentColor の単色版にして両テーマを一枚で賄う。
+  { name: 'Next.js', icon: 'nextjs-mono' },
+  // タイル自体が不透明なので、地の色に関係なく一枚で読める。
+  { name: 'TanStack Query', icon: 'tanstack' },
   // マークが暗色なので暗い地では沈む。グラデーションを持つため単色化はできず、
   // 公式の暗い背景用（マークが白）に差し替える。
   { name: 'Astro', icon: 'logos:astro-icon', iconDark: 'astro-dark' },
@@ -21,7 +27,12 @@ const skills = [
   // 暗い地では 13.98:1 と十分読めるため、公式の配色に戻す。
   { name: 'Drizzle', icon: 'drizzle-mono', iconDark: 'drizzle' },
   { name: 'zod', icon: 'logos:zod' },
+  // logos:rails はワードマークで幅が浮くため、devicon のアイコン版を使う。
+  // 赤がブランドカラーなので単色化はしない。
+  { name: 'Rails', icon: 'rails' },
   { name: 'Cloudflare', icon: 'logos:cloudflare-icon' },
+  { name: 'Docker', icon: 'logos:docker-icon' },
+  { name: 'Figma', icon: 'logos:figma' },
   // 元から単色なので、色だけ currentColor にした版を置いて両テーマを一枚で賄う。
   { name: 'Unity', icon: 'unity-mono' },
 ];

@@ -12,7 +12,17 @@ import icon from 'astro-icon';
 // https://astro.build/config
 export default defineConfig({
   // アイコンはビルド時に svg として埋め込まれるので、クライアントに JS は乗らない。
-  integrations: [mdx(), react(), icon()],
+  integrations: [
+    mdx(),
+    react(),
+    icon({
+      // svgo は既定で id を a, b, c… へ短縮する。ローカルの svg が複数あると
+      // 別ファイル同士で id がぶつかり、グラデーションが他方の定義を拾って色が化ける。
+      svgoOptions: {
+        plugins: [{ name: 'preset-default', params: { overrides: { cleanupIds: false } } }],
+      },
+    }),
+  ],
 
   markdown: {
     // Shiki はテーマの色をインライン style で書き込むため、CSS からは上書きできない。
