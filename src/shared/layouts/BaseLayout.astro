@@ -10,10 +10,7 @@ interface Props {
 
 const { title, description } = Astro.props;
 
-const navItems = [
-  { href: '/posts', label: 'Posts' },
-  { href: '/about', label: 'About' },
-];
+const navItems = [{ href: '/posts', label: 'Posts' }];
 
 // 現在地のナビを濃く出す。/posts/xxx でも Posts を現在地として扱う。
 const path = Astro.url.pathname;
