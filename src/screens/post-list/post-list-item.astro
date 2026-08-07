@@ -48,7 +48,7 @@ const monthDay = post.data.pubDate.toLocaleDateString('ja-JP', {
       <ul class="mt-3 flex flex-wrap gap-2 max-sm:mt-2">
         {post.data.tags.map((tag) => (
           <li>
-            <Badge variant="subtle" colorPalette="info" size="sm">
+            <Badge variant="subtle" size="sm" className="bg-brand-subtle text-brand-fg">
               #{tag}
             </Badge>
           </li>

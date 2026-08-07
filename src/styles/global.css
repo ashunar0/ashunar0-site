@@ -318,6 +318,14 @@
    * 地の明るさで必要な濃さが逆転するので、light / dark で振り分ける。
    */
   --color-link: var(--color-sky-600);
+
+  /*
+   * タグなど、brand を淡い面として使うとき用。
+   * surface から作るので、テーマが変われば面の色も一緒に動く。
+   * 文字は brand そのままだと淡い面の上で 3.9:1 しかないため、暗い側へ寄せる。
+   */
+  --color-brand-subtle: color-mix(in oklab, var(--color-brand) 12%, var(--color-surface));
+  --color-brand-fg: color-mix(in oklab, var(--color-brand) 85%, black);
 }
 
 .dark {
@@ -328,6 +336,10 @@
 
   /* sky-700 は暗い地で 3.02:1 しかなく本文には暗すぎるので、明るい側へ */
   --color-link: var(--color-sky-400);
+
+  /* 暗い面では淡い面を作るのに brand を多めに混ぜないと沈む。文字は明るいままでよい */
+  --color-brand-subtle: color-mix(in oklab, var(--color-brand) 20%, var(--color-surface));
+  --color-brand-fg: var(--color-brand);
 
   /*
    * 暗いテーマの下地を neutral（完全な無彩色）から stone（わずかに暖色）へ。
