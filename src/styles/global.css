@@ -5,7 +5,8 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-sans: "Wix Madefor Text Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-sans:
+    "Wix Madefor Text Variable", ui-sans-serif, system-ui, sans-serif;
 
   --animate-menu-open: menu-open 120ms ease-out;
   --animate-menu-close: menu-close 120ms ease-in;
@@ -14,7 +15,8 @@
   --animate-fade-in: fade-in 200ms ease-out;
   --animate-fade-out: fade-out 200ms ease-out;
   --animate-slide-in-right: slide-in-right 250ms cubic-bezier(0.32, 0.72, 0, 1);
-  --animate-slide-out-right: slide-out-right 250ms cubic-bezier(0.32, 0.72, 0, 1);
+  --animate-slide-out-right: slide-out-right 250ms
+    cubic-bezier(0.32, 0.72, 0, 1);
   --animate-slide-in-left: slide-in-left 250ms cubic-bezier(0.32, 0.72, 0, 1);
   --animate-slide-out-left: slide-out-left 250ms cubic-bezier(0.32, 0.72, 0, 1);
   --animate-slide-in-up: slide-in-up 250ms cubic-bezier(0.32, 0.72, 0, 1);
@@ -148,53 +150,93 @@
 }
 
 @keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes fade-out {
-  from { opacity: 1; }
-  to { opacity: 0; }
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
 
 @keyframes slide-in-right {
-  from { transform: translateX(100%); }
-  to { transform: translateX(0); }
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
 
 @keyframes slide-out-right {
-  from { transform: translateX(0); }
-  to { transform: translateX(100%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
 }
 
 @keyframes slide-in-left {
-  from { transform: translateX(-100%); }
-  to { transform: translateX(0); }
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
 
 @keyframes slide-out-left {
-  from { transform: translateX(0); }
-  to { transform: translateX(-100%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
 }
 
 @keyframes slide-in-up {
-  from { transform: translateY(100%); }
-  to { transform: translateY(0); }
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
 
 @keyframes slide-out-down {
-  from { transform: translateY(0); }
-  to { transform: translateY(100%); }
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
 }
 
 @keyframes slide-in-down {
-  from { transform: translateY(-100%); }
-  to { transform: translateY(0); }
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
 
 @keyframes slide-out-up {
-  from { transform: translateY(0); }
-  to { transform: translateY(-100%); }
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100%);
+  }
 }
 
 /*
@@ -270,6 +312,12 @@
 
   /* ページの下地。白より少しだけ沈ませて、surface（white）の Card を浮かせる */
   --color-canvas: #fafbfe;
+
+  /*
+   * 本文中のリンク。「リンクは青」という慣習を残すため brand とは別に持つ。
+   * 地の明るさで必要な濃さが逆転するので、light / dark で振り分ける。
+   */
+  --color-link: var(--color-sky-600);
 }
 
 .dark {
@@ -277,4 +325,7 @@
   --color-brand: #4fa8a6;
 
   /* coral は暗い地の方が得意で、そのままで 5.65:1 通るので据え置き */
+
+  /* sky-700 は暗い地で 3.02:1 しかなく本文には暗すぎるので、明るい側へ */
+  --color-link: var(--color-sky-400);
 }
