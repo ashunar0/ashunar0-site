@@ -114,13 +114,46 @@ const publishedOn = post.data.pubDate.toLocaleDateString('ja-JP', {
 
   /* 見出しは上を大きく空け、直後の本文とは近づける（近いものは仲間に見える） */
   .post-body > h2 {
+    position: relative;
     margin-top: 3rem;
     padding-bottom: 0.4em;
-    border-bottom: 1px solid var(--color-border);
     font-size: 1.375rem;
     font-weight: 700;
     letter-spacing: -0.01em;
     line-height: 1.5;
+  }
+
+  /*
+   * 見出しの装飾。縦棒（::before）と下線（::after）を同じ左端から始める。
+   * 本文の左端は揃えたままにしたいので、字下げせずカードの padding 側へはみ出させる。
+   *
+   * 下線に border-bottom を使うと h2 の枠に沿って left: 0 から始まり、
+   * 縦棒と左端が揃わないため、こちらも擬似要素で引く。
+   */
+  .post-body > h2::before,
+  .post-body > h2::after {
+    content: '';
+    position: absolute;
+    left: -0.75rem;
+    background: var(--color-brand);
+  }
+
+  /*
+   * 縦棒は下線まで伸ばさず、文字の高さに揃える。
+   * line-height: 1.5 の余白が上下に 0.25em ずつ乗るのでその分を詰め、
+   * 下は padding-bottom (0.4em) も足して文字の下端で止める。
+   */
+  .post-body > h2::before {
+    top: 0.25em;
+    bottom: 0.65em;
+    width: 5px;
+  }
+
+  /* 半端な px は h2 の位置によって 1px / 2px に丸めが割れるので、整数で指定する */
+  .post-body > h2::after {
+    right: 0;
+    bottom: 0;
+    height: 2px;
   }
 
   /* 線が入ったぶん、h2 の直後だけ少し余白を足す */
