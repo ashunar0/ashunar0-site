@@ -1,0 +1,57 @@
+---
+import { Image } from 'astro:assets';
+import { Card } from '@/shared/ui/card';
+import GithubIcon from '@/shared/ui/github-icon.astro';
+import avatar from '@/assets/avatar.png';
+
+// TODO: role と bio はあさひが書く。
+const name = 'asahi';
+const handle = 'ashunar0';
+const role = 'ここに一行で何をしている人かを書く';
+const bio = 'ここに二〜三行で自己紹介を書く。何を作っていて、何に興味があるか。';
+---
+
+<Card.Root variant="outline" className="p-5">
+  {/*
+    alt は空にする。すぐ下に名前がテキストであるので、読み上げると二重になる。
+    画像の地は白なので、暗いテーマで浮きすぎないよう縁を一本入れる。
+  */}
+  {/* 縦積みを一段減らすため、アバターと名前は横に並べる */}
+  <div class="flex items-center gap-3">
+    {/*
+      src/assets に置いた画像は astro:assets がビルド時にリサイズして webp にする。
+      表示は 56px だが Retina を考えて 2 倍で書き出す。
+    */}
+    <Image
+      src={avatar}
+      alt=""
+      width={112}
+      height={112}
+      class="size-14 shrink-0 rounded-full border border-border object-cover"
+    />
+
+    <div class="min-w-0">
+      <p class="truncate font-semibold">{name}</p>
+      <p class="truncate text-sm text-fg-muted">@{handle}</p>
+    </div>
+  </div>
+
+  <p class="mt-4 text-sm text-fg-soft">{role}</p>
+  <p class="mt-2 text-sm leading-relaxed text-fg-muted">{bio}</p>
+
+  <div class="mt-4 flex items-center gap-3">
+    <a
+      href={`https://github.com/${handle}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="GitHub"
+      class="text-fg-muted transition-colors hover:text-fg"
+    >
+      <GithubIcon class="size-5" />
+    </a>
+
+    <a href="/about" class="ml-auto text-sm text-fg-muted transition-colors hover:text-brand">
+      About
+    </a>
+  </div>
+</Card.Root>

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@/shared/layouts/BaseLayout.astro';
 import PostYearGroup from './post-year-group.astro';
+import ProfileCard from './profile-card.astro';
 import { getPublishedPosts, type Post } from '@/features/posts/query';
 
 const posts = await getPublishedPosts();
@@ -16,16 +17,28 @@ for (const post of posts) {
 <BaseLayout title="Posts | ashunar0" description="書いた記事の一覧">
   <h1 class="max-w-3xl text-2xl font-bold tracking-tight">Posts</h1>
 
-  {
-    posts.length === 0 ? (
-      <p class="mt-8 text-sm text-fg-muted">まだ記事がない。</p>
-    ) : (
-      <div class="mt-8 flex max-w-3xl flex-col gap-6">
-        {/* 最新の年だけ開いておき、古い年は畳んで一覧の見通しを保つ */}
-        {[...byYear].map(([year, yearPosts], index) => (
-          <PostYearGroup year={year} posts={yearPosts} open={index === 0} />
-        ))}
+  {/*
+    詳細ページの目次と同じ列幅・同じ間隔にして、右のレールの位置を揃える。
+    狭い画面では本文の幅を削ってしまうので出さない。
+  */}
+  <div class="mt-8 lg:grid lg:grid-cols-[minmax(0,1fr)_16rem] lg:gap-10">
+    {
+      posts.length === 0 ? (
+        <p class="text-sm text-fg-muted">まだ記事がない。</p>
+      ) : (
+        <div class="flex max-w-3xl flex-col gap-6">
+          {/* 最新の年だけ開いておき、古い年は畳んで一覧の見通しを保つ */}
+          {[...byYear].map(([year, yearPosts], index) => (
+            <PostYearGroup year={year} posts={yearPosts} open={index === 0} />
+          ))}
+        </div>
+      )
+    }
+
+    <div class="hidden lg:block">
+      <div class="sticky top-8">
+        <ProfileCard />
       </div>
-    )
-  }
+    </div>
+  </div>
 </BaseLayout>
