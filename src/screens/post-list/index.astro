@@ -1,0 +1,31 @@
+---
+import BaseLayout from '@/shared/layouts/BaseLayout.astro';
+import PostYearGroup from './post-year-group.astro';
+import { getPublishedPosts, type Post } from '@/features/posts/query';
+
+const posts = await getPublishedPosts();
+
+// 新しい順に並んだ配列をそのまま畳むので、年も年内の記事も新しい順のまま保たれる。
+const byYear = new Map<number, Post[]>();
+for (const post of posts) {
+  const year = post.data.pubDate.getFullYear();
+  byYear.set(year, [...(byYear.get(year) ?? []), post]);
+}
+---
+
+<BaseLayout title="Posts | ashunar0" description="書いた記事の一覧">
+  <h1 class="max-w-3xl text-2xl font-bold tracking-tight">Posts</h1>
+
+  {
+    posts.length === 0 ? (
+      <p class="mt-8 text-sm text-fg-muted">まだ記事がない。</p>
+    ) : (
+      <div class="mt-8 flex max-w-3xl flex-col gap-6">
+        {/* 最新の年だけ開いておき、古い年は畳んで一覧の見通しを保つ */}
+        {[...byYear].map(([year, yearPosts], index) => (
+          <PostYearGroup year={year} posts={yearPosts} open={index === 0} />
+        ))}
+      </div>
+    )
+  }
+</BaseLayout>

@@ -1,0 +1,82 @@
+---
+import { ChevronRight } from 'lucide-react';
+import { Card } from '@/shared/ui/card';
+import PostListItem from './post-list-item.astro';
+import type { Post } from '@/features/posts/query';
+
+interface Props {
+  year: number;
+  posts: Post[];
+  open?: boolean;
+}
+
+const { year, posts, open = false } = Astro.props;
+---
+
+<Card.Root variant="outline" className="p-6 sm:p-8">
+  {/*
+    開閉は details に任せる。JS を足さずにキーボード操作と
+    スクリーンリーダーの読み上げが付いてくる。
+  */}
+  <details open={open} class="group/year">
+    <summary class="flex cursor-pointer items-center justify-between gap-2">
+      <h2 class="font-semibold tracking-wider text-fg"># {year}</h2>
+
+      {/*
+        client directive を付けないので、この React コンポーネントは
+        ビルド時に静的な svg になる。JS は乗らない。
+        React 側が描く svg には Astro の scoped style が届かないため、
+        回転は CSS ではなく class で当てる。
+      */}
+      <ChevronRight
+        className="size-4 shrink-0 text-fg-muted transition-transform group-open/year:rotate-90"
+        aria-hidden="true"
+      />
+    </summary>
+
+    {/* カードの中では線を引かず、記事どうしの余白だけで区切る */}
+    <ul class="mt-4 flex flex-col gap-7">
+      {
+        posts.map((post) => (
+          <li>
+            <PostListItem post={post} />
+          </li>
+        ))
+      }
+    </ul>
+  </details>
+</Card.Root>
+
+<style>
+  /* 既定の三角マーカーを消す。Safari は ::-webkit-details-marker が要る */
+  summary {
+    list-style: none;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  /*
+   * 開閉のアニメーション。auto への補間は interpolate-size が要る。
+   * 継承されるプロパティなので details に置けば ::details-content まで届く。
+   * 未対応のブラウザではアニメーションが付かないだけで、開閉自体は動く。
+   */
+  @media (prefers-reduced-motion: no-preference) {
+    details {
+      interpolate-size: allow-keywords;
+    }
+
+    details::details-content {
+      block-size: 0;
+      overflow: hidden;
+      transition:
+        block-size 200ms ease,
+        content-visibility 200ms allow-discrete;
+    }
+
+    details[open]::details-content {
+      block-size: auto;
+    }
+  }
+</style>

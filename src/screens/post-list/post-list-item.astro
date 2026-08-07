@@ -1,0 +1,53 @@
+---
+import { Badge } from '@/shared/ui/badge';
+import type { Post } from '@/features/posts/query';
+
+interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+
+// 年は年ごとの見出しに出るので、ここは月日だけでよい
+const monthDay = post.data.pubDate.toLocaleDateString('ja-JP', {
+  month: '2-digit',
+  day: '2-digit',
+});
+---
+
+{/* どこを押しても開けるよう、リンクをブロック全体に広げる */}
+{/*
+  group に名前を付ける。無名だと祖先の group（年ごとの details）にも反応して、
+  カード内をホバーしただけで全記事のタイトルが色変わりしてしまう。
+*/}
+<a href={`/posts/${post.id}`} class="group/post block">
+  <div class="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-fg-muted">
+    <time datetime={post.data.pubDate.toISOString()}>{monthDay}</time>
+
+    {
+      post.data.tags.length > 0 && (
+        <>
+          <span aria-hidden="true" class="text-fg-subtle">
+            /
+          </span>
+          <ul class="flex flex-wrap gap-2">
+            {post.data.tags.map((tag) => (
+              <li>
+                <Badge variant="subtle" colorPalette="info" size="sm">
+                  #{tag}
+                </Badge>
+              </li>
+            ))}
+          </ul>
+        </>
+      )
+    }
+  </div>
+
+  <h3 class="mt-2 text-lg font-semibold transition-colors group-hover/post:text-brand">
+    {post.data.title}
+  </h3>
+
+  {/* 説明文の長さで見え方が散らからないよう 2 行で切る */}
+  <p class="mt-1.5 line-clamp-2 text-sm text-fg-muted">{post.data.description}</p>
+</a>
