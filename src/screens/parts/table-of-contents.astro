@@ -30,8 +30,9 @@ const items = headings.filter((heading) => heading.depth === 2 || heading.depth 
               href={`#${heading.slug}`}
               data-toc-link={heading.slug}
               class:list={[
-                // 縦線を隠す位置に自前のボーダーを重ねて、active だけ色を差し替える
-                '-ml-px block border-l border-transparent py-1.5 text-fg-muted transition-colors hover:text-fg',
+                // 縦線を隠す位置に自前のボーダーを重ねて、active だけ色と太さを差し替える。
+                // 全項目に同じ border と負マージンを持たせることで、active でも文字位置がずれない
+                '-ml-0.5 block border-l-3 border-transparent py-1.5 text-fg-muted transition-colors hover:text-fg',
                 heading.depth === 3 ? 'pl-6' : 'pl-3',
               ]}
             >
@@ -63,10 +64,10 @@ const items = headings.filter((heading) => heading.depth === 2 || heading.depth 
       const next = links.get(slug);
       if (!next || next === current) return;
 
-      current?.classList.remove('text-fg', 'border-accent');
+      current?.classList.remove('text-fg', 'border-brand', 'font-bold');
       current?.classList.add('text-fg-muted', 'border-transparent');
       next.classList.remove('text-fg-muted', 'border-transparent');
-      next.classList.add('text-fg', 'border-accent');
+      next.classList.add('text-fg', 'border-brand', 'font-bold');
       current = next;
 
       // 目次自体がスクロールする長さのとき、active を視界に入れ続ける
