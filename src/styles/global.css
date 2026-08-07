@@ -256,9 +256,25 @@
  * hisui のブロック内は `hisui init` で再生成されるので、必ず外側に置く。
  */
 @theme {
-  /* タグ・本文中のリンクなど、読み手に「押せる／辿れる」と伝える色 */
-  --color-accent: var(--color-sky-700);
+  /*
+   * ブランドカラー。semantic の 4 色（sky=info / emerald=success /
+   * amber=warning / rose=danger）とは意図的に別の色相にして、
+   * 「状態を表す色」と「サイトの色」が混ざらないようにする。
+   */
 
-  /* ページの下地。hisui の既定（無彩色の #f5f5f5）を、accent と同じ色相へ寄せる */
-  --color-canvas: #f9fbfe;
+  /* 主役。白地で 4.55:1 なので、本文サイズの文字にも使える */
+  --color-brand: #378180;
+
+  /* 一点強調用。白地では 3.17:1 しかないため、本文サイズの文字には使わない */
+  --color-accent: #ef6452;
+
+  /* ページの下地。白より少しだけ沈ませて、surface（white）の Card を浮かせる */
+  --color-canvas: #fafbfe;
+}
+
+.dark {
+  /* 暗い地では #378180 が沈むので明るい側へ寄せる（暫定値） */
+  --color-brand: #4fa8a6;
+
+  /* coral は暗い地の方が得意で、そのままで 5.65:1 通るので据え置き */
 }
