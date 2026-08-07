@@ -3,22 +3,22 @@ import { Image } from 'astro:assets';
 import { Card } from '@/shared/ui/card';
 import GithubIcon from '@/shared/ui/github-icon.astro';
 import avatar from '@/assets/avatar.png';
+import avatarDark from '@/assets/avatar-dark.png';
 
 // TODO: role と bio はあさひが書く。
 const name = 'asahi';
 const handle = 'ashunar0';
-const role = 'ここに一行で何をしている人かを書く';
-const bio = 'ここに二〜三行で自己紹介を書く。何を作っていて、何に興味があるか。';
+const bio = 'エンジニア。大学4年生。大学生になって初めてプログラミングに触れて、Unity, React, Honoなどを勉強。フルスタックエンジニアになれるように修行中。ヨルシカが好き。';
 ---
 
 <Card.Root variant="outline" className="p-5">
-  {/*
-    alt は空にする。すぐ下に名前がテキストであるので、読み上げると二重になる。
-    画像の地は白なので、暗いテーマで浮きすぎないよう縁を一本入れる。
-  */}
   {/* 縦積みを一段減らすため、アバターと名前は横に並べる */}
   <div class="flex items-center gap-3">
     {/*
+      画像の地が塗りつぶしなので、テーマごとに用意した 2 枚を class で出し分ける。
+      prefers-color-scheme のメディアクエリでは切り替えボタンの選択に追従できない。
+
+      alt は空にする。すぐ横に名前がテキストであるので、読み上げると二重になる。
       src/assets に置いた画像は astro:assets がビルド時にリサイズして webp にする。
       表示は 56px だが Retina を考えて 2 倍で書き出す。
     */}
@@ -27,7 +27,14 @@ const bio = 'ここに二〜三行で自己紹介を書く。何を作ってい�
       alt=""
       width={112}
       height={112}
-      class="size-14 shrink-0 rounded-full border border-border object-cover"
+      class="size-14 shrink-0 rounded-full border border-border object-cover dark:hidden"
+    />
+    <Image
+      src={avatarDark}
+      alt=""
+      width={112}
+      height={112}
+      class="hidden size-14 shrink-0 rounded-full border border-border object-cover dark:block"
     />
 
     <div class="min-w-0">
@@ -36,8 +43,7 @@ const bio = 'ここに二〜三行で自己紹介を書く。何を作ってい�
     </div>
   </div>
 
-  <p class="mt-4 text-sm text-fg-soft">{role}</p>
-  <p class="mt-2 text-sm leading-relaxed text-fg-muted">{bio}</p>
+  <p class="mt-4 text-sm text-fg-soft">{bio}</p>
 
   <div class="mt-4 flex items-center gap-3">
     <a
