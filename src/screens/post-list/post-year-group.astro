@@ -20,7 +20,7 @@ const { year, posts, open = false } = Astro.props;
   */}
   <details open={open} class="group/year">
     <summary class="flex cursor-pointer items-center justify-between gap-2">
-      <h2 class="font-semibold tracking-wider text-fg"># {year}</h2>
+      <h2 class="font-semibold tracking-wider text-brand">{year}</h2>
 
       {/*
         client directive を付けないので、この React コンポーネントは
