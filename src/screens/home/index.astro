@@ -1,12 +1,95 @@
 ---
+import { Image } from 'astro:assets';
+import { ArrowRight } from 'lucide-react';
 import BaseLayout from '@/shared/layouts/BaseLayout.astro';
+import GithubIcon from '@/shared/ui/github-icon.astro';
+import XIcon from '@/shared/ui/x-icon.astro';
 import { getRecentPosts } from '@/features/posts/query';
+import heroPhoto from '@/assets/hero.jpg';
 
 const recentPosts = await getRecentPosts();
+
+const bio = 'エンジニア。大学4年生。大学生になって初めてプログラミングに触れて、Unity, React, Honoなどを勉強。フルスタックエンジニアになれるように修行中。ヨルシカが好き。';
 ---
 
 <BaseLayout title="ashunar0" description="あさひの個人サイト">
-  <h1>ashunar0</h1>
+  {/*
+    写真の上は明暗がテーマと無関係に決まるので、この中だけテーマ連動のトークンを使わない。
+    text-fg などを使うと、ライトモードで暗い写真の上に黒い文字が乗って読めなくなる。
+  */}
+  {/*
+    狭い画面では写真を画面幅いっぱいに広げ、ヘッダーの直下に付ける。
+    負のマージンで main の padding（px-6 py-14）を打ち消している。
+    枠と角丸も外して、写真の縁そのものが境界になるようにする。
+  */}
+  <section
+    class="relative overflow-hidden rounded-xl border border-border max-sm:-mx-6 max-sm:-mt-14 max-sm:rounded-none max-sm:border-0"
+  >
+    <Image
+      src={heroPhoto}
+      alt=""
+      width={1600}
+      height={900}
+      class="h-80 w-full object-cover sm:h-96"
+    />
+
+    {/*
+      覆いを二枚重ねる。全面に黒を敷くと写真が濁るので、必要な場所だけ暗くする。
+      下辺は左右とも文字が乗るので下から、左側は本文が長いので左から。
+      写真の見どころ（上半分の光と葉の影）はどちらの濃い側からも外れるので残る。
+    */}
+    <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent"></div>
+
+    {/*
+      カードの印字のように、名前を左下・リンクを右下へ振る。
+      横幅が足りない画面では重なるので、その時だけ縦に積む。
+    */}
+    <div
+      class="absolute inset-0 flex flex-col justify-end gap-6 p-6 sm:flex-row sm:items-end sm:justify-between sm:p-10"
+    >
+      <div class="max-w-md">
+        <h1 class="text-2xl font-bold tracking-tight text-white text-balance sm:text-3xl">
+          Hi, I'm asahi.
+        </h1>
+
+        <p class="mt-3 text-sm leading-relaxed text-white/75">{bio}</p>
+      </div>
+
+      <div class="flex shrink-0 items-center gap-5">
+        <a
+          href="https://github.com/ashunar0"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub"
+          class="text-white/70 transition-colors hover:text-white"
+        >
+          <GithubIcon class="size-5" />
+        </a>
+
+        <a
+          href="https://x.com/ashunar0"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="X"
+          class="text-white/70 transition-colors hover:text-white"
+        >
+          <XIcon class="size-5" />
+        </a>
+
+        <a
+          href="/posts"
+          class="group/posts inline-flex items-center gap-1.5 text-sm text-white/70 transition-colors hover:text-white"
+        >
+          Posts
+          <ArrowRight
+            className="size-4 transition-transform group-hover/posts:translate-x-0.5"
+            aria-hidden="true"
+          />
+        </a>
+      </div>
+    </div>
+  </section>
 
   <section>
     <h2>Recent posts</h2>
