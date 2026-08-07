@@ -21,33 +21,39 @@ const monthDay = post.data.pubDate.toLocaleDateString('ja-JP', {
   カード内をホバーしただけで全記事のタイトルが色変わりしてしまう。
 */}
 <a href={`/posts/${post.id}`} class="group/post block">
-  <div class="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-fg-muted">
-    <time datetime={post.data.pubDate.toISOString()}>{monthDay}</time>
+  {/*
+    日付とタグを同じ行に置くと、タグが増えたときや画面が狭いときに
+    行を取り合って折り返し、区切り文字が行頭に落ちる。段を分けておけば
+    タグが何個あっても日付の位置は動かない。
+  */}
+  <time datetime={post.data.pubDate.toISOString()} class="text-sm text-fg-muted">
+    {monthDay}
+  </time>
 
-    {
-      post.data.tags.length > 0 && (
-        <>
-          <span aria-hidden="true" class="text-fg-subtle">
-            /
-          </span>
-          <ul class="flex flex-wrap gap-2">
-            {post.data.tags.map((tag) => (
-              <li>
-                <Badge variant="subtle" colorPalette="info" size="sm">
-                  #{tag}
-                </Badge>
-              </li>
-            ))}
-          </ul>
-        </>
-      )
-    }
-  </div>
-
-  <h3 class="mt-2 text-lg font-semibold transition-colors group-hover/post:text-brand">
+  <h3 class="mt-1 text-lg font-semibold transition-colors group-hover/post:text-brand">
     {post.data.title}
   </h3>
 
-  {/* 説明文の長さで見え方が散らからないよう 2 行で切る */}
-  <p class="mt-1.5 line-clamp-2 text-sm text-fg-muted">{post.data.description}</p>
+  {/*
+    説明文の長さで見え方が散らからないよう 2 行で切る。
+    狭い画面では 1 件が縦に伸びて一覧性が落ちるので、まるごと省く。
+  */}
+  <p class="mt-1.5 line-clamp-2 text-sm text-fg-muted max-sm:hidden">
+    {post.data.description}
+  </p>
+
+  {/* 説明文が消える狭い画面ではタイトルの直下に来るので、その分だけ詰める */}
+  {
+    post.data.tags.length > 0 && (
+      <ul class="mt-3 flex flex-wrap gap-2 max-sm:mt-2">
+        {post.data.tags.map((tag) => (
+          <li>
+            <Badge variant="subtle" colorPalette="info" size="sm">
+              #{tag}
+            </Badge>
+          </li>
+        ))}
+      </ul>
+    )
+  }
 </a>

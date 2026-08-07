@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # wrangler
 .wrangler/
+
+# playwright mcp のスナップショット出力
+.playwright-mcp/
