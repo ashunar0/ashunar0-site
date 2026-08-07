@@ -1,0 +1,54 @@
+---
+import { Icon } from 'astro-icon/components';
+
+/**
+ * 触れたスタック。増減はここを直す。
+ * icon は @iconify-json/logos のもの（公式ロゴをそのまま使う）。
+ * コレクションに無いものは src/icons に置いて名前だけで参照する。
+ *
+ * iconDark は、明るい地と暗い地で見え方が変わるロゴにだけ指定する。
+ * 単色のロゴは片方の地に沈むので、ドキュメントサイトと同じくテーマごとに差し替える。
+ */
+const skills = [
+  { name: 'TypeScript', icon: 'logos:typescript-icon' },
+  { name: 'React', icon: 'logos:react' },
+  // マークが暗色なので暗い地では沈む。グラデーションを持つため単色化はできず、
+  // 公式の暗い背景用（マークが白）に差し替える。
+  { name: 'Astro', icon: 'logos:astro-icon', iconDark: 'astro-dark' },
+  { name: 'Tailwind CSS', icon: 'logos:tailwindcss-icon' },
+  { name: 'Hono', icon: 'logos:hono' },
+  // ライムグリーンは白地で 1.25:1 しかないので、明るい地では単色版を文字色で出す。
+  // 暗い地では 13.98:1 と十分読めるため、公式の配色に戻す。
+  { name: 'Drizzle', icon: 'drizzle-mono', iconDark: 'drizzle' },
+  { name: 'zod', icon: 'logos:zod' },
+  { name: 'Cloudflare', icon: 'logos:cloudflare-icon' },
+  // 元から単色なので、色だけ currentColor にした版を置いて両テーマを一枚で賄う。
+  { name: 'Unity', icon: 'unity-mono' },
+];
+
+const iconClass = 'h-5 w-auto shrink-0';
+---
+
+<section class="mt-12">
+  <h2 class="font-semibold tracking-wider text-fg"># Skills</h2>
+
+  {/* 縦横比がロゴごとに違うので、高さだけ揃えて幅は成り行きにする */}
+  <ul class="mt-5 flex flex-wrap gap-2">
+    {
+      skills.map((skill) => (
+        <li class="inline-flex items-center gap-2 rounded-lg border border-border bg-surface py-2 pr-3 pl-2.5">
+          {skill.iconDark ? (
+            <>
+              <Icon name={skill.icon} class={`${iconClass} dark:hidden`} />
+              <Icon name={skill.iconDark} class={`hidden ${iconClass} dark:block`} />
+            </>
+          ) : (
+            <Icon name={skill.icon} class={iconClass} />
+          )}
+
+          <span class="text-sm font-medium">{skill.name}</span>
+        </li>
+      ))
+    }
+  </ul>
+</section>

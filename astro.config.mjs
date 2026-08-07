@@ -7,9 +7,12 @@ import tailwindcss from '@tailwindcss/vite';
 
 import react from '@astrojs/react';
 
+import icon from 'astro-icon';
+
 // https://astro.build/config
 export default defineConfig({
-  integrations: [mdx(), react()],
+  // アイコンはビルド時に svg として埋め込まれるので、クライアントに JS は乗らない。
+  integrations: [mdx(), react(), icon()],
 
   markdown: {
     // Shiki はテーマの色をインライン style で書き込むため、CSS からは上書きできない。

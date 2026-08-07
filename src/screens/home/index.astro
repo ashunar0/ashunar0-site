@@ -4,6 +4,7 @@ import { ArrowRight } from 'lucide-react';
 import BaseLayout from '@/shared/layouts/BaseLayout.astro';
 import FeaturedPost from './featured-post.astro';
 import RecentPostItem from './recent-post-item.astro';
+import Skills from './skills.astro';
 import GithubIcon from '@/shared/ui/github-icon.astro';
 import XIcon from '@/shared/ui/x-icon.astro';
 import { getRecentPosts } from '@/features/posts/query';
@@ -130,4 +131,6 @@ const bio = 'エンジニア。大学4年生。大学生になって初めてプ
       />
     </a>
   </section>
+
+  <Skills />
 </BaseLayout>
