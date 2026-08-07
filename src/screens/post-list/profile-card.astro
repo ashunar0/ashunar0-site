@@ -3,7 +3,6 @@ import { Image } from 'astro:assets';
 import { Card } from '@/shared/ui/card';
 import GithubIcon from '@/shared/ui/github-icon.astro';
 import avatar from '@/assets/avatar.png';
-import avatarDark from '@/assets/avatar-dark.png';
 
 // TODO: role と bio はあさひが書く。
 const name = 'asahi';
@@ -15,8 +14,8 @@ const bio = 'エンジニア。大学4年生。大学生になって初めてプ
   {/* 縦積みを一段減らすため、アバターと名前は横に並べる */}
   <div class="flex items-center gap-3">
     {/*
-      画像の地が塗りつぶしなので、テーマごとに用意した 2 枚を class で出し分ける。
-      prefers-color-scheme のメディアクエリでは切り替えボタンの選択に追従できない。
+      テーマを問わず地が白い方を使う。暗い地に合わせた版も作ったが、
+      顔の白が浮いて絵の重心が変わってしまうため、白い円のまま置く。
 
       alt は空にする。すぐ横に名前がテキストであるので、読み上げると二重になる。
       src/assets に置いた画像は astro:assets がビルド時にリサイズして webp にする。
@@ -27,14 +26,7 @@ const bio = 'エンジニア。大学4年生。大学生になって初めてプ
       alt=""
       width={112}
       height={112}
-      class="size-14 shrink-0 rounded-full border border-border object-cover dark:hidden"
-    />
-    <Image
-      src={avatarDark}
-      alt=""
-      width={112}
-      height={112}
-      class="hidden size-14 shrink-0 rounded-full border border-border object-cover dark:block"
+      class="size-14 shrink-0 rounded-full border border-border object-cover"
     />
 
     <div class="min-w-0">
