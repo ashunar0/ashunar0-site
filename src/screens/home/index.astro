@@ -2,12 +2,15 @@
 import { Image } from 'astro:assets';
 import { ArrowRight } from 'lucide-react';
 import BaseLayout from '@/shared/layouts/BaseLayout.astro';
+import FeaturedPost from './featured-post.astro';
+import RecentPostItem from './recent-post-item.astro';
 import GithubIcon from '@/shared/ui/github-icon.astro';
 import XIcon from '@/shared/ui/x-icon.astro';
 import { getRecentPosts } from '@/features/posts/query';
 import heroPhoto from '@/assets/hero.jpg';
 
-const recentPosts = await getRecentPosts();
+// 最新の一本だけ大きく見せ、残りは行で並べる
+const [latestPost, ...olderPosts] = await getRecentPosts();
 
 const bio = 'エンジニア。大学4年生。大学生になって初めてプログラミングに触れて、Unity, React, Honoなどを勉強。フルスタックエンジニアになれるように修行中。ヨルシカが好き。';
 ---
@@ -91,17 +94,40 @@ const bio = 'エンジニア。大学4年生。大学生になって初めてプ
     </div>
   </section>
 
-  <section>
-    <h2>Recent posts</h2>
-    <ul>
-      {
-        recentPosts.map((post) => (
-          <li>
-            <a href={`/posts/${post.id}`}>{post.data.title}</a>
-          </li>
-        ))
-      }
-    </ul>
-    <a href="/posts">すべての記事</a>
+  {/*
+    hero がカードなので、ここは囲わず地の上に直接置く。
+    カードが二枚続くと入れ子に見えて、hero が主役に見えなくなる。
+    見出しの扱いは /posts の年ごとの見出しに揃える。
+  */}
+  <section class="mt-12">
+    <h2 class="font-semibold tracking-wider text-fg"># Recent posts</h2>
+
+    {!latestPost && <p class="mt-4 text-sm text-fg-muted">まだ記事がない。</p>}
+
+    {latestPost && <div class="mt-5"><FeaturedPost post={latestPost} /></div>}
+
+    {/* 大きい一本と行の列を分ける。ここだけは太さの差が足りないので線を一本引く */}
+    {
+      olderPosts.length > 0 && (
+        <ul class="mt-6 flex flex-col gap-3 border-t border-border pt-6">
+          {olderPosts.map((post) => (
+            <li>
+              <RecentPostItem post={post} />
+            </li>
+          ))}
+        </ul>
+      )
+    }
+
+    <a
+      href="/posts"
+      class="group/all mt-7 inline-flex items-center gap-1.5 text-sm text-fg-muted transition-colors hover:text-brand"
+    >
+      すべての記事
+      <ArrowRight
+        className="size-4 transition-transform group-hover/all:translate-x-0.5"
+        aria-hidden="true"
+      />
+    </a>
   </section>
 </BaseLayout>

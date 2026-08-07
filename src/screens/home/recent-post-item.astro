@@ -1,0 +1,32 @@
+---
+import type { Post } from '@/features/posts/query';
+
+interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+
+const date = post.data.pubDate.toLocaleDateString('ja-JP', {
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+});
+---
+
+{/*
+  最新の一本より下は行で並べる。日付を先頭に固定幅で置くと
+  タイトルの頭が縦に揃って、目が下に流れる。
+*/}
+<a href={`/posts/${post.id}`} class="group/post flex gap-4">
+  <time
+    datetime={post.data.pubDate.toISOString()}
+    class="shrink-0 text-sm text-fg-muted tabular-nums"
+  >
+    {date}
+  </time>
+
+  <span class="text-sm font-medium transition-colors group-hover/post:text-brand">
+    {post.data.title}
+  </span>
+</a>
