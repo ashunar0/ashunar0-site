@@ -328,4 +328,28 @@
 
   /* sky-700 は暗い地で 3.02:1 しかなく本文には暗すぎるので、明るい側へ */
   --color-link: var(--color-sky-400);
+
+  /*
+   * 暗いテーマの下地を neutral（完全な無彩色）から stone（わずかに暖色）へ。
+   * 無彩色のグレーは既定値に見えるので、色相をほんの少し寄せる。
+   *
+   * 面だけ差し替えると border や文字が無彩色のまま残り、暖色と寒色が同居して
+   * かえって濁るので、暗いテーマのグレーはまとめて stone に揃える。
+   */
+  --color-bg: var(--color-stone-950);
+  --color-canvas: var(--color-stone-950);
+  --color-surface: var(--color-stone-900);
+  --color-surface-muted: var(--color-stone-900);
+  --color-surface-sunken: var(--color-stone-800);
+  --color-surface-sunken-hover: var(--color-stone-700);
+  --color-hover: var(--color-stone-800);
+  --color-active: var(--color-stone-700);
+
+  --color-fg: var(--color-stone-50);
+  --color-fg-soft: var(--color-stone-300);
+  --color-fg-muted: var(--color-stone-400);
+  --color-fg-subtle: var(--color-stone-500);
+
+  --color-border: var(--color-stone-800);
+  --color-border-muted: var(--color-stone-800);
 }
