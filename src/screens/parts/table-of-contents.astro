@@ -13,16 +13,27 @@ const items = headings.filter((heading) => heading.depth === 2 || heading.depth 
 
 {
   items.length > 0 && (
-    <nav aria-labelledby="toc-label" class="sticky top-8">
+    <nav
+      aria-labelledby="toc-label"
+      class="sticky top-8 max-h-[calc(100vh-6rem)] overflow-y-auto"
+      data-toc
+    >
       <p id="toc-label" class="text-xs font-semibold tracking-wider text-fg-muted uppercase">
         On This Page
       </p>
-      <ul class="mt-3 flex flex-col gap-2 text-sm">
+
+      {/* 項目ごとに線を引くと切れ目が出るので、リスト全体に 1 本通す */}
+      <ul class="mt-3 flex flex-col border-l border-border-muted text-sm">
         {items.map((heading) => (
-          <li class={heading.depth === 3 ? 'pl-3' : undefined}>
+          <li>
             <a
               href={`#${heading.slug}`}
-              class="text-fg transition-colors hover:text-fg"
+              data-toc-link={heading.slug}
+              class:list={[
+                // 縦線を隠す位置に自前のボーダーを重ねて、active だけ色を差し替える
+                '-ml-px block border-l border-transparent py-1.5 text-fg-muted transition-colors hover:text-fg',
+                heading.depth === 3 ? 'pl-6' : 'pl-3',
+              ]}
             >
               {heading.text}
             </a>
@@ -32,3 +43,76 @@ const items = headings.filter((heading) => heading.depth === 2 || heading.depth 
     </nav>
   )
 }
+
+<script>
+  const nav = document.querySelector<HTMLElement>('[data-toc]');
+
+  if (nav) {
+    const links = new Map<string, HTMLAnchorElement>();
+    for (const link of nav.querySelectorAll<HTMLAnchorElement>('[data-toc-link]')) {
+      links.set(link.dataset.tocLink!, link);
+    }
+
+    const headings = [...links.keys()]
+      .map((slug) => document.getElementById(slug))
+      .filter((heading): heading is HTMLElement => heading !== null);
+
+    let current: HTMLAnchorElement | null = null;
+
+    const activate = (slug: string) => {
+      const next = links.get(slug);
+      if (!next || next === current) return;
+
+      current?.classList.remove('text-fg', 'border-accent');
+      current?.classList.add('text-fg-muted', 'border-transparent');
+      next.classList.remove('text-fg-muted', 'border-transparent');
+      next.classList.add('text-fg', 'border-accent');
+      current = next;
+
+      // 目次自体がスクロールする長さのとき、active を視界に入れ続ける
+      next.scrollIntoView({ block: 'nearest' });
+    };
+
+    // IntersectionObserver は「見えているか」しか教えてくれないので、
+    // 交差のたびに全見出しの位置を測り直して「今どのセクションにいるか」を決める。
+    const sync = () => {
+      // ヘッダー下に少し余裕を持たせた基準線より上で、一番下にある見出しが現在地
+      const line = 96;
+      let found = headings[0];
+
+      for (const heading of headings) {
+        if (heading.getBoundingClientRect().top > line) break;
+        found = heading;
+      }
+
+      // 最下部まで読み切ったら、最後の見出しは短くても active にしたい
+      const atBottom = window.innerHeight + window.scrollY >= document.body.scrollHeight - 2;
+      if (atBottom) found = headings.at(-1) ?? found;
+
+      if (found) activate(found.id);
+    };
+
+    const observer = new IntersectionObserver(sync, {
+      // 見出しが基準線をまたぐ瞬間に発火させる
+      rootMargin: '-96px 0px 0px 0px',
+    });
+    for (const heading of headings) observer.observe(heading);
+
+    // 最後の見出しが短いと交差が起きないままなので、スクロール終端も拾う
+    window.addEventListener('scroll', sync, { passive: true });
+    sync();
+  }
+</script>
+
+<style>
+  /* 目次のスクロールバーは常時出ていると線が二重に見えるので、細く目立たなくする */
+  nav {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border) transparent;
+  }
+
+  /* クリックで飛んだ見出しがヘッダーに潜らないように */
+  :global(.post-body :is(h2, h3)) {
+    scroll-margin-top: 6rem;
+  }
+</style>
