@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import { Card } from '@/shared/ui/card';
 import GithubIcon from '@/shared/ui/github-icon.astro';
+import XIcon from '@/shared/ui/x-icon.astro';
 import avatar from '@/assets/avatar.png';
 
 // TODO: role と bio はあさひが書く。
@@ -48,8 +49,14 @@ const bio = 'エンジニア。大学4年生。大学生になって初めてプ
       <GithubIcon class="size-5" />
     </a>
 
-    <a href="/about" class="ml-auto text-sm text-fg-muted transition-colors hover:text-brand">
-      About
+    <a
+      href={`https://x.com/${handle}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="X"
+      class="text-fg-muted transition-colors hover:text-fg"
+    >
+      <XIcon class="size-5" />
     </a>
   </div>
 </Card.Root>
