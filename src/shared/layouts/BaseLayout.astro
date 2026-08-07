@@ -1,6 +1,7 @@
 ---
 import '@/styles/global.css';
 import GithubIcon from '@/shared/ui/github-icon.astro';
+import Logo from '@/assets/logo.svg';
 import ThemeToggle from '@/shared/layouts/theme-toggle.astro';
 
 interface Props {
@@ -47,8 +48,16 @@ const isCurrent = (href: string) => path === href || path.startsWith(`${href}/`)
   <body class="min-h-dvh bg-canvas font-sans text-fg antialiased">
     <header class="border-b border-border bg-surface">
       <div class="mx-auto flex max-w-5xl items-center justify-between px-6 py-5">
-        <a href="/" class="text-xl font-bold tracking-tight transition-colors hover:text-fg-soft">
-          @ashunar0
+        {/*
+          ロゴは文字をアウトライン化した svg なので、読み上げ用に aria-label を持たせる。
+          塗りは currentColor なので、テーマごとに画像を用意せず text-fg を継ぐ。
+        */}
+        <a
+          href="/"
+          aria-label="ashunar0"
+          class="text-fg transition-colors hover:text-fg-soft"
+        >
+          <Logo class="h-6 w-auto" />
         </a>
         <div class="flex items-center gap-6">
           <nav class="flex gap-6 text-sm">
