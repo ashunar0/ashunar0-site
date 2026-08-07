@@ -1,7 +1,7 @@
 ---
 import type { GetStaticPaths } from 'astro';
 import { getPublishedPosts, type Post } from '@/features/posts/query';
-import PostDetail from '@/screens/post-detail.astro';
+import PostDetail from '@/screens/post-detail/index.astro';
 
 // URL の生成はルーティングの責務なので pages に置く。画面の中身は screens が持つ。
 export const getStaticPaths: GetStaticPaths = async () => {
