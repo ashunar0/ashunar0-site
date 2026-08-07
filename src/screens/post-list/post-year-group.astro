@@ -34,8 +34,12 @@ const { year, posts, open = false } = Astro.props;
       />
     </summary>
 
-    {/* カードの中では線を引かず、記事どうしの余白だけで区切る */}
-    <ul class="mt-4 flex flex-col gap-7">
+    {/*
+      カードの中では線を引かず、記事どうしの余白だけで区切る。
+      記事の切れ目が「タグ → 次の日付」と小さい文字どうしで接するので、
+      記事内の行間よりはっきり広く取らないと境目が読めない。
+    */}
+    <ul class="mt-4 flex flex-col gap-9">
       {
         posts.map((post) => (
           <li>
