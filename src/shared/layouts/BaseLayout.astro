@@ -1,6 +1,7 @@
 ---
 import '@/styles/global.css';
 import GithubIcon from '@/shared/ui/github-icon.astro';
+import ThemeToggle from '@/shared/layouts/theme-toggle.astro';
 
 interface Props {
   title: string;
@@ -27,6 +28,24 @@ const isCurrent = (href: string) => path === href || path.startsWith(`${href}/`)
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
+
+    {/*
+      body が描画される前に .dark を確定させないと、暗い設定の人に白い画面が一瞬映る。
+      それを防ぐため is:inline で head に直接置き、バンドルも defer もさせない。
+    */}
+    <script is:inline>
+      (() => {
+        const stored = localStorage.getItem('theme');
+        const dark = stored
+          ? stored === 'dark'
+          : matchMedia('(prefers-color-scheme: dark)').matches;
+
+        document.documentElement.classList.toggle('dark', dark);
+
+        // スクロールバーやフォーム部品など、ブラウザが描く部分も揃える
+        document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+      })();
+    </script>
   </head>
   <body class="min-h-dvh bg-canvas font-sans text-fg antialiased">
     <header class="border-b border-border bg-surface">
@@ -50,6 +69,7 @@ const isCurrent = (href: string) => path === href || path.startsWith(`${href}/`)
               ))
             }
           </nav>
+          <ThemeToggle />
           <a
             href="https://github.com/ashunar0"
             target="_blank"

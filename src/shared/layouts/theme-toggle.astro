@@ -1,0 +1,49 @@
+---
+// hisui の primitive ではなくこのサイト固有のヘッダー部品なので、
+// `hisui add` の管理下（shared/ui）ではなく layout 側に置く。
+---
+
+<button
+  type="button"
+  data-theme-toggle
+  aria-label="テーマを切り替える"
+  class="text-fg-muted transition-colors hover:text-fg cursor-pointer"
+>
+  {/* いま適用されている側を出す。dark クラスの有無だけで切り替わるので JS で差し替えない */}
+  <svg
+    class="size-5 dark:hidden"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.75"
+    stroke-linecap="round"
+    aria-hidden="true"
+  >
+    <circle cx="12" cy="12" r="4"></circle>
+    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"
+    ></path>
+  </svg>
+
+  <svg
+    class="hidden size-5 dark:block"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.75"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79Z"></path>
+  </svg>
+</button>
+
+<script>
+  document.querySelector('[data-theme-toggle]')?.addEventListener('click', () => {
+    const dark = document.documentElement.classList.toggle('dark');
+    document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+
+    // 明示的に選んだらそれを覚える。以降はシステム設定より優先される
+    localStorage.setItem('theme', dark ? 'dark' : 'light');
+  });
+</script>
