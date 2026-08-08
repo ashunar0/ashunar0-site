@@ -1,6 +1,6 @@
 ---
 import { render } from 'astro:content';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Copy } from 'lucide-react';
 import BaseLayout from '@/shared/layouts/BaseLayout.astro';
 import { Card } from '@/shared/ui/card';
 import { Badge } from '@/shared/ui/badge';
@@ -19,6 +19,14 @@ const publishedOn = post.data.pubDate.toLocaleDateString('ja-JP', {
   month: 'long',
   day: 'numeric',
 });
+
+/*
+ * 記事ヘッダーと本文カードは別の要素だが、右端は揃えたい。
+ * カードは目次と並ぶ grid の 1 列目に入るため max-w-3xl まで伸びきらず、
+ * ヘッダーに max-w-3xl を直接置くと目次のぶん（13rem + gap）だけ右にはみ出す。
+ * 同じ grid を被せて列幅そのものを共有する。
+ */
+const contentGrid = 'lg:grid lg:grid-cols-[minmax(0,1fr)_13rem] lg:gap-10';
 ---
 
 <BaseLayout
@@ -42,31 +50,49 @@ const publishedOn = post.data.pubDate.toLocaleDateString('ja-JP', {
   </a>
 
   <article>
-    <header class="max-w-3xl">
-      <h1 class="text-2xl font-bold tracking-tight text-balance">{post.data.title}</h1>
+    <div class={contentGrid}>
+      <header class="max-w-3xl">
+        <h1 class="text-2xl font-bold tracking-tight text-balance">{post.data.title}</h1>
 
-      <div class="mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-fg-muted">
-        <time datetime={post.data.pubDate.toISOString()}>{publishedOn}</time>
-        {
-          post.data.tags.length > 0 && (
-            <>
-              <span aria-hidden="true" class="text-fg-subtle">
-                /
-              </span>
-              <ul class="flex flex-wrap gap-2">
-                {post.data.tags.map((tag) => (
-                  <li>
-                    <Badge variant="subtle" size="sm" className="bg-brand-subtle text-brand-fg">
-                      #{tag}
-                    </Badge>
-                  </li>
-                ))}
-              </ul>
-            </>
-          )
-        }
-      </div>
-    </header>
+        {/* タグが増えて折り返しても、ボタンは右端に留めたいので行を分けて持つ */}
+        <div class="mt-5 flex items-start justify-between gap-4">
+          <div class="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-fg-muted">
+            <time datetime={post.data.pubDate.toISOString()}>{publishedOn}</time>
+            {
+              post.data.tags.length > 0 && (
+                <>
+                  <span aria-hidden="true" class="text-fg-subtle">
+                    /
+                  </span>
+                  <ul class="flex flex-wrap gap-2">
+                    {post.data.tags.map((tag) => (
+                      <li>
+                        <Badge variant="subtle" size="sm" className="bg-brand-subtle text-brand-fg">
+                          #{tag}
+                        </Badge>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )
+            }
+          </div>
+
+          {/*
+            押した結果を文字で返したいので、aria-live で読み上げにも伝える。
+            幅が Copied で変わると右端がガタつくため、ラベルの最小幅を決めておく。
+          */}
+          <button
+            type="button"
+            data-copy-markdown={`/posts/${post.id}.md`}
+            class="cursor-pointer inline-flex h-7 shrink-0 items-center gap-1.5 rounded-md border border-border bg-surface px-2 text-xs text-fg-muted transition-colors hover:bg-surface-sunken hover:text-fg"
+          >
+            <Copy className="size-3.5" aria-hidden="true" />
+            <span class="min-w-[6.5em] text-left" aria-live="polite">Copy Markdown</span>
+          </button>
+        </div>
+      </header>
+    </div>
 
     {/* 記事ヘッダーを外に出すことで、カードと目次の上辺が揃う */}
     {/*
@@ -93,6 +119,29 @@ const publishedOn = post.data.pubDate.toLocaleDateString('ja-JP', {
 </BaseLayout>
 
 <script>
+  // 生 markdown を取りにいってクリップボードへ。本文を HTML に二重に持たせずに済む。
+  const copyButton = document.querySelector<HTMLButtonElement>('[data-copy-markdown]');
+
+  if (copyButton) {
+    const label = copyButton.querySelector('span')!;
+
+    copyButton.addEventListener('click', async () => {
+      try {
+        const response = await fetch(copyButton.dataset.copyMarkdown!);
+        if (!response.ok) throw new Error(String(response.status));
+
+        await navigator.clipboard.writeText(await response.text());
+        label.textContent = 'Copied';
+      } catch {
+        label.textContent = 'Failed';
+      }
+
+      setTimeout(() => {
+        label.textContent = 'Copy Markdown';
+      }, 1500);
+    });
+  }
+
   // Shiki が出す pre をラッパーで包み、右上にコピーボタンを足す。
   // クリップボードはブラウザ API なので、ここだけは静的 HTML で完結しない。
   for (const pre of document.querySelectorAll<HTMLPreElement>('.post-body pre')) {
