@@ -20,7 +20,11 @@ const publishedOn = post.data.pubDate.toLocaleDateString('ja-JP', {
 });
 ---
 
-<BaseLayout title={`${post.data.title} | ashunar0`} description={post.data.description}>
+<BaseLayout
+  title={`${post.data.title} | ashunar0`}
+  description={post.data.description}
+  image={`/og/${post.id}.png`}
+>
   <article>
     <header class="max-w-3xl">
       <h1 class="text-2xl font-bold tracking-tight text-balance">{post.data.title}</h1>

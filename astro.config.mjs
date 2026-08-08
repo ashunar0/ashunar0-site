@@ -11,6 +11,10 @@ import icon from 'astro-icon';
 
 // https://astro.build/config
 export default defineConfig({
+  // OGP の og:image / og:url は絶対 URL でないとクローラが解決できない。
+  // その基準になるので、独自ドメインを当てたらここも変える。
+  site: 'https://ashunar0-site.asahi-gaia1530.workers.dev',
+
   // アイコンはビルド時に svg として埋め込まれるので、クライアントに JS は乗らない。
   integrations: [
     mdx(),
