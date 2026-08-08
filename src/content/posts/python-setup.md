@@ -26,6 +26,10 @@ Mac では Homebrew、Windows では winget を使います。エディタは VS
 
 Mac に最初から入っている Python は、macOS 自身が使うためのものです。これには手を触れず、uv が用意する Python を使います。
 
+https://ashunar0.dev/posts/windows-dev-setup/
+
+https://ashunar0.dev/posts/mac-dev-setup/
+
 ### 所要時間
 
 10 分程度です。

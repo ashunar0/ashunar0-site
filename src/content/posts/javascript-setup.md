@@ -24,6 +24,10 @@ JavaScript はもともとブラウザの中で動く言語です。Node.js を�
 
 Mac では Homebrew、Windows では winget を使います。エディタは VSCode を想定しています。まだの場合は先に済ませてください。
 
+https://ashunar0.dev/posts/windows-dev-setup/
+
+https://ashunar0.dev/posts/mac-dev-setup/
+
 ### 所要時間
 
 20 分程度です。

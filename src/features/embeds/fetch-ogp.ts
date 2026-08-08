@@ -40,14 +40,30 @@ function readMeta(html: string, key: string): string | undefined {
   }
 }
 
-/** meta の content は実体参照で書かれることがある。よく出るものだけ戻す。 */
+const NAMED_ENTITIES: Record<string, string> = {
+  quot: '"',
+  apos: "'",
+  lt: '<',
+  gt: '>',
+  nbsp: ' ',
+  hellip: '…',
+  mdash: '—',
+  ndash: '–',
+  laquo: '«',
+  raquo: '»',
+  middot: '·',
+};
+
+/**
+ * 実体参照を文字に戻す。
+ * &amp; は最後に処理する。先に戻すと &amp;hellip; が &hellip; になり、
+ * 続く置換で本来ただの文字列だったものまで … に化ける。
+ */
 function decodeEntities(text: string): string {
   return text
-    .replace(/&quot;/g, '"')
-    .replace(/&#0?39;/g, "'")
-    .replace(/&apos;/g, "'")
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
+    .replace(/&#x([0-9a-f]+);/gi, (_, hex) => String.fromCodePoint(parseInt(hex, 16)))
+    .replace(/&#(\d+);/g, (_, dec) => String.fromCodePoint(Number(dec)))
+    .replace(/&([a-z]+);/gi, (match, name) => NAMED_ENTITIES[name.toLowerCase()] ?? match)
     .replace(/&amp;/g, '&');
 }
 

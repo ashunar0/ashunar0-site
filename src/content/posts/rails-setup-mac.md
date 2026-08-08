@@ -26,6 +26,8 @@ rbenv を挟むのは、プロジェクトごとに必要な Ruby のバージ�
 
 Homebrew を使います。エディタは VSCode を想定しています。まだの場合は先に済ませてください。
 
+https://ashunar0.dev/posts/mac-dev-setup/
+
 ### 所要時間
 
 30 分程度です。Ruby のインストールに時間がかかります。

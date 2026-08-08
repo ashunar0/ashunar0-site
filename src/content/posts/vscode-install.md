@@ -18,9 +18,9 @@ Mac と Windows の両方を扱いますが、手順が分かれるのは「1. V
 
 インストールに Mac では Homebrew、Windows では winget を使います。まだ用意していない場合は、こちらの記事を参考にしてください。
 
-https://qiita.com/Ashunar0/items/cab94e1a12cb7bf9cfec
+https://ashunar0.dev/posts/windows-dev-setup/
 
-https://qiita.com/Ashunar0/items/feba3b3a09f36cec4845
+https://ashunar0.dev/posts/mac-dev-setup/
 
 使わずに進めたい場合は、公式サイトからインストーラをダウンロードする方法もあります。
 
