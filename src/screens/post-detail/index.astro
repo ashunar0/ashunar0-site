@@ -1,5 +1,6 @@
 ---
 import { render } from 'astro:content';
+import { ArrowLeft } from 'lucide-react';
 import BaseLayout from '@/shared/layouts/BaseLayout.astro';
 import { Card } from '@/shared/ui/card';
 import { Badge } from '@/shared/ui/badge';
@@ -25,6 +26,21 @@ const publishedOn = post.data.pubDate.toLocaleDateString('ja-JP', {
   description={post.data.description}
   image={`/og/${post.id}.png`}
 >
+  {/*
+    直前が一覧とは限らない（検索や SNS から直接来る）ので、履歴を戻る history.back() ではなく
+    行き先の決まったリンクにする。
+  */}
+  <a
+    href="/posts"
+    class="group/back mb-8 inline-flex items-center gap-1.5 text-sm text-fg-muted transition-colors hover:text-fg"
+  >
+    <ArrowLeft
+      className="size-4 transition-transform group-hover/back:-translate-x-0.5"
+      aria-hidden="true"
+    />
+    Posts
+  </a>
+
   <article>
     <header class="max-w-3xl">
       <h1 class="text-2xl font-bold tracking-tight text-balance">{post.data.title}</h1>
