@@ -32,7 +32,14 @@ const isCurrent = (href: string) => path === href || path.startsWith(`${href}/`)
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    {/*
+      アバターを丸く抜いたもの。元が png なので svg 版は持てず、実寸を 2 つ置く。
+      apple-touch-icon だけ白背景の四角にしてある。iOS はホーム画面に置くとき
+      透明部分を黒で埋めるため、丸く抜いたものを渡すと角が黒くなる。
+    */}
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="180x180" href="/favicon-180.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
     <link rel="canonical" href={canonical} />
