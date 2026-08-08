@@ -32,7 +32,7 @@ const publishedOn = post.data.pubDate.toLocaleDateString('ja-JP', {
   */}
   <a
     href="/posts"
-    class="group/back mb-8 inline-flex items-center gap-1.5 text-sm text-fg-muted transition-colors hover:text-fg"
+    class="group/back mb-4 inline-flex items-center gap-1.5 text-sm text-fg-muted transition-colors hover:text-fg"
   >
     <ArrowLeft
       className="size-4 transition-transform group-hover/back:-translate-x-0.5"
@@ -130,6 +130,14 @@ const publishedOn = post.data.pubDate.toLocaleDateString('ja-JP', {
   /* 段落やリストなど、ブロック同士の既定の間隔 */
   .post-body > * + * {
     margin-top: 1.5em;
+  }
+
+  /*
+   * 見出しの margin-top は「前の本文から離す」ためのもの。先頭要素には前がないので、
+   * カードの padding にそのまま上乗せされて上だけ間延びする。先頭だけ打ち消す。
+   */
+  .post-body > :first-child {
+    margin-top: 0;
   }
 
   /* 見出しは上を大きく空け、直後の本文とは近づける（近いものは仲間に見える） */
