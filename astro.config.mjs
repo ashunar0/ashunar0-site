@@ -9,6 +9,8 @@ import react from '@astrojs/react';
 
 import icon from 'astro-icon';
 
+import { remarkLinkCard } from './src/features/embeds/remark-link-card';
+
 // https://astro.build/config
 export default defineConfig({
   // OGP の og:image / og:url は絶対 URL でないとクローラが解決できない。
@@ -29,6 +31,10 @@ export default defineConfig({
   ],
 
   markdown: {
+    // URL だけの段落をリンクカードにする。相手の OGP をビルド時に読むので、
+    // 実行時の fetch も CORS も発生しない。
+    remarkPlugins: [remarkLinkCard],
+
     // Shiki はテーマの色をインライン style で書き込むため、CSS からは上書きできない。
     // コードブロックの配色はここが唯一の指定場所になる。
     shikiConfig: {

@@ -317,6 +317,110 @@ const contentGrid = 'lg:grid lg:grid-cols-[minmax(0,1fr)_13rem] lg:gap-10';
     line-height: 1.7;
   }
 
+  /*
+   * リンクカード。remark-link-card が出す HTML に当てる。
+   * 本文中の a は下線付きの色文字なので、カードだけそれを打ち消す。
+   */
+  /*
+   * 高さは固定する。中身は相手のサイト任せで、説明文の有無も OG 画像の縦横比もばらばらなため、
+   * 成り行きに任せると並べたときに高さが揃わない（正方形の OG 画像を持つサイトが特に伸びる）。
+   * 入りきらない分は行数で切る。
+   */
+  .post-body .link-card {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 1rem;
+    height: 8.5rem;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    background: var(--color-surface);
+    color: inherit;
+    text-decoration: none;
+    transition: background 120ms ease;
+  }
+
+  .post-body .link-card:hover {
+    background: var(--color-surface-sunken);
+  }
+
+  .post-body .link-card__text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    min-width: 0;
+    padding: 0.875rem 1rem;
+  }
+
+  /*
+   * 長いタイトルでカードが伸びると一覧性が落ちるので、2 行で切る。
+   * line-clamp は「2 行で切る」だけで高さは確保しないため、flex の既定の縮みに任せると
+   * 2 行ぶんの場所を貰えず 2 行目が途中で欠ける。縮まないようにして高さを守る。
+   */
+  .post-body .link-card__title {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    flex-shrink: 0;
+    overflow: hidden;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  /* 高さが決まっているぶん、説明は 1 行に抑えないとホスト名を押し出す */
+  .post-body .link-card__description {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    flex-shrink: 0;
+    overflow: hidden;
+    color: var(--color-fg-muted);
+    font-size: 0.8125rem;
+    line-height: 1.6;
+  }
+
+  /*
+   * ホスト名はカードの下端に置く。margin-top: auto が縦の余りを吸う。
+   * 段落の余白は .post-body > * + * が直接の子だけに当たるものなので、ここには届かない。
+   */
+  .post-body .link-card__host {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: auto;
+    padding-top: 0.25rem;
+    color: var(--color-fg-muted);
+    font-size: 0.75rem;
+  }
+
+  .post-body .link-card__host img {
+    width: 0.875rem;
+    height: 0.875rem;
+    border-radius: 0.125rem;
+  }
+
+  /* 幅は固定、高さはテキスト側に合わせる。潰れないよう縮小を止める */
+  .post-body .link-card__image {
+    flex-shrink: 0;
+    width: 10rem;
+  }
+
+  .post-body .link-card__image img {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    object-fit: cover;
+  }
+
+  /* 横幅が足りない画面では、サムネイルを落として文字だけにする */
+  @media (max-width: 30rem) {
+    .post-body .link-card__image {
+      display: none;
+    }
+  }
+
   .post-body blockquote {
     border-left: 3px solid var(--color-border);
     padding-left: 1em;
