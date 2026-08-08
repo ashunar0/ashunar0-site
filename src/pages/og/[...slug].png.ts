@@ -149,11 +149,18 @@ const card = (title: string) => ({
                     },
                   },
                 },
+                /*
+                 * 名前とハンドルは濃さで区別する。
+                 * satori は 1 つの div に文字色を 2 つ持てないので、箱を分けて並べる。
+                 */
                 {
                   type: 'div',
                   props: {
-                    style: { display: 'flex', fontSize: 30, color: FG_MUTED },
-                    children: 'ashunar0',
+                    style: { display: 'flex', alignItems: 'baseline', gap: 10, fontSize: 30 },
+                    children: [
+                      { type: 'div', props: { style: { display: 'flex', color: FG }, children: 'asahi' } },
+                      { type: 'div', props: { style: { display: 'flex', color: FG_MUTED }, children: '/ @ashunar0' } },
+                    ],
                   },
                 },
               ],
