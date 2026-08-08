@@ -1,6 +1,6 @@
 ---
 import { render } from 'astro:content';
-import { ArrowLeft, Copy } from 'lucide-react';
+import { ArrowLeft, CalendarDays, Copy } from 'lucide-react';
 import BaseLayout from '@/shared/layouts/BaseLayout.astro';
 import { Card } from '@/shared/ui/card';
 import { Badge } from '@/shared/ui/badge';
@@ -14,11 +14,11 @@ interface Props {
 const { post } = Astro.props;
 const { Content, headings } = await render(post);
 
-const publishedOn = post.data.pubDate.toLocaleDateString('ja-JP', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-});
+/*
+ * 2025.12.19 の形。toLocaleDateString('ja-JP') は 2025/12/19 と 0 詰めなしで返すため、
+ * 区切りの置換だけでは桁が揃わない。en-CA が返す 0 詰めの YYYY-MM-DD を作り直す。
+ */
+const publishedOn = post.data.pubDate.toLocaleDateString('en-CA').replaceAll('-', '.');
 
 /*
  * 記事ヘッダーと本文カードは別の要素だが、右端は揃えたい。
@@ -54,10 +54,21 @@ const contentGrid = 'lg:grid lg:grid-cols-[minmax(0,1fr)_13rem] lg:gap-10';
       <header class="max-w-3xl">
         <h1 class="text-2xl font-bold tracking-tight text-balance">{post.data.title}</h1>
 
-        {/* タグが増えて折り返しても、ボタンは右端に留めたいので行を分けて持つ */}
-        <div class="mt-5 flex items-start justify-between gap-4">
+        {/*
+          タグが増えて折り返しても、ボタンは右端に留めたいので行を分けて持つ。
+          狭い画面では日付とタグに幅を譲りたいので、横並びをやめて下に積む。
+        */}
+        <div
+          class="mt-5 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4"
+        >
           <div class="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-fg-muted">
-            <time datetime={post.data.pubDate.toISOString()}>{publishedOn}</time>
+            <time
+              datetime={post.data.pubDate.toISOString()}
+              class="inline-flex items-center gap-1.5"
+            >
+              <CalendarDays className="size-3.5 text-fg-subtle" aria-hidden="true" />
+              {publishedOn}
+            </time>
             {
               post.data.tags.length > 0 && (
                 <>
