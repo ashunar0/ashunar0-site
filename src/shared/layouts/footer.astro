@@ -1,0 +1,44 @@
+---
+import GithubIcon from '@/shared/ui/github-icon.astro';
+import XIcon from '@/shared/ui/x-icon.astro';
+
+// ビルド時に確定する。年が変わったら次のデプロイで追いつく。
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-border bg-surface">
+  <div
+    class="mx-auto flex max-w-5xl flex-col-reverse items-center justify-between gap-4 px-6 py-8 sm:flex-row"
+  >
+    <p class="text-sm text-fg-muted">© {year} ashunar0</p>
+
+    <div class="flex items-center gap-5">
+      <a
+        href="/posts"
+        class="text-sm text-fg-muted transition-colors hover:text-fg"
+      >
+        Posts
+      </a>
+
+      <a
+        href="https://github.com/ashunar0"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="GitHub"
+        class="text-fg-muted transition-colors hover:text-fg"
+      >
+        <GithubIcon class="size-5" />
+      </a>
+
+      <a
+        href="https://x.com/ashunar0"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="X"
+        class="text-fg-muted transition-colors hover:text-fg"
+      >
+        <XIcon class="size-5" />
+      </a>
+    </div>
+  </div>
+</footer>

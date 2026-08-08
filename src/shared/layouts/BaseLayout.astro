@@ -3,6 +3,7 @@ import '@/styles/global.css';
 import GithubIcon from '@/shared/ui/github-icon.astro';
 import Logo from '@/assets/logo.svg';
 import ThemeToggle from '@/shared/layouts/theme-toggle.astro';
+import Footer from '@/shared/layouts/footer.astro';
 
 interface Props {
   title: string;
@@ -83,7 +84,8 @@ const isCurrent = (href: string) => path === href || path.startsWith(`${href}/`)
       })();
     </script>
   </head>
-  <body class="min-h-dvh bg-canvas font-sans text-fg antialiased">
+  {/* 記事が短いページでも footer が画面下に貼りつくよう、main を伸ばす */}
+  <body class="flex min-h-dvh flex-col bg-canvas font-sans text-fg antialiased">
     <header class="border-b border-border bg-surface">
       <div class="mx-auto flex max-w-5xl items-center justify-between px-6 py-5">
         {/*
@@ -127,8 +129,10 @@ const isCurrent = (href: string) => path === href || path.startsWith(`${href}/`)
       </div>
     </header>
 
-    <main class="mx-auto max-w-5xl px-6 py-14">
+    <main class="mx-auto w-full max-w-5xl flex-1 px-6 py-14">
       <slot />
     </main>
+
+    <Footer />
   </body>
 </html>
