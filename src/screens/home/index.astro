@@ -16,7 +16,10 @@ const [latestPost, ...olderPosts] = await getRecentPosts();
 const bio = 'エンジニア。大学4年生。大学生になって初めてプログラミングに触れて、Unity, React, Honoなどを勉強。フルスタックエンジニアになれるように修行中。ヨルシカが好き。';
 ---
 
-<BaseLayout title="ashunar0" description="あさひの個人サイト">
+<BaseLayout
+  title="@ashunar0 | あさひの個人ブログ"
+  description="あさひの個人ブログです。Web 開発を中心に、学んだことや作ったものについて書いています。React・Hono あたりが多めです。"
+>
   {/*
     写真の上は明暗がテーマと無関係に決まるので、この中だけテーマ連動のトークンを使わない。
     text-fg などを使うと、ライトモードで暗い写真の上に黒い文字が乗って読めなくなる。
