@@ -7,6 +7,18 @@
     "directory": "./dist",
     "not_found_handling": "404-page"
   },
+
+  /*
+   * 独自ドメイン。custom_domain を立てると deploy 時に DNS レコードまで
+   * Cloudflare が用意するので、ダッシュボードで A レコードを引く必要はない。
+   * ドメインが Cloudflare のゾーンにあることが条件（ネームサーバーを向けてある）。
+   *
+   * www も持っておく。無いと www 付きで来た人がエラーになる。
+   */
+  "routes": [
+    { "pattern": "ashunar0.dev", "custom_domain": true },
+    { "pattern": "www.ashunar0.dev", "custom_domain": true }
+  ],
   "observability": {
     "enabled": true
   }
