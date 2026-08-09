@@ -1,6 +1,6 @@
 ---
-title: Cloudflare Durable Objects
-description: Durable Objects を「グローバルに1つだけ存在する、永続ストレージ付きのクラスインスタンス」として捉え直す。binding の仕組み、直列実行の効き方、分割の単位の決め方まで。
+title: グローバルに1つだけ存在する永続ストレージ付きのクラスインスタンス「Durable Objects」
+description: binding で env に生えてくる仕組み、リクエストが直列化される理由、どういう単位で分割すべきか。Durable Objects を一つのモデルで説明する。
 pubDate: 2026-08-09
 tags: [Cloudflare, Durable Objects]
 draft: false
