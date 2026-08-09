@@ -1,7 +1,7 @@
 ---
 title: Durable Objects でリアルタイムな状態共有を実現する
 description: 名前で決まるインスタンス、ロックのいらない直列化、Alarm と WebSocket Hibernation、RPC 境界で壊れるもの。リアルタイム投票アプリを一本作りながら、Durable Objects の要素を順に通す。
-pubDate: 2026-08-09
+pubDate: 2026-08-10
 tags: [Cloudflare, Durable Objects]
 draft: false
 ---
