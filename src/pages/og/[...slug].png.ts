@@ -156,7 +156,7 @@ const card = (title: string) => ({
                 {
                   type: 'div',
                   props: {
-                    style: { display: 'flex', alignItems: 'baseline', gap: 10, fontSize: 30 },
+                    style: { display: 'flex', alignItems: 'baseline', gap: 10, fontSize: 36 },
                     children: [
                       { type: 'div', props: { style: { display: 'flex', color: FG }, children: 'asahi' } },
                       { type: 'div', props: { style: { display: 'flex', color: FG_MUTED }, children: '/ @ashunar0' } },
