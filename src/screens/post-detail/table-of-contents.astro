@@ -70,8 +70,17 @@ const items = headings.filter((heading) => heading.depth === 2 || heading.depth 
       next.classList.add('text-fg', 'border-brand', 'font-bold');
       current = next;
 
-      // 目次自体がスクロールする長さのとき、active を視界に入れ続ける
-      next.scrollIntoView({ block: 'nearest' });
+      /*
+       * 目次自体がスクロールする長さのとき、active を視界に入れ続ける。
+       * scrollIntoView はページ側も動かしてしまう。WebKit はこのスクリプトを
+       * スタイルシートの適用前に走らせることがあり、その瞬間の目次は
+       * hidden lg:block が効かず本文の下に居るため、記事の途中まで飛ばされる。
+       * 動かしていいのは目次の中だけなので、はみ出した分を自分で詰める。
+       */
+      const navBox = nav.getBoundingClientRect();
+      const linkBox = next.getBoundingClientRect();
+      if (linkBox.top < navBox.top) nav.scrollTop -= navBox.top - linkBox.top;
+      else if (linkBox.bottom > navBox.bottom) nav.scrollTop += linkBox.bottom - navBox.bottom;
     };
 
     // IntersectionObserver は「見えているか」しか教えてくれないので、
