@@ -62,7 +62,7 @@ code
 
 アプリケーションが立ち上がれば成功です。
 
-![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/4124101/2109f2fd-419c-4a27-812d-a103ca0f246d.png)
+![VS Code が起動した画面](./media/vscode.jpeg)
 
 `command not found`（Windows では「用語 'code' は…認識されません」）と表示された場合は、まだ開き直せていない可能性があります。もう一度閉じて開き直してから試してください。
 
