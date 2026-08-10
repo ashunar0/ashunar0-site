@@ -26,6 +26,16 @@ https://zenn.dev/ashunar0/articles/1ba94a110d8622
 
 https://ashunar0.dev/posts/mac-dev-setup/
 
+## X の投稿
+
+投稿の URL は、カードではなく埋め込みになります。
+
+https://x.com/yusukebe/status/2049020835516854392?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E2049020835516854392%7Ctwgr%5E18c93877b1331d467c139959629820ceb0d27527%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fembed.zenn.studio%2Ftweetzenn-embedded__ee371124ffa2a
+
+同じ x.com でも、投稿以外はカードのままです。
+
+https://x.com/astrodotbuild
+
 ## 文中のリンク
 
 文の途中にある [Astro のドキュメント](https://docs.astro.build) は、そのまま普通のリンクとして残ります。

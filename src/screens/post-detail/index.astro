@@ -130,6 +130,13 @@ const contentGrid = 'lg:grid lg:grid-cols-[minmax(0,1fr)_13rem] lg:gap-10';
 </BaseLayout>
 
 <script>
+  // widgets.js が実行時に生やすもの。型は付いてこないのでここで宣言する。
+  declare global {
+    interface Window {
+      twttr?: { widgets: { load: (target?: HTMLElement) => void } };
+    }
+  }
+
   // 生 markdown を取りにいってクリップボードへ。本文を HTML に二重に持たせずに済む。
   const copyButton = document.querySelector<HTMLButtonElement>('[data-copy-markdown]');
 
@@ -151,6 +158,59 @@ const contentGrid = 'lg:grid lg:grid-cols-[minmax(0,1fr)_13rem] lg:gap-10';
         label.textContent = 'Copy Markdown';
       }, 1500);
     });
+  }
+
+  /*
+   * X の投稿を埋め込む。remark-link-card が置いた .tweet-embed を widgets.js が iframe に差し替える。
+   * 投稿がある記事でだけスクリプトを足したいので、読み込みはここで行う。
+   */
+  const tweets = [...document.querySelectorAll<HTMLElement>('.tweet-embed')];
+
+  if (tweets.length > 0) {
+    const currentTheme = () =>
+      document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+
+    /*
+     * 配色は blockquote の data-theme を見て iframe が組まれるため、
+     * 出来上がったあとから変えられない。テーマを変えたら中身ごと作り直す。
+     */
+    const paint = () => {
+      const theme = currentTheme();
+
+      for (const wrapper of tweets) {
+        const quote = document.createElement('blockquote');
+        quote.className = 'twitter-tweet';
+        quote.dataset.theme = theme;
+
+        // 既定の 550px は本文の中で目立ちすぎる。250〜550 の範囲で指定でき、中身は組み直される。
+        quote.dataset.width = '500';
+
+        // 中身のないリンクを置くと、widgets.js が投稿を取ってきて描き換える
+        const link = document.createElement('a');
+        link.href = wrapper.dataset.tweetUrl!;
+        quote.append(link);
+
+        wrapper.replaceChildren(quote);
+      }
+
+      window.twttr?.widgets.load();
+    };
+
+    paint();
+
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://platform.twitter.com/widgets.js';
+    document.head.append(script);
+
+    // テーマの切り替えは html の class で伝わる。トグル側に手を入れずに拾う。
+    let theme = currentTheme();
+
+    new MutationObserver(() => {
+      if (currentTheme() === theme) return;
+      theme = currentTheme();
+      paint();
+    }).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
   }
 
   // Shiki が出す pre をラッパーで包み、右上にコピーボタンを足す。
@@ -425,6 +485,44 @@ const contentGrid = 'lg:grid lg:grid-cols-[minmax(0,1fr)_13rem] lg:gap-10';
     border-left: 3px solid var(--color-border);
     padding-left: 1em;
     color: var(--color-fg-muted);
+  }
+
+  /*
+   * X の投稿。差し替わったあとの見た目は向こうの iframe が持つので、こちらは場所だけ決める。
+   * 器は本文の幅いっぱいに取り、中の iframe を中央に置く（幅は data-width で決まる）。
+   */
+  .post-body .tweet-embed {
+    /* 差し替わるまでは中身が 1 行のリンクなので、その分だけ本文が下にずれる。
+       いちばん小さい投稿くらいの高さを先に確保して、ずれ幅を減らす。 */
+    min-height: 12rem;
+  }
+
+  /* 引用の見た目は本文の blockquote 用のもの。埋め込み待ちのリンクには要らない */
+  .post-body .tweet-embed blockquote {
+    border-left: 0;
+    padding-left: 0;
+    margin: 0;
+  }
+
+  /*
+   * widgets.js は blockquote を div.twitter-tweet-rendered に置き換え、その中に iframe を入れる。
+   * 幅を持っているのはこの div なので、中央寄せはここに効かせる（iframe 側に書いても届かない）。
+   * 向こうの margin: 10px 0 を上書きするため !important が要る。
+   */
+  .post-body .tweet-embed .twitter-tweet-rendered {
+    margin-inline: auto !important;
+  }
+
+  .post-body .tweet-embed iframe {
+
+    /*
+     * 角を丸めているのは iframe の中の投稿カードで、iframe 自身の下地は白のまま。
+     * 暗いテーマだと丸めた外側の四隅にその白が覗くので、iframe 自体を同じ丸みで切り抜く。
+     *
+     * 器（.tweet-embed）側に付けても届かない。widgets.js が iframe を上下 10px 空けて置くため、
+     * 切り抜き線が iframe の角から離れてしまう。
+     */
+    border-radius: 12px;
   }
 
   .post-body :is(img, video) {

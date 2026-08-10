@@ -40,6 +40,35 @@ function bareUrlOf(node: Node): string | undefined {
   return child.url;
 }
 
+/**
+ * X の投稿 URL なら ID を返す。
+ * 同じ x.com でもプロフィールや検索結果は埋め込めないので、/status/ を持つものだけ拾う。
+ */
+function tweetIdOf(url: string): string | undefined {
+  try {
+    const { host, pathname } = new URL(url);
+    if (!/^(?:www\.)?(?:x|twitter)\.com$/.test(host)) return;
+
+    return pathname.match(/^\/[^/]+\/status(?:es)?\/(\d+)/)?.[1];
+  } catch {
+    return;
+  }
+}
+
+/*
+ * 投稿の中身は X が配信する iframe が持つので、こちらは URL を置くだけでよい。
+ * 差し替えるのは platform.twitter.com/widgets.js で、読み込みと配色の面倒は
+ * post-detail 側のスクリプトが見る（テーマを切り替えたら作り直す必要があるため）。
+ *
+ * 素の blockquote のままでも普通のリンクとして読めるので、
+ * スクリプトが落ちてもリンク切れにはならない。
+ */
+function renderTweet(url: string): string {
+  return `<div class="tweet-embed" data-tweet-url="${escapeHtml(url)}">
+  <blockquote class="twitter-tweet"><a href="${escapeHtml(url)}">${escapeHtml(url)}</a></blockquote>
+</div>`;
+}
+
 function renderCard(preview: LinkPreview): string {
   const { url, title, description, image, host, favicon } = preview;
 
@@ -69,7 +98,18 @@ export function remarkLinkCard() {
     // 裸の URL は本文直下にしか現れないので、根の子だけ見れば足りる
     for (const node of tree.children ?? []) {
       const url = bareUrlOf(node);
-      if (url) targets.push({ node, url });
+      if (!url) continue;
+
+      // X の投稿は OGP を取りにいかない。ログインしていない相手には中身を返さないうえ、
+      // そもそも埋め込みに必要なのは URL だけ。
+      if (tweetIdOf(url)) {
+        node.type = 'html';
+        node.value = renderTweet(url);
+        delete node.children;
+        continue;
+      }
+
+      targets.push({ node, url });
     }
 
     if (targets.length === 0) return;
