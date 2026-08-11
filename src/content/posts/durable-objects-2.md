@@ -6,6 +6,8 @@ tags: [Cloudflare, Durable Objects]
 draft: false
 ---
 
+## はじめに
+
 前回、Durable Object とはなにかをまとめました。ここでは実際に 1 つアプリを作り、Durable Objects の要素を順に通していきます。
 
 https://ashunar0.dev/posts/durable-objects/
