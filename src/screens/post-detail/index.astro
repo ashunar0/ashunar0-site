@@ -241,6 +241,11 @@ const contentGrid = 'lg:grid lg:grid-cols-[minmax(0,1fr)_13rem] lg:gap-10';
 </script>
 
 {/* MDX が吐く HTML には scoped style が効かないので、.post-body に絞って global で当てる */}
+{/*
+  ここを変えたら docs/markdown-preview.css も合わせること。
+  あちらは VSCode の Markdown プレビューを公開後の見た目に寄せるための写しで、
+  .post-body を body に読み替えたものを二重管理している（詳細は AGENTS.md）。
+*/}
 <style is:global>
   .post-body {
     font-size: 0.9375rem;

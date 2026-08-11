@@ -1,0 +1,269 @@
+/*
+ * VSCode の Markdown プレビューを、公開後の記事の見た目に近づけるための CSS。
+ *
+ * 読み込みは このリポジトリの .vscode/settings.json で行う。
+ *   "markdown.styles": ["docs/markdown-preview.css"]
+ * 相対パスは開いているフォルダ基準で解決される。
+ * ユーザー設定側に書くと、CSS を置いていない他のリポジトリを開くたびに
+ * "markdown.styles を読み込むことができません" が出続けるので、書かないこと。
+ *
+ * このファイルを新しく置いたり設定を変えたりしても、開きっぱなしのウィンドウには
+ * 反映されない（プレビュー webview の読めるリソース範囲は起動時に確定するため）。
+ * 変更したら Developer: Reload Window が必要。
+ * 実体があるのに読めない時は、まずリロードを疑うこと。置き場所やワークスペース
+ * トラストのせいだと誤診しやすい。
+ *
+ * 元になっているのは src/screens/post-detail/index.astro の <style is:global>。
+ * あちらは .post-body 配下だが、プレビューには相当するラッパーが無いので body に付け替えてある。
+ * 二重管理なので、記事のスタイルを変えたらこちらも手で合わせること。
+ *
+ * 対応していないもの（プレビューでは remark プラグインが動かないため）:
+ *   - リンクカード（remark-link-card）
+ *   - X の埋め込み
+ *   - コードブロックのコピーボタン
+ */
+
+/* -------------------------------------------------------------------------
+ * トークン
+ *   本体は Tailwind v4 の @theme で組まれていて素の CSS では解決できないため、
+ *   記事本文で実際に使う色だけを実値で写している。
+ *   出典: src/styles/global.css
+ * ------------------------------------------------------------------------- */
+
+body {
+  --color-surface: #ffffff;
+  --color-surface-sunken: #eaebec;
+  --color-border: #e5e5e5; /* neutral-200 */
+  --color-fg: #171717; /* neutral-900 */
+  --color-fg-muted: #737373; /* neutral-500 */
+  --color-brand: #378180;
+  --color-link: #0284c7; /* sky-600 */
+}
+
+body.vscode-dark,
+body.vscode-high-contrast {
+  --color-surface: #1c1917; /* stone-900 */
+  --color-surface-sunken: #292524; /* stone-800 */
+  --color-border: #292524; /* stone-800 */
+  --color-fg: #fafaf9; /* stone-50 */
+  --color-fg-muted: #a8a29e; /* stone-400 */
+  --color-brand: #4fa8a6;
+  --color-link: #38bdf8; /* sky-400 */
+}
+
+/* -------------------------------------------------------------------------
+ * 本文フォント
+ *   サイトは Wix Madefor Text を webfont で読んでいる。node_modules から直接
+ *   参照を試み、読めなければ下のフォールバックに落ちる。
+ * ------------------------------------------------------------------------- */
+
+@font-face {
+  font-family: 'Wix Madefor Text Variable';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url('../node_modules/@fontsource-variable/wix-madefor-text/files/wix-madefor-text-latin-wght-normal.woff2')
+    format('woff2-variations');
+}
+
+/* -------------------------------------------------------------------------
+ * 記事カードの再現
+ *   サイトでは max-w-3xl の Card（p-6 / sm:p-8）に本文が載っている。
+ * ------------------------------------------------------------------------- */
+
+body {
+  max-width: 48rem; /* max-w-3xl */
+  margin-inline: auto;
+  padding: 2rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  background: var(--color-surface);
+  color: var(--color-fg);
+  font-family: 'Wix Madefor Text Variable', ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.9375rem;
+  line-height: 1.9;
+}
+
+/* 段落やリストなど、ブロック同士の既定の間隔 */
+body > * + * {
+  margin-top: 1.5em;
+}
+
+body > :first-child {
+  margin-top: 0;
+}
+
+/* -------------------------------------------------------------------------
+ * 見出し
+ * ------------------------------------------------------------------------- */
+
+body > h1 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+}
+
+body > h2 {
+  position: relative;
+  margin-top: 3rem;
+  padding-bottom: 0.4em;
+  border: 0;
+  font-size: 1.375rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.5;
+}
+
+/* 縦棒（::before）と下線（::after）を同じ左端から始める */
+body > h2::before,
+body > h2::after {
+  content: '';
+  position: absolute;
+  left: -0.75rem;
+  background: var(--color-brand);
+}
+
+body > h2::before {
+  top: 0.25em;
+  bottom: 0.65em;
+  width: 5px;
+}
+
+body > h2::after {
+  right: 0;
+  bottom: 0;
+  height: 2px;
+}
+
+body > h2 + * {
+  margin-top: 1.25em;
+}
+
+body > h3 {
+  margin-top: 2.25rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+body > h4 {
+  margin-top: 1.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+body > :is(h2, h3, h4) + * {
+  margin-top: 0.75em;
+}
+
+/* -------------------------------------------------------------------------
+ * インライン要素
+ * ------------------------------------------------------------------------- */
+
+body a {
+  color: var(--color-link);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 0.08em;
+}
+
+body strong {
+  font-weight: 700;
+}
+
+body :is(ul, ol) {
+  padding-left: 1.5em;
+}
+
+body ul {
+  list-style: disc;
+}
+
+body ol {
+  list-style: decimal;
+}
+
+body li + li {
+  margin-top: 0.5em;
+}
+
+body blockquote {
+  border-left: 3px solid var(--color-border);
+  padding-left: 1em;
+  color: var(--color-fg-muted);
+  font-style: normal;
+}
+
+body :is(img, video) {
+  max-width: 100%;
+  border-radius: 0.5rem;
+}
+
+body hr {
+  border: 0;
+  border-top: 1px solid var(--color-border);
+  margin-top: 3rem;
+}
+
+body hr + * {
+  margin-top: 3rem;
+}
+
+/* -------------------------------------------------------------------------
+ * コード
+ *   サイトは Shiki の github-dark でハイライトしているため、
+ *   コードブロックはテーマに関係なく暗い地にしている。
+ * ------------------------------------------------------------------------- */
+
+body :not(pre) > code {
+  background: var(--color-surface-sunken);
+  border-radius: 0.25rem;
+  padding: 0.15em 0.4em;
+  color: inherit;
+  font-size: 0.9em;
+}
+
+body pre {
+  border-radius: 0.5rem;
+  padding: 1rem;
+  overflow-x: auto;
+  background: #24292e; /* shiki github-dark */
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+
+body pre > code {
+  background: none;
+  padding: 0;
+  color: #e1e4e8; /* shiki github-dark の既定文字色 */
+}
+
+/* -------------------------------------------------------------------------
+ * テーブル
+ * ------------------------------------------------------------------------- */
+
+body table {
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-size: 0.9333em;
+  line-height: 1.7;
+}
+
+body :is(th, td) {
+  border: 1px solid var(--color-border);
+  padding: 0.5em 0.75em;
+  text-align: left;
+  vertical-align: top;
+}
+
+body th {
+  background: var(--color-surface-sunken);
+  font-weight: 600;
+  white-space: nowrap;
+}

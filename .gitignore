@@ -28,3 +28,9 @@ pnpm-debug.log*
 
 # playwright mcp のスナップショット出力
 .playwright-mcp/
+
+# Claude Code のローカル設定
+.claude/
+
+# VSCode のローカル設定（Markdown プレビューの CSS はユーザー設定側で読む）
+.vscode/
