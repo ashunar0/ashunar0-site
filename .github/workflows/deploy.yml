@@ -1,0 +1,45 @@
+name: Deploy
+
+# 静的サイトなので、ビルドし直さない限り公開日を迎えた記事は出てこない。
+# 毎日 1 回ビルドすることで、pubDate が今日になった記事が掘り起こされる。
+on:
+  schedule:
+    # 00:00 UTC = 09:00 JST。pubDate に日付だけ書くと UTC 深夜として解釈されるので、
+    # 「その日付の朝 9 時に公開される」という素直な対応になる。
+    # GitHub の cron は混雑時に数十分遅れることがある（時刻の保証はない）。
+    - cron: '0 0 * * *'
+  push:
+    branches: [main]
+  # 待たずに今すぐ反映したい時は Actions タブから手で叩く。
+  workflow_dispatch:
+
+# 定時ビルドと push が重なった時に、古い方が後から上書きするのを防ぐ。
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      # 型チェック（astro check）は入れていない。型エラーで公開が止まると
+      # 予約公開の意味が無くなるため、check はローカルの deploy スクリプト側に残す。
+      - run: pnpm run build
+
+      - run: pnpm exec wrangler deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
