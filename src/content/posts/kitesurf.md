@@ -1,5 +1,5 @@
 ---
-title: Cloudflare から AI エージェントのためのブラウザ「Kitesurf」が登場！
+title: Cloudflare が AI エージェント専用ブラウザを出した
 description: 人間が画面を見るための機能を捨て去った新ブラウザ。ページごとに立つ isolate、状態を持たない描画係、eval だけが別扱いになる理由、Chromium と比べて何が速く何が遅いか。置き換えではなく選択肢が 1 つ増えた話として読む。
 pubDate: 2026-08-12
 tags: [Cloudflare, Kitesurf, ブラウザ自動化]
