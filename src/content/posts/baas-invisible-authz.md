@@ -1,5 +1,5 @@
 ---
-title: BaaS の認可漏れは、コードを読んでも見つからない
+title: tl;dv のインシデントに学ぶ、BaaS の「見えない脆弱性」を生む危険性
 description: Firestore や Supabase では認可が DB 側の設定ファイルに移り、抜けが「不在」としてしか存在しない。grep にも差分にも型検査にも出てこない理由、request.auth != null で開発中だけ完璧に動く罠、パス設計で境界をデータの形に埋める方法。tl;dv の 18 万件流出を題材に構造を整理する。
 pubDate: 2026-08-13
 tags: [セキュリティ, Firebase, Supabase, 設計]
