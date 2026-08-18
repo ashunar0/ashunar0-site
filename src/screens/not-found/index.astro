@@ -1,9 +1,76 @@
 ---
-import BaseLayout from '@/shared/layouts/BaseLayout.astro';
+import BaseLayout from "@/shared/layouts/BaseLayout.astro";
+import { ArrowLeft } from "lucide-react";
 ---
 
-<BaseLayout title="404 | ashunar0">
-  <h1>404</h1>
-  <p>ページが見つからなかった。</p>
-  <a href="/">トップへ戻る</a>
+<BaseLayout title="404 | ashunar0" description="ページが見つかりませんでした">
+  <div class="flex flex-col items-center gap-10 text-center">
+    {
+      /*
+      public/ に置いた svg は Astro の最適化を通らないので、参照はルート相対の素のパスになる。
+      width / height は viewBox と同じ比（750:500）を渡して、読み込み前に高さを確保する。
+      入れないと画像が入った瞬間に下の文字が押し下げられる。
+
+      イラストに 404 の文字が図として描かれているが、読み上げには乗らない。
+      下の見出しが同じことを伝えるので、こちらは装飾として alt を空にする。
+    */
+    }
+    <img
+      src="/404notfound.svg"
+      alt=""
+      width="750"
+      height="500"
+      class="fade-in w-full max-w-2xl"
+    />
+
+    <div class="flex flex-col items-center gap-3">
+      <h1 class="text-lg font-bold tracking-tight text-balance">
+        このページはすでに削除されているか、URL が間違っている可能性があります。
+      </h1>
+    </div>
+
+    <a
+      href="/"
+      class="group/back inline-flex items-center gap-1.5 text-sm font-semibold text-fg-muted transition-colors hover:text-fg"
+    >
+      <ArrowLeft
+        className="size-4 transition-transform group-hover/back:-translate-x-0.5"
+        aria-hidden="true"
+      />
+      トップへ戻る
+    </a>
+  </div>
 </BaseLayout>
+
+<style>
+  /*
+   * イラストをふわりと出す。JS は使わず、ページが描かれた時点で一度だけ流す。
+   *
+   * animation を no-preference の中だけで定義しているので、動きを減らす設定の人には
+   * 何も当たらず、既定の opacity: 1 でそのまま表示される。
+   * .fade-in 側に opacity: 0 を持たせると、そちらは消し忘れて見えなくなるので置かない。
+   */
+  @media (prefers-reduced-motion: no-preference) {
+    .fade-in {
+      /*
+       * cubic-bezier(0.16, 1, 0.3, 1) のような expo-out 系は前半で動き切って
+       * 後半が惰性になるので、時間を伸ばしても「ゆっくり」に感じない。
+       * 全体を通して等速に近い ease-out にして、長さをそのまま体感させる。
+       */
+      animation: not-found-fade-in 2400ms ease-out both;
+    }
+
+    @keyframes not-found-fade-in {
+      from {
+        opacity: 0;
+        /* 下から少し上がってくると「出てきた」感が出る。大きく動かすと騒がしい */
+        transform: translateY(12px) scale(0.98);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  }
+</style>
