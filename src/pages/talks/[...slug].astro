@@ -1,0 +1,23 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getPublishedTalks, type Talk } from '@/features/talks/query';
+import TalkDetail from '@/screens/talk-detail/index.astro';
+
+// URL の生成はルーティングの責務なので pages に置く。画面の中身は screens が持つ。
+export const getStaticPaths: GetStaticPaths = async () => {
+  const talks = await getPublishedTalks();
+  return talks.map((talk) => ({
+    params: { slug: talk.id },
+    props: { talk },
+  }));
+};
+
+// getStaticPaths の props は Astro.props に型が伝わらないので、ここで明示する。
+interface Props {
+  talk: Talk;
+}
+
+const { talk } = Astro.props;
+---
+
+<TalkDetail talk={talk} />

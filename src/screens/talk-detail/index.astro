@@ -1,0 +1,112 @@
+---
+import { render } from 'astro:content';
+import { Image } from 'astro:assets';
+import { ArrowLeft, CalendarDays, ExternalLink } from 'lucide-react';
+import BaseLayout from '@/shared/layouts/BaseLayout.astro';
+import { Card } from '@/shared/ui/card';
+import { getSlides } from '@/features/talks/slides';
+import { formatTalkDate, type Talk } from '@/features/talks/query';
+// 本文（.post-body）の見た目。post-detail と共有する。
+import '@/styles/post-body.css';
+
+interface Props {
+  talk: Talk;
+}
+
+const { talk } = Astro.props;
+const { Content } = await render(talk);
+
+const slides = getSlides(talk.id);
+
+// 本文は書かなくてよいものなので、空のときはカードごと出さない（空の枠が残るのを防ぐ）
+const hasBody = (talk.body ?? '').trim().length > 0;
+---
+
+<BaseLayout title={`${talk.data.title} | ashunar0`} description={talk.data.description}>
+  {/* 直前が一覧とは限らないので、履歴を戻るのではなく行き先の決まったリンクにする */}
+  <a
+    href="/talks"
+    class="group/back mb-4 inline-flex items-center gap-1.5 text-sm text-fg-muted transition-colors hover:text-fg"
+  >
+    <ArrowLeft
+      className="size-4 transition-transform group-hover/back:-translate-x-0.5"
+      aria-hidden="true"
+    />
+    Talks
+  </a>
+
+  <article class="max-w-3xl">
+    <header>
+      <h1 class="text-2xl font-bold tracking-tight text-balance">{talk.data.title}</h1>
+
+      <div class="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-fg-muted">
+        <span class="inline-flex items-center gap-1.5">
+          <CalendarDays className="size-4" aria-hidden="true" />
+          <time datetime={talk.pubDate.toISOString()}>{formatTalkDate(talk.pubDate)}</time>
+        </span>
+
+        <span>{talk.data.event}</span>
+
+        {
+          talk.data.slidesUrl && (
+            <a
+              href={talk.data.slidesUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1.5 transition-colors hover:text-brand"
+            >
+              資料の公開先
+              <ExternalLink className="size-3.5" aria-hidden="true" />
+            </a>
+          )
+        }
+      </div>
+    </header>
+
+    {/*
+      本文はスライドの前に置く。開いた瞬間に画像が並んでいると何の話か分からないので、
+      先に数行あるほうが読み手に親切。本文は空でも成立する。
+    */}
+    {
+      hasBody && (
+        <Card.Root variant="outline" className="mt-6 p-6 sm:p-8">
+          <div class="post-body">
+            <Content />
+          </div>
+        </Card.Root>
+      )
+    }
+
+    {/*
+      スライドは index.md には書かず、同じディレクトリの PNG をそのまま並べる。
+      ここが「登壇を足す作業」を軽く保っている要（features/talks/slides.ts）。
+    */}
+    {
+      slides.length > 0 && (
+        <section class="mt-10">
+          <h2 class="sr-only">スライド</h2>
+
+          <ol class="flex flex-col gap-4">
+            {slides.map((slide, index) => (
+              <li>
+                {/*
+                  枚数が多いので loading="lazy" は必須。Astro の Image は既定で付ける。
+                  alt は空にする。スライドの文字は画像なので読み上げられず、
+                  「スライド 3 枚目」と読ませても中身の代わりにはならない。
+                  中身を伝えたい部分は本文に書く。
+                */}
+                <Image
+                  src={slide}
+                  alt=""
+                  width={1600}
+                  class="w-full rounded-lg border border-border"
+                />
+                <span class="sr-only">{index + 1} 枚目</span>
+              </li>
+            ))}
+          </ol>
+        </section>
+      )
+    }
+  </article>
+</BaseLayout>

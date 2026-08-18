@@ -1,0 +1,33 @@
+---
+import BaseLayout from '@/shared/layouts/BaseLayout.astro';
+import TalkListItem from './talk-list-item.astro';
+import { getPublishedTalks } from '@/features/talks/query';
+
+const talks = await getPublishedTalks();
+---
+
+<BaseLayout title="Talks | ashunar0" description="登壇資料の一覧">
+  {/* 見出しに # を付ける表記は Posts と揃える */}
+  <h1 class="max-w-3xl font-semibold tracking-wider text-fg text-lg"># Talks</h1>
+
+  {/*
+    posts のような年ごとの畳みは持たない。登壇は本数が少なく、
+    畳む対象が無いのに開閉だけあると操作が増えるだけになる。
+    数が増えて 1 画面に収まらなくなったら、そこで年で束ねる。
+  */}
+  <div class="mt-8 max-w-3xl">
+    {
+      talks.length === 0 ? (
+        <p class="text-sm text-fg-muted">まだ登壇がない。</p>
+      ) : (
+        <ul class="grid gap-6 sm:grid-cols-2">
+          {talks.map((talk) => (
+            <li>
+              <TalkListItem talk={talk} />
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</BaseLayout>

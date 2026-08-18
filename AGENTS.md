@@ -10,7 +10,8 @@ Manage the background server with `astro dev stop`, `astro dev status`, and `ast
 
 ## 記事本文のスタイル
 
-記事本文の見た目は `src/screens/post-detail/index.astro` の `<style is:global>` にある（`.post-body` 配下）。
+記事本文の見た目は `src/styles/post-body.css` にある（`.post-body` 配下）。
+記事詳細（post-detail）と登壇詳細（talk-detail）の両方がここを読む。
 
 **ここを変えたら `docs/markdown-preview.css` も手で合わせること。**
 

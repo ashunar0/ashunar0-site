@@ -1,0 +1,74 @@
+---
+import { Image } from 'astro:assets';
+import { Card } from '@/shared/ui/card';
+import { Badge } from '@/shared/ui/badge';
+import { getCoverSlide } from '@/features/talks/slides';
+import { formatTalkDate, type Talk } from '@/features/talks/query';
+
+interface Props {
+  talk: Talk;
+}
+
+const { talk } = Astro.props;
+
+// 1 枚目のスライドをそのままサムネにする。手で用意する画像はひとつも無い。
+const cover = getCoverSlide(talk.id);
+---
+
+<Card.Root variant="outline" className="overflow-hidden">
+  {/* カードのどこを押しても開けるよう、リンクをブロック全体に広げる */}
+  <a href={`/talks/${talk.id}`} class="group/talk block">
+    {
+      cover ? (
+        /*
+          スライドは 16:9 で書き出される前提なので、aspect-video なら切れずに収まる。
+          比率が違うものが来ても object-cover で枠は崩さない。
+          alt は空にする。すぐ下にタイトルがテキストであるので、読み上げると二重になる。
+        */
+        <Image
+          src={cover}
+          alt=""
+          width={1200}
+          class="aspect-video w-full border-b border-border object-cover"
+        />
+      ) : (
+        /* スライド未投入の登壇でもカードの高さが崩れないよう、同じ比率の枠を置く */
+        <div class="aspect-video w-full border-b border-border bg-surface-muted" />
+      )
+    }
+
+    <div class="p-5">
+      {/*
+        イベント名と日付を同じ行に置く。イベント名が長いと折り返して日付が
+        行頭に落ちるので、日付側を縮まないようにして右に留める。
+      */}
+      <div class="flex items-center justify-between gap-3">
+        {/*
+          イベント名は posts のタグと同じ「分類」なので、同じ見た目を使い回す。
+          文字色だけをブランドカラーにする案もあったが、タイトルのホバー色と
+          かぶって「今どこを指しているか」が読めなくなるため、塗りのある形にする。
+        */}
+        <Badge
+          variant="subtle"
+          size="sm"
+          className="min-w-0 shrink bg-brand-subtle text-brand-fg"
+        >
+          <span class="truncate">{talk.data.event}</span>
+        </Badge>
+
+        <time datetime={talk.pubDate.toISOString()} class="shrink-0 text-sm text-fg-muted">
+          {formatTalkDate(talk.pubDate)}
+        </time>
+      </div>
+
+      <h3 class="mt-1 text-lg font-semibold transition-colors group-hover/talk:text-brand">
+        {talk.data.title}
+      </h3>
+
+      {/* 説明文の長さで見え方が散らからないよう 2 行で切る */}
+      <p class="mt-1.5 line-clamp-2 text-sm text-fg-muted">
+        {talk.data.description}
+      </p>
+    </div>
+  </a>
+</Card.Root>
