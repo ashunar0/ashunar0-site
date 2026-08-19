@@ -1,9 +1,9 @@
 ---
-import { Image } from 'astro:assets';
-import { Card } from '@/shared/ui/card';
-import { Badge } from '@/shared/ui/badge';
-import { getCoverSlide } from '@/features/talks/slides';
-import { formatTalkDate, type Talk } from '@/features/talks/query';
+import { formatTalkDate, type Talk } from "@/features/talks/query";
+import { getCoverSlide } from "@/features/talks/slides";
+import { Badge } from "@/shared/ui/badge";
+import { Card } from "@/shared/ui/card";
+import { Image } from "astro:assets";
 
 interface Props {
   talk: Talk;
@@ -38,16 +38,20 @@ const cover = getCoverSlide(talk.id);
     }
 
     <div class="p-5">
-      {/*
+      {
+        /*
         イベント名と日付を同じ行に置く。イベント名が長いと折り返して日付が
         行頭に落ちるので、日付側を縮まないようにして右に留める。
-      */}
+      */
+      }
       <div class="flex items-center justify-between gap-3">
-        {/*
+        {
+          /*
           イベント名は posts のタグと同じ「分類」なので、同じ見た目を使い回す。
           文字色だけをブランドカラーにする案もあったが、タイトルのホバー色と
           かぶって「今どこを指しているか」が読めなくなるため、塗りのある形にする。
-        */}
+        */
+        }
         <Badge
           variant="subtle"
           size="sm"
@@ -56,12 +60,17 @@ const cover = getCoverSlide(talk.id);
           <span class="truncate">{talk.data.event}</span>
         </Badge>
 
-        <time datetime={talk.pubDate.toISOString()} class="shrink-0 text-sm text-fg-muted">
+        <time
+          datetime={talk.pubDate.toISOString()}
+          class="shrink-0 text-sm text-fg-muted"
+        >
           {formatTalkDate(talk.pubDate)}
         </time>
       </div>
 
-      <h3 class="mt-1 text-lg font-semibold transition-colors group-hover/talk:text-brand">
+      <h3
+        class="mt-1 text-md font-semibold transition-colors group-hover/talk:text-brand"
+      >
         {talk.data.title}
       </h3>
 
