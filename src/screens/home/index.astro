@@ -10,8 +10,10 @@ import XIcon from '@/shared/ui/x-icon.astro';
 import { getRecentPosts } from '@/features/posts/query';
 import heroPhoto from '@/assets/hero.jpg';
 
-// 最新の一本だけ大きく見せ、残りは行で並べる
-const [latestPost, ...olderPosts] = await getRecentPosts();
+// 新しい 3 本は説明文まで見せ、続く 5 本はタイトルの行だけで並べる
+const recentPosts = await getRecentPosts(8);
+const featuredPosts = recentPosts.slice(0, 3);
+const olderPosts = recentPosts.slice(3);
 
 const bio = 'エンジニア。大学4年生。大学生になって初めてプログラミングに触れて、Unity, React, Honoなどを勉強。フルスタックエンジニアになれるように修行中。ヨルシカが好き。';
 ---
@@ -106,11 +108,22 @@ const bio = 'エンジニア。大学4年生。大学生になって初めてプ
   <section class="mt-12">
     <h2 class="font-semibold tracking-wider text-fg"># Recent posts</h2>
 
-    {!latestPost && <p class="mt-4 text-sm text-fg-muted">まだ記事がない。</p>}
+    {featuredPosts.length === 0 && <p class="mt-4 text-sm text-fg-muted">まだ記事がない。</p>}
 
-    {latestPost && <div class="mt-5"><FeaturedPost post={latestPost} /></div>}
+    {/* 説明文まで出す組。線では区切らず、間隔だけで一本ずつのまとまりを作る */}
+    {
+      featuredPosts.length > 0 && (
+        <ul class="mt-5 flex flex-col gap-8">
+          {featuredPosts.map((post) => (
+            <li>
+              <FeaturedPost post={post} />
+            </li>
+          ))}
+        </ul>
+      )
+    }
 
-    {/* 大きい一本と行の列を分ける。ここだけは太さの差が足りないので線を一本引く */}
+    {/* 大きい組と行の列を分ける。ここだけは太さの差が足りないので線を一本引く */}
     {
       olderPosts.length > 0 && (
         <ul class="mt-6 flex flex-col gap-3 border-t border-border pt-6">

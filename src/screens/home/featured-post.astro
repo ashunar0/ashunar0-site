@@ -15,7 +15,7 @@ const date = post.data.pubDate.toLocaleDateString('ja-JP', {
 });
 ---
 
-{/* 最新の一本。ここだけ説明文まで出して「まずこれを読んで」を示す */}
+{/* 新しい方の数本。ここだけ説明文まで出して「まずこれを読んで」を示す */}
 <a href={`/posts/${post.id}`} class="group/featured block">
   <time datetime={post.data.pubDate.toISOString()} class="text-sm text-fg-muted tabular-nums">
     {date}
