@@ -89,7 +89,42 @@ Fiber はインスタンスごとにあるので、記憶もインスタンス�
 
 保存場所が分かったところで、`useState` が何をしているのかを見てみます。
 
-面白いことに、React には `useState` という 1 つの実装があるわけではありません。**初回のレンダーと 2 回目以降で、呼ばれる関数が違います**。細部を落として書くと、こうなっています。
+`useState` の定義そのものは、拍子抜けするくらい短いです。
+
+```js
+export function useState(initialState) {
+  const dispatcher = resolveDispatcher();
+  return dispatcher.useState(initialState);
+}
+```
+
+自分では何もしていません。「今のディスパッチャ」を取ってきて、そこに丸投げしているだけです。
+ディスパッチャというのは、フック名と実装の対応表です。そしてこれが 2 種類あります。
+
+```js
+const HooksDispatcherOnMount = {
+  useState: mountState,      // 初回はこっち
+  useEffect: mountEffect,
+  // ...
+};
+
+const HooksDispatcherOnUpdate = {
+  useState: updateState,     // 2 回目以降はこっち
+  useEffect: updateEffect,
+  // ...
+};
+```
+
+どちらを使うかは、レンダーのたびに決められます。
+
+```js
+ReactSharedInternals.H =
+  current === null || current.memoizedState === null
+    ? HooksDispatcherOnMount
+    : HooksDispatcherOnUpdate;
+```
+
+つまり、同じ `useState(0)` と書いていても、**初回と 2 回目以降では実際に走る関数が違います**。それぞれの中身は、細部を落とすとこうなっています。
 
 ```js
 // 初回のレンダー
