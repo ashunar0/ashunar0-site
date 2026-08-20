@@ -251,10 +251,10 @@ function Form({ isEditing }) {
 上のように書いてしまうと、 `isEditing` が `true` のときと `false` のときで、フックが呼ばれる回数が変わります。順番で引かれるので、こうなります。
 
 ```
-isEditing === true            isEditing === false
-1 番目 → name                 1 番目 → name
-2 番目 → draft                2 番目 → error   ← draft の枠を引いてしまう
-3 番目 → error                （3 番目は誰も引かない）
+        isEditing === true      isEditing === false
+[0]     name                    name
+[1]     draft                   error   <-- draft の枠を引いてしまう
+[2]     error                   ([2] は誰も引かない)
 ```
 
 `error` が、前回まで `draft` が使っていた枠を取りに行きます。`null` を期待している変数に、空文字が入ってくる。そこから下は全部ずれます。
