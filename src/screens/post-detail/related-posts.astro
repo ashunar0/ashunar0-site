@@ -1,0 +1,48 @@
+---
+import type { Post } from '@/features/posts/query';
+
+interface Props {
+  posts: Post[];
+}
+
+const { posts } = Astro.props;
+---
+
+{/*
+  流入の大半が X から記事単位で来るので、読み終わりに次の一本を置く。
+  一覧へ戻すリンクは記事上部に既にあり、そこは出口として使われていない。
+
+  本文カードの下にもう一枚カードを置くと入れ子に見えて本文が主役でなくなるため、
+  ここは囲わず地の上に置く。見出しの形はトップの「# Recent posts」に揃える。
+*/}
+{
+  posts.length > 0 && (
+    <section class="mt-12 max-w-3xl">
+      <h2 class="font-semibold tracking-wider text-fg"># Related posts</h2>
+
+      {/* 線では区切らず間隔だけで分ける。モバイルが 7 割なので一本ずつを詰めすぎない */}
+      <ul class="mt-5 flex flex-col gap-6">
+        {posts.map((post) => (
+          <li>
+            <a href={`/posts/${post.id}`} class="group/related block">
+              <time
+                datetime={post.data.pubDate.toISOString()}
+                class="text-sm text-fg-muted tabular-nums"
+              >
+                {post.data.pubDate.toLocaleDateString('en-CA').replaceAll('-', '.')}
+              </time>
+
+              <h3 class="mt-1 font-bold tracking-tight transition-colors group-hover/related:text-brand">
+                {post.data.title}
+              </h3>
+
+              <p class="mt-1.5 line-clamp-2 text-sm leading-relaxed text-fg-muted">
+                {post.data.description}
+              </p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}

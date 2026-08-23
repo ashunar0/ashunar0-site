@@ -5,7 +5,8 @@ import BaseLayout from '@/shared/layouts/BaseLayout.astro';
 import { Card } from '@/shared/ui/card';
 import { Badge } from '@/shared/ui/badge';
 import TableOfContents from './table-of-contents.astro';
-import type { Post } from '@/features/posts/query';
+import RelatedPosts from './related-posts.astro';
+import { getRelatedPosts, type Post } from '@/features/posts/query';
 // 本文（.post-body）の見た目。talk-detail と共有する。
 import '@/styles/post-body.css';
 
@@ -15,6 +16,7 @@ interface Props {
 
 const { post } = Astro.props;
 const { Content, headings } = await render(post);
+const relatedPosts = await getRelatedPosts(post);
 
 /*
  * 2025.12.19 の形。toLocaleDateString('ja-JP') は 2025/12/19 と 0 詰めなしで返すため、
@@ -129,6 +131,11 @@ const contentGrid = 'lg:grid lg:grid-cols-[minmax(0,1fr)_13rem] lg:gap-10';
       </div>
     </div>
   </article>
+
+  {/* 目次の列と同じ grid を被せて、本文カードと左右の端を揃える */}
+  <div class={contentGrid}>
+    <RelatedPosts posts={relatedPosts} />
+  </div>
 </BaseLayout>
 
 <script>
