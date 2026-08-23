@@ -26,7 +26,13 @@ const url = new URL(`/posts/${post.id}`, Astro.site);
  * prefill はタイトルと URL だけにする。ハッシュタグや定型文まで詰めると、
  * その人が自分の言葉を書く余白が埋まってしまう。欲しいのは感想なので上を空けておく。
  */
-const xUrl = `https://x.com/intent/post?text=${encodeURIComponent(post.data.title)}&url=${encodeURIComponent(url.href)}`;
+/*
+ * /intent/post ではなく /intent/tweet を使う。どちらも 200 を返すが、
+ * twitter.com/intent/tweet が今も x.com/intent/tweet へ 301 する通り、
+ * X 側の正規の行き先はこちら。iOS で universal link として X アプリに渡ったとき、
+ * /intent/post はアプリが投稿画面と解釈できず内蔵ブラウザに落ちることがある。
+ */
+const xUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(post.data.title)}&url=${encodeURIComponent(url.href)}`;
 
 // はてブは https のとき /entry/s/<host><path> がブックマーク追加のページになる。
 const hatenaUrl = `https://b.hatena.ne.jp/entry/s/${url.host}${url.pathname}`;
