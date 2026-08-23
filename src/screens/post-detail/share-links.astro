@@ -1,0 +1,73 @@
+---
+import XIcon from '@/shared/ui/x-icon.astro';
+import type { Post } from '@/features/posts/query';
+
+interface Props {
+  post: Post;
+  /**
+   * inline は目次の下に並べる組。float はモバイルで本文の上に浮かせる組。
+   * 浮かせる側は地から切り離す必要があるので、丸と影を持たせて枠に頼らない。
+   */
+  variant?: 'inline' | 'float';
+  /** 置き場所ごとに並びが変わるので、外側の見た目は呼ぶ側が決める。 */
+  class?: string;
+}
+
+const { post, variant = 'inline', class: className } = Astro.props;
+
+const url = new URL(`/posts/${post.id}`, Astro.site);
+
+/*
+ * 公式ウィジェット（platform.twitter.com / b.hatena の button.js）は使わない。
+ * 外部スクリプトを読んで iframe を挿すため色をテーマに合わせられず、
+ * 読者の 7 割を占めるモバイルで読み込みが増える。ただのリンクで同じことができる。
+ */
+/*
+ * prefill はタイトルと URL だけにする。ハッシュタグや定型文まで詰めると、
+ * その人が自分の言葉を書く余白が埋まってしまう。欲しいのは感想なので上を空けておく。
+ */
+const xUrl = `https://x.com/intent/post?text=${encodeURIComponent(post.data.title)}&url=${encodeURIComponent(url.href)}`;
+
+// はてブは https のとき /entry/s/<host><path> がブックマーク追加のページになる。
+const hatenaUrl = `https://b.hatena.ne.jp/entry/s/${url.host}${url.pathname}`;
+
+// 文字を持たないぶん、指で押せる大きさを箱そのもので確保する。
+const base = 'inline-flex size-11 items-center justify-center transition-colors';
+
+/*
+ * 浮かせる側は枠を太くして立たせるのではなく、面で塗る。線を足さずに存在感を出せる。
+ * 文字色に surface を使うのは、brand が明暗で入れ替わるため。
+ * ライトは白地の上の #378180 に白抜き、ダークは明るい #4fa8a6 に暗い抜きになり、
+ * どちらでもアイコンのコントラストが確保される。
+ */
+const item =
+  variant === 'float'
+    ? `${base} rounded-full bg-brand text-surface shadow-lg hover:opacity-90`
+    : `${base} rounded-md border border-border bg-surface text-fg-muted hover:bg-surface-sunken hover:text-fg`;
+---
+
+<div class:list={['flex items-center gap-3', className]}>
+  <a
+    href={xUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="X で共有"
+    class={item}
+  >
+    <XIcon class="size-5" />
+  </a>
+
+  {/*
+    はてブのロゴは lucide に無く、公式の形を正確に持てないので B! の字で置く。
+    自前の文字なので色はテーマのトークンに乗る。
+  */}
+  <a
+    href={hatenaUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="はてなブックマークに追加"
+    class={item}
+  >
+    <span class="text-lg font-bold" aria-hidden="true">B!</span>
+  </a>
+</div>

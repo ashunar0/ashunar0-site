@@ -6,6 +6,7 @@ import { Card } from '@/shared/ui/card';
 import { Badge } from '@/shared/ui/badge';
 import TableOfContents from './table-of-contents.astro';
 import RelatedPosts from './related-posts.astro';
+import ShareLinks from './share-links.astro';
 import { getRelatedPosts, type Post } from '@/features/posts/query';
 // 本文（.post-body）の見た目。talk-detail と共有する。
 import '@/styles/post-body.css';
@@ -126,8 +127,15 @@ const contentGrid = 'lg:grid lg:grid-cols-[minmax(0,1fr)_13rem] lg:gap-10';
       </Card.Root>
 
       {/* 狭い画面では本文の幅を削ってしまうので出さない */}
+      {/*
+        目次と共有をまとめて貼り付ける。sticky は目次自身ではなくこの箱が持つ。
+        目次だけを sticky にすると、下に置いた共有が一緒に動かず流れていく。
+      */}
       <div class="hidden lg:block">
-        <TableOfContents headings={headings} />
+        <div class="sticky top-8 flex flex-col gap-6">
+          <TableOfContents headings={headings} />
+          <ShareLinks post={post} />
+        </div>
       </div>
     </div>
   </article>
@@ -136,7 +144,28 @@ const contentGrid = 'lg:grid lg:grid-cols-[minmax(0,1fr)_13rem] lg:gap-10';
   <div class={contentGrid}>
     <RelatedPosts posts={relatedPosts} />
   </div>
+
+  {/*
+    モバイルには目次の列が無いので、共有だけ本文の上に浮かせる。
+    末尾に置くと最後まで読んだ人しか通らず、読了前に共有したい人を取りこぼす。
+
+    画面幅いっぱいの帯にすると footer がもう一枚増えたように見えるので、
+    右下に寄せた粒として置く。親指の届く側で、本文の中央も塞がない。
+  */}
+  <ShareLinks post={post} variant="float" class="fixed right-4 bottom-4 z-40 lg:hidden" />
 </BaseLayout>
+
+{/*
+  浮かせたぶんは場所を取らないが、最後まで送ったときに footer の上へ
+  重なったままになる。その分だけ文書を伸ばして逃がす。lg では出さないので要らない。
+*/}
+<style is:global>
+  @media (width < 64rem) {
+    body {
+      padding-bottom: 4.25rem;
+    }
+  }
+</style>
 
 <script>
   // widgets.js が実行時に生やすもの。型は付いてこないのでここで宣言する。
