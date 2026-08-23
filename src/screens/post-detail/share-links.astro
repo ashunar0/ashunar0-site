@@ -37,19 +37,19 @@ const xUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(post.data.tit
 // はてブは https のとき /entry/s/<host><path> がブックマーク追加のページになる。
 const hatenaUrl = `https://b.hatena.ne.jp/entry/s/${url.host}${url.pathname}`;
 
-// 文字を持たないぶん、指で押せる大きさを箱そのもので確保する。
-const base = 'inline-flex size-11 items-center justify-center transition-colors';
-
 /*
- * 浮かせる側は枠を太くして立たせるのではなく、面で塗る。線を足さずに存在感を出せる。
+ * 文字を持たないぶん、指で押せる大きさを箱そのもので確保する。
+ *
+ * 枠を太くして立たせるのではなく、面で塗る。線を足さずに存在感を出せる。
  * 文字色に surface を使うのは、brand が明暗で入れ替わるため。
  * ライトは白地の上の #378180 に白抜き、ダークは明るい #4fa8a6 に暗い抜きになり、
  * どちらでもアイコンのコントラストが確保される。
  */
-const item =
-  variant === 'float'
-    ? `${base} rounded-full bg-brand text-surface shadow-lg hover:opacity-90`
-    : `${base} rounded-md border border-border bg-surface text-fg-muted hover:bg-surface-sunken hover:text-fg`;
+const base =
+  'inline-flex size-11 items-center justify-center rounded-full bg-brand text-surface transition-opacity hover:opacity-90';
+
+// 影は地から切り離すためのもの。列の中に収まる inline には要らない。
+const item = variant === 'float' ? `${base} shadow-lg` : base;
 ---
 
 <div class:list={['flex items-center gap-3', className]}>
