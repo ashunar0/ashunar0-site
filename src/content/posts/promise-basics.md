@@ -1,7 +1,7 @@
 ---
 title: なんとなく使っていたPromiseを、基礎から整理する
 description: Promiseの3つの状態、thenが新しいPromiseを返すこと、async/awaitとの対応関係を確認します。あわせて、forEachの中のawaitが効かない理由、await忘れ、Promise.allとallSettledの違い、new Promiseで包むべきでない場面を扱います。
-pubDate: 2026-08-27
+pubDate: 2026-08-26
 tags: [JavaScript, 非同期]
 draft: false
 ---
