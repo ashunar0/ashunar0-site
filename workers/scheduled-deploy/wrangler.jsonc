@@ -5,6 +5,12 @@
   "compatibility_date": "2026-08-06",
 
   /*
+   * workers.dev の公開 URL を持たない。fetch ハンドラが無いので叩かれても
+   * 何も起きないが、使わない入口は開けておかない。
+   */
+  "workers_dev": false,
+
+  /*
    * サイト本体（ルートの wrangler.jsonc）とは別の Worker として立てる。
    * 本体は assets 配信専用で main を持たない設計なので、そこに scheduled
    * ハンドラを同居させると「静的サイト」でなくなる。役割で分けておく。
