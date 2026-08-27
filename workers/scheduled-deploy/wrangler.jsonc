@@ -1,0 +1,27 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "ashunar0-site-scheduled-deploy",
+  "main": "src/index.js",
+  "compatibility_date": "2026-08-06",
+
+  /*
+   * サイト本体（ルートの wrangler.jsonc）とは別の Worker として立てる。
+   * 本体は assets 配信専用で main を持たない設計なので、そこに scheduled
+   * ハンドラを同居させると「静的サイト」でなくなる。役割で分けておく。
+   */
+
+  /*
+   * 00:05 UTC = 09:05 JST。
+   * pubDate に日付だけ書くと UTC 深夜（= JST 9:00）と解釈されるので、
+   * その 5 分後に叩けば「公開日を迎えた記事」が確実に拾われる。
+   * ちょうど 0 分でなく 5 分なのは、境界ぴったりを避けるため。
+   */
+  "triggers": {
+    "crons": ["5 0 * * *"]
+  },
+
+  // 失敗を無言で流さないため。ログは CF のダッシュボードで見る。
+  "observability": {
+    "enabled": true
+  }
+}

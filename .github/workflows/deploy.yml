@@ -2,11 +2,15 @@ name: Deploy
 
 # 静的サイトなので、ビルドし直さない限り公開日を迎えた記事は出てこない。
 # 毎日 1 回ビルドすることで、pubDate が今日になった記事が掘り起こされる。
+#
+# 定時ビルドの発火は Cloudflare の Cron Trigger に移した
+# （workers/scheduled-deploy）。09:05 JST に workflow_dispatch で叩かれる。
+# GitHub の schedule は公式に「毎時 00 分は高負荷帯で遅延し、負荷次第では
+# drop される」とされていて、実際に 1 時間超の遅延と不発が起きたため。
 on:
   schedule:
-    # 00:00 UTC = 09:00 JST。pubDate に日付だけ書くと UTC 深夜として解釈されるので、
-    # 「その日付の朝 9 時に公開される」という素直な対応になる。
-    # GitHub の cron は混雑時に数十分遅れることがある（時刻の保証はない）。
+    # CF が落ちていた場合の保険。こちらが本命だった頃の名残でもある。
+    # 遅れて発火しても concurrency で直列化されるだけなので害はない。
     - cron: '0 0 * * *'
   push:
     branches: [main]
