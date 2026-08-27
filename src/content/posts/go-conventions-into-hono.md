@@ -1,5 +1,5 @@
 ---
-title: Goの一貫性に学ぶ、Honoの規約を型とlintで再現する方法
+title: Goの一貫性を型やlintで真似すれば、Honoの開発体験を爆上げできる説
 description: Goはフレームワーク側の規約を持たないのに大規模でも破綻しにくいと言われます。その一貫性を書き方・置き場所と届く範囲・エラーの通り道・抽象化の仕方・時間軸の5つに分解し、TypeScriptとHonoに無かった3つを埋めた記録です。oxlintのカスタム規則、dbを渡さないrepository、ApiErrorをexportせずファクトリ経由に強制した話など。
 pubDate: 2026-08-27
 tags: [Go, Hono, TypeScript, 設計, Lint]
