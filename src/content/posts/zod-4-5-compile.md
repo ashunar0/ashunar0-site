@@ -1,5 +1,5 @@
 ---
-title: Zod 4.5のz.compile()はなぜ速いのか
+title: Zod 4.5でバリデーションが超高速化できるようになった！
 description: Zod 4.5で追加されたz.compile()について、そもそもZodがparseのたびに何をしているのかというところから調べて整理します。
 pubDate: 2026-08-31
 tags: [Zod, TypeScript]
