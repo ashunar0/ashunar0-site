@@ -1,5 +1,5 @@
 ---
-title: Cloudflare Workers Cacheとは何か
+title: ついにCloudflareでWorkersの手前にCacheを置けるようになった
 description: Workerの手前にキャッシュを置けるようになったWorkers Cacheを調べました。ヒット時にWorkerが動かなくなる仕組み、wranglerでの有効化とCache-Controlでの制御、キャッシュキーにホスト名が入らない罠、tiered cacheとrequest collapsing、コードから叩けるpurge、そして無料だったリクエストが課金対象に変わる点まで見ていきます。
 pubDate: 2026-09-03
 tags: [Cloudflare, Cloudflare Workers, キャッシュ]
