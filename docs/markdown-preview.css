@@ -81,7 +81,8 @@ body {
   color: var(--color-fg);
   font-family: 'Wix Madefor Text Variable', ui-sans-serif, system-ui, sans-serif;
   font-size: 0.9375rem;
-  line-height: 1.9;
+  line-height: 2.1333; /* 15px * 2.1333 ≈ 32px */
+  letter-spacing: 1.6px;
 }
 
 /* 段落やリストなど、ブロック同士の既定の間隔 */

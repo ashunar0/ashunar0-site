@@ -8,7 +8,8 @@
 
 .post-body {
   font-size: 0.9375rem;
-  line-height: 1.9;
+  line-height: 2.1333; /* 15px * 2.1333 ≈ 32px */
+  letter-spacing: 1.6px;
 }
 
 /* 段落やリストなど、ブロック同士の既定の間隔 */
@@ -251,6 +252,13 @@
 @media (max-width: 30rem) {
   .post-body .link-card__image {
     display: none;
+  }
+}
+
+/* スマホでは本文の基本サイズを少し落とす */
+@media (max-width: 30rem) {
+  .post-body {
+    font-size: 0.875rem;
   }
 }
 
