@@ -15,9 +15,10 @@ const { talk } = Astro.props;
 const cover = getCoverSlide(talk.id);
 ---
 
-<Card.Root variant="outline" className="overflow-hidden">
+{/* 同じ行のカードと高さを揃える。タイトルが何行に折り返すかで高さが変わらないように */}
+<Card.Root variant="outline" className="h-full overflow-hidden">
   {/* カードのどこを押しても開けるよう、リンクをブロック全体に広げる */}
-  <a href={`/talks/${talk.id}`} class="group/talk block">
+  <a href={`/talks/${talk.id}`} class="group/talk block h-full">
     {
       cover ? (
         /*
