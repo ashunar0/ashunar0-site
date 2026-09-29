@@ -100,6 +100,13 @@ async function request(url: string): Promise<LinkPreview> {
   };
 }
 
+function describe(error: Error): string {
+  const { cause } = error;
+  if (!(cause instanceof Error)) return error.message;
+  const code = 'code' in cause ? ` ${cause.code}` : '';
+  return `${error.message}: ${cause.message}${code}`;
+}
+
 /*
  * CI（GitHub Actions）からだと、手元では取れるページがときどき取れない。
  * 一度だけ取り直し、それでも駄目なら理由をビルドログに残して素のリンクに戻す。
@@ -111,7 +118,8 @@ async function load(url: string): Promise<LinkPreview | null> {
       return await request(url);
     } catch (error) {
       if (attempt < 2) continue;
-      const reason = error instanceof Error ? error.message : String(error);
+      // fetch failed だけでは分からない。DNS・接続・TLS のどれで落ちたかは cause が持つ
+      const reason = error instanceof Error ? describe(error) : String(error);
       console.warn(`[link-card] カードにできなかった: ${url} (${reason})`);
       return null;
     }
