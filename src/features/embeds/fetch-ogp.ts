@@ -69,37 +69,52 @@ function decodeEntities(text: string): string {
     .replace(/&amp;/g, '&');
 }
 
+/** 取れなかったら理由を添えて投げる。握りつぶすのは呼び出し側の load。 */
+async function request(url: string): Promise<LinkPreview> {
+  const response = await fetch(url, {
+    // UA を偽らないと HTML を返さないサイトがある
+    headers: { 'user-agent': 'Mozilla/5.0 (compatible; ashunar0.dev link preview)' },
+    signal: AbortSignal.timeout(8000),
+  });
+
+  if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+  const html = await response.text();
+  const { host } = new URL(url);
+
+  // og:title が無いサイトは <title> で代用する。それも無ければカードにしない。
+  const title =
+    readMeta(html, 'og:title') ??
+    decodeEntities(html.match(/<title[^>]*>([^<]*)<\/title>/i)?.[1]?.trim() ?? '');
+
+  if (!title) throw new Error('title が無い');
+
+  return {
+    url,
+    title,
+    description: readMeta(html, 'og:description') ?? readMeta(html, 'description'),
+    image: readMeta(html, 'og:image'),
+    host,
+    // 各サイトの favicon を辿るのは面倒なので、Google のサービスに任せる
+    favicon: `https://www.google.com/s2/favicons?domain=${host}&sz=64`,
+  };
+}
+
+/*
+ * CI（GitHub Actions）からだと、手元では取れるページがときどき取れない。
+ * 一度だけ取り直し、それでも駄目なら理由をビルドログに残して素のリンクに戻す。
+ * 黙って戻すと、公開後に本番を見るまで誰も気づけない。
+ */
 async function load(url: string): Promise<LinkPreview | null> {
-  try {
-    const response = await fetch(url, {
-      // UA を偽らないと HTML を返さないサイトがある
-      headers: { 'user-agent': 'Mozilla/5.0 (compatible; ashunar0.dev link preview)' },
-      signal: AbortSignal.timeout(8000),
-    });
-
-    if (!response.ok) return null;
-
-    const html = await response.text();
-    const { host } = new URL(url);
-
-    // og:title が無いサイトは <title> で代用する。それも無ければカードにしない。
-    const title =
-      readMeta(html, 'og:title') ??
-      decodeEntities(html.match(/<title[^>]*>([^<]*)<\/title>/i)?.[1]?.trim() ?? '');
-
-    if (!title) return null;
-
-    return {
-      url,
-      title,
-      description: readMeta(html, 'og:description') ?? readMeta(html, 'description'),
-      image: readMeta(html, 'og:image'),
-      host,
-      // 各サイトの favicon を辿るのは面倒なので、Google のサービスに任せる
-      favicon: `https://www.google.com/s2/favicons?domain=${host}&sz=64`,
-    };
-  } catch {
-    return null;
+  for (let attempt = 1; ; attempt++) {
+    try {
+      return await request(url);
+    } catch (error) {
+      if (attempt < 2) continue;
+      const reason = error instanceof Error ? error.message : String(error);
+      console.warn(`[link-card] カードにできなかった: ${url} (${reason})`);
+      return null;
+    }
   }
 }
 
