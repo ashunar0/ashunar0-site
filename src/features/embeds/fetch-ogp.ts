@@ -1,3 +1,5 @@
+import { internalPreview } from './internal-preview';
+
 /*
  * リンク先の OGP を読む。ビルド時にだけ走るので、実行時のコストも CORS も関係ない。
  *
@@ -102,6 +104,10 @@ async function load(url: string): Promise<LinkPreview | null> {
 }
 
 export function fetchLinkPreview(url: string): Promise<LinkPreview | null> {
+  // 自サイトの記事・登壇は手元のファイルから引く（理由は internal-preview.ts）
+  const internal = internalPreview(url);
+  if (internal) return Promise.resolve(internal);
+
   const cached = cache.get(url);
   if (cached) return cached;
 
