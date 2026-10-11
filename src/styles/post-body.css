@@ -311,6 +311,17 @@
   border-radius: 0.5rem;
 }
 
+.post-body figure {
+  margin: 1.5rem 0;
+}
+
+.post-body figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  text-align: center;
+  color: var(--color-fg-muted);
+}
+
 /*
  * 列が多いとカードからはみ出すので、テーブル自体を横スクロールさせる。
  * ラッパー要素は MDX が吐かないため、table に直接持たせる。

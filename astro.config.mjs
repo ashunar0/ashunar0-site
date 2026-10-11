@@ -9,6 +9,7 @@ import react from '@astrojs/react';
 
 import icon from 'astro-icon';
 
+import { remarkFigure } from './src/features/embeds/remark-figure';
 import { remarkLinkCard } from './src/features/embeds/remark-link-card';
 
 // https://astro.build/config
@@ -33,7 +34,8 @@ export default defineConfig({
   markdown: {
     // URL だけの段落をリンクカードにする。相手の OGP をビルド時に読むので、
     // 実行時の fetch も CORS も発生しない。
-    remarkPlugins: [remarkLinkCard],
+    // title 付きの画像だけの段落は figure にしてキャプションを出す。
+    remarkPlugins: [remarkLinkCard, remarkFigure],
 
     // Shiki はテーマの色をインライン style で書き込むため、CSS からは上書きできない。
     // コードブロックの配色はここが唯一の指定場所になる。
