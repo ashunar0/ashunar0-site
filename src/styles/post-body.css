@@ -315,6 +315,18 @@
   margin: 1.5rem 0;
 }
 
+/*
+ * 写真は幅いっぱいに広げると、縦長のものは画面を何枚分も占めてしまう。
+ * 高さで頭を押さえて、幅は比率なりに縮める。横長もこれで本文より一回り小さくなる。
+ */
+.post-body figure img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-height: 24rem;
+  margin-inline: auto;
+}
+
 .post-body figcaption {
   margin-top: 0.5rem;
   font-size: 0.875rem;
