@@ -8,6 +8,11 @@ astro dev --background
 
 Manage the background server with `astro dev stop`, `astro dev status`, and `astro dev logs`.
 
+## 記事（posts）を書く
+
+記事を書く・直すときは、手を付ける前に **`docs/writing.md` を読む**。置き場所、frontmatter、
+進め方、文体、書かないことをまとめてある。
+
 ## 登壇資料（talks）の追加
 
 1 登壇 = 1 ディレクトリ。`src/content/talks/YYYY-MM-DD-<短い名前>/` を作り、
