@@ -15,12 +15,16 @@ const talks = await getPublishedTalks();
     畳む対象が無いのに開閉だけあると操作が増えるだけになる。
     数が増えて 1 画面に収まらなくなったら、そこで年で束ねる。
   */}
-  <div class="mt-8 max-w-3xl">
+  {/*
+    posts の縦一列と違ってカードを並べるグリッドなので、本文幅（max-w-3xl）に
+    絞らずページ幅いっぱいを使う。絞ると 2 列で左に寄り、右が中途半端に空く。
+  */}
+  <div class="mt-8">
     {
       talks.length === 0 ? (
         <p class="text-sm text-fg-muted">まだ登壇がない。</p>
       ) : (
-        <ul class="grid gap-6 sm:grid-cols-2">
+        <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {talks.map((talk) => (
             <li>
               <TalkListItem talk={talk} />
