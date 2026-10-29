@@ -55,11 +55,6 @@
   ],
   "quick": [
     {
-      "title": "【サンプル】要対応の表示確認用",
-      "summary": "本物の短信が届いたら差し替える。脆弱性やアップデートのお知らせが入る想定。",
-      "source": "https://example.com/"
-    },
-    {
       "title": "Rolldown の次版で chunk.code の扱いが速くなる",
       "summary": "プラグインが chunk.code や renderedLength を読むたびに、Rust から JS へコードをコピーしなくなる。",
       "source": "https://x.com/voidzerodev/status/2115473594327400687"
