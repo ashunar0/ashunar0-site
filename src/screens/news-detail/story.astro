@@ -1,0 +1,56 @@
+---
+import AroundItem from './around-item.astro';
+import type { News } from '@/features/news/query';
+
+interface Props {
+  story: News['data']['stories'][number];
+}
+
+const { story } = Astro.props;
+---
+
+{/* 何本目かは上の進み具合のバーが示すので、番号は持たない */}
+<article class="flex flex-col gap-5">
+  <h2 class="text-base font-bold leading-snug text-balance">{story.title}</h2>
+
+  {/*
+    中身は widgets.js が差し替える。スクリプトが落ちても、
+    素のリンクとして元の投稿へは辿れるようにしておく。
+  */}
+  <div class="tweet-embed" data-tweet-url={story.main}>
+    <a href={story.main} class="text-sm text-fg-muted underline">
+      {story.main}
+    </a>
+  </div>
+
+  <p class="text-sm leading-relaxed text-fg-soft">{story.body}</p>
+
+  {
+    story.around.length > 0 && (
+      <section class="flex flex-col gap-1">
+        <h3 class="text-xs font-semibold text-fg-muted">周辺</h3>
+        <ul class="flex flex-col">
+          {story.around.map((item) => (
+            <li>
+              <AroundItem item={item} />
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+</article>
+
+<style>
+  /*
+   * widgets.js は blockquote を div.twitter-tweet-rendered に置き換え、その中に iframe を入れる。
+   * 中央寄せと角の切り抜きの理由は post-body.css の .tweet-embed と同じ。
+   */
+  .tweet-embed :global(.twitter-tweet-rendered) {
+    margin-inline: auto !important;
+  }
+
+  .tweet-embed :global(iframe) {
+    border-radius: 12px;
+  }
+</style>

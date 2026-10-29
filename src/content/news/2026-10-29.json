@@ -1,0 +1,57 @@
+{
+  "stories": [
+    {
+      "title": "Vite+ 移行の実例が続々、ビルド時間が半分近くに",
+      "main": "https://x.com/harshil1712/status/2115423128486662633",
+      "body": "Cloudflare の harshil1712 さんが、Cloudflare Certification のモノレポを Vite+ に移行。コード変更なしで本番ビルドが admin で −59%、user で −41% になり、型チェックも 21 秒（tsc ×6）から 5.3 秒（tsgo 1コマンド）に縮んだ。",
+      "around": [
+        {
+          "url": "https://x.com/yusukebe/status/2115435665030885737",
+          "name": "yusukebe",
+          "summary": "Ramen API も Vite+ を使い始めた"
+        },
+        {
+          "url": "https://x.com/voidzerodev/status/2115473594327400687",
+          "name": "VoidZero",
+          "summary": "Rolldown の次版で、chunk.code を読むたびの Rust→JS コピーがなくなる"
+        }
+      ]
+    },
+    {
+      "title": "JS パーサー競争が過熱、SWC Next 登場に Oxc も 3 倍速を予告",
+      "main": "https://x.com/jiahan_c/status/2115367245820088403",
+      "body": "SWC が次期メジャーの土台として「SWC Next」を発表。ネイティブのパースは最大 3 倍、JS API 経由なら最大 10 倍速くなり、フラットな ESTree ベースの AST で JS プラグインを速く書けるようにする。",
+      "around": [
+        {
+          "url": "https://x.com/evanyou/status/2115395476879241483",
+          "name": "Evan You",
+          "summary": "Oxc のパーサーも 3 倍速くする作業が進んでいると予告"
+        },
+        {
+          "url": "https://x.com/boshen_c/status/2115454414118904137",
+          "name": "Boshen",
+          "summary": "各陣営が自前のエージェントで作ったベンチは自陣が勝つ、と懐疑的"
+        }
+      ]
+    },
+    {
+      "title": "「useState を禁止したら AI エージェントはうまく書ける？」論争",
+      "main": "https://x.com/mattpocockuk/status/2115442777647726835",
+      "body": "Matt Pocock さんが、React アプリで useState を全面禁止しようか迷っていると投稿し、800 いいね超えの議論に。useState / useEffect の暗黙的な更新はエージェントが間違えやすく、useReducer やステートマシンのように明示的に書かせたほうが安定する、という意見が多い。",
+      "around": [
+        {
+          "url": "https://x.com/RyanCarniato/status/2115467254125174963",
+          "name": "Ryan Carniato",
+          "summary": "「これが React の現状？」と引用で反応"
+        }
+      ]
+    },
+    {
+      "title": "Cloudflare、自前の AI コードレビュアーで 100 万件超え",
+      "main": "https://x.com/CloudflareDev/status/2115478950642327912",
+      "body": "既製の AI コードレビューツールを試したうえで、より細かく制御するために自前のレビュアーを作り、すでに 100 万件以上のレビューを回している。作るか買うかを、制御・コスト・保守の観点でどう比べたかが紹介されている。",
+      "around": []
+    }
+  ],
+  "quick": []
+}

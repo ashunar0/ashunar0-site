@@ -168,12 +168,7 @@ const contentGrid = 'lg:grid lg:grid-cols-[minmax(0,1fr)_13rem] lg:gap-10';
 </style>
 
 <script>
-  // widgets.js が実行時に生やすもの。型は付いてこないのでここで宣言する。
-  declare global {
-    interface Window {
-      twttr?: { widgets: { load: (target?: HTMLElement) => void } };
-    }
-  }
+  import { mountTweets } from '@/features/embeds/mount-tweets';
 
   // 生 markdown を取りにいってクリップボードへ。本文を HTML に二重に持たせずに済む。
   const copyButton = document.querySelector<HTMLButtonElement>('[data-copy-markdown]');
@@ -198,58 +193,8 @@ const contentGrid = 'lg:grid lg:grid-cols-[minmax(0,1fr)_13rem] lg:gap-10';
     });
   }
 
-  /*
-   * X の投稿を埋め込む。remark-link-card が置いた .tweet-embed を widgets.js が iframe に差し替える。
-   * 投稿がある記事でだけスクリプトを足したいので、読み込みはここで行う。
-   */
-  const tweets = [...document.querySelectorAll<HTMLElement>('.tweet-embed')];
-
-  if (tweets.length > 0) {
-    const currentTheme = () =>
-      document.documentElement.classList.contains('dark') ? 'dark' : 'light';
-
-    /*
-     * 配色は blockquote の data-theme を見て iframe が組まれるため、
-     * 出来上がったあとから変えられない。テーマを変えたら中身ごと作り直す。
-     */
-    const paint = () => {
-      const theme = currentTheme();
-
-      for (const wrapper of tweets) {
-        const quote = document.createElement('blockquote');
-        quote.className = 'twitter-tweet';
-        quote.dataset.theme = theme;
-
-        // 既定の 550px は本文の中で目立ちすぎる。250〜550 の範囲で指定でき、中身は組み直される。
-        quote.dataset.width = '500';
-
-        // 中身のないリンクを置くと、widgets.js が投稿を取ってきて描き換える
-        const link = document.createElement('a');
-        link.href = wrapper.dataset.tweetUrl!;
-        quote.append(link);
-
-        wrapper.replaceChildren(quote);
-      }
-
-      window.twttr?.widgets.load();
-    };
-
-    paint();
-
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = 'https://platform.twitter.com/widgets.js';
-    document.head.append(script);
-
-    // テーマの切り替えは html の class で伝わる。トグル側に手を入れずに拾う。
-    let theme = currentTheme();
-
-    new MutationObserver(() => {
-      if (currentTheme() === theme) return;
-      theme = currentTheme();
-      paint();
-    }).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
-  }
+  // X の投稿を埋め込む。remark-link-card が置いた .tweet-embed を差し替える。
+  mountTweets([...document.querySelectorAll<HTMLElement>('.tweet-embed')]);
 
   // Shiki が出す pre をラッパーで包み、右上にコピーボタンを足す。
   // クリップボードはブラウザ API なので、ここだけは静的 HTML で完結しない。

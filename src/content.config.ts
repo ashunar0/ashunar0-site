@@ -43,4 +43,48 @@ const talks = defineCollection({
   }),
 });
 
-export const collections = { posts, talks };
+/*
+ * 朝のニュース。1 日 = 1 ファイルで、ファイル名 `YYYY-MM-DD.json` がそのまま URL と日付になる。
+ * 中身は Grok bot が X から集めたものを、この形の JSON に詰めて置く。
+ *
+ * 日付を中に持たないのは talks と同じ理由（ファイル名と二重に持たない）。
+ */
+const news = defineCollection({
+  loader: glob({ pattern: '*.json', base: './src/content/news' }),
+  schema: z.object({
+    stories: z.array(
+      z.object({
+        title: z.string(),
+        /*
+         * X の投稿の URL に限る。X ニュース（/i/trending/…）は公式の埋め込みがないので、
+         * ニュースの話題でも元になった投稿を選ばせる。
+         */
+        main: z
+          .url()
+          .regex(/^https:\/\/(?:www\.)?x\.com\/[^/]+\/status\/\d+/, 'main は X の投稿 URL にすること'),
+        body: z.string(),
+        around: z
+          .array(
+            z.object({
+              url: z.url(),
+              name: z.string(),
+              summary: z.string(),
+            }),
+          )
+          .default([]),
+      }),
+    ),
+    quick: z
+      .array(
+        z.object({
+          title: z.string(),
+          summary: z.string(),
+          urgent: z.boolean(),
+          source: z.url(),
+        }),
+      )
+      .default([]),
+  }),
+});
+
+export const collections = { posts, talks, news };

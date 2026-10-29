@@ -58,7 +58,7 @@ function tweetIdOf(url: string): string | undefined {
 /*
  * 投稿の中身は X が配信する iframe が持つので、こちらは URL を置くだけでよい。
  * 差し替えるのは platform.twitter.com/widgets.js で、読み込みと配色の面倒は
- * post-detail 側のスクリプトが見る（テーマを切り替えたら作り直す必要があるため）。
+ * features/embeds/mount-tweets.ts が見る（テーマを切り替えたら作り直す必要があるため）。
  *
  * 素の blockquote のままでも普通のリンクとして読めるので、
  * スクリプトが落ちてもリンク切れにはならない。

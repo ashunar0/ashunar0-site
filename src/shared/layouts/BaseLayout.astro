@@ -10,9 +10,14 @@ interface Props {
   description?: string;
   /** SNS カードの画像。サイト内の絶対パス（例: /og/hello-world.png）で渡す。 */
   image?: string;
+  /**
+   * ヘッダーとフッターを出さず、slot だけを body に置く。
+   * ニュースのように、画面全体を自分で使うページ用。
+   */
+  bare?: boolean;
 }
 
-const { title, description, image } = Astro.props;
+const { title, description, image, bare = false } = Astro.props;
 
 /*
  * OGP のクローラは HTML を読むだけでページを実行しないため、相対パスを解決できない。
@@ -89,53 +94,61 @@ const isCurrent = (href: string) => path === href || path.startsWith(`${href}/`)
   </head>
   {/* 記事が短いページでも footer が画面下に貼りつくよう、main を伸ばす */}
   <body class="flex min-h-dvh flex-col bg-canvas font-sans text-fg antialiased">
-    <header class="border-b border-border bg-surface">
-      <div class="mx-auto flex max-w-5xl items-center justify-between px-6 py-5">
-        {/*
-          ロゴは文字をアウトライン化した svg なので、読み上げ用に aria-label を持たせる。
-          塗りは currentColor なので、テーマごとに画像を用意せず text-fg を継ぐ。
-        */}
-        <a
-          href="/"
-          aria-label="ashunar0"
-          class="text-fg transition-colors hover:text-fg-soft"
-        >
-          <Logo class="h-6 w-auto" />
-        </a>
-        <div class="flex items-center gap-6">
-          <nav class="flex gap-6 text-sm">
-            {
-              navItems.map(({ href, label }) => (
+    {
+      bare ? (
+        <slot />
+      ) : (
+        <>
+          <header class="border-b border-border bg-surface">
+            <div class="mx-auto flex max-w-5xl items-center justify-between px-6 py-5">
+              {/*
+                ロゴは文字をアウトライン化した svg なので、読み上げ用に aria-label を持たせる。
+                塗りは currentColor なので、テーマごとに画像を用意せず text-fg を継ぐ。
+              */}
+              <a
+                href="/"
+                aria-label="ashunar0"
+                class="text-fg transition-colors hover:text-fg-soft"
+              >
+                <Logo class="h-6 w-auto" />
+              </a>
+              <div class="flex items-center gap-6">
+                <nav class="flex gap-6 text-sm">
+                  {
+                    navItems.map(({ href, label }) => (
+                      <a
+                        href={href}
+                        class:list={[
+                          'font-semibold transition-colors hover:text-fg',
+                          isCurrent(href) ? 'text-fg' : 'text-fg-muted',
+                        ]}
+                      >
+                        {label}
+                      </a>
+                    ))
+                  }
+                </nav>
+                <ThemeToggle />
                 <a
-                  href={href}
-                  class:list={[
-                    'font-semibold transition-colors hover:text-fg',
-                    isCurrent(href) ? 'text-fg' : 'text-fg-muted',
-                  ]}
+                  href="https://github.com/ashunar0"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="GitHub"
+                  class="text-fg-muted transition-colors hover:text-fg"
                 >
-                  {label}
+                  <GithubIcon class="size-5" />
                 </a>
-              ))
-            }
-          </nav>
-          <ThemeToggle />
-          <a
-            href="https://github.com/ashunar0"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub"
-            class="text-fg-muted transition-colors hover:text-fg"
-          >
-            <GithubIcon class="size-5" />
-          </a>
-        </div>
-      </div>
-    </header>
+              </div>
+            </div>
+          </header>
 
-    <main class="mx-auto w-full max-w-5xl flex-1 px-6 py-14">
-      <slot />
-    </main>
+          <main class="mx-auto w-full max-w-5xl flex-1 px-6 py-14">
+            <slot />
+          </main>
 
-    <Footer />
+          <Footer />
+        </>
+      )
+    }
   </body>
 </html>

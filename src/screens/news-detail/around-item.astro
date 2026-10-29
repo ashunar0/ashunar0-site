@@ -1,0 +1,40 @@
+---
+import { ExternalLink } from 'lucide-react';
+import { handleOf, type News } from '@/features/news/query';
+
+interface Props {
+  item: News['data']['stories'][number]['around'][number];
+}
+
+const { item } = Astro.props;
+
+const handle = handleOf(item.url);
+---
+
+{/*
+  X の投稿の並びに寄せて「名前 @ハンドル」と本文を置く。
+  アイコンは今は出さない。見る人のブラウザから外部サービスに取りに行くと回数の上限があるので、
+  ニュースを置くときに一度だけ取ってきてサイトに保存する形で、あとから足す。
+  行ごとに線や枠は引かず、ホバーの面だけで押せる範囲を示す。
+  面が文字に貼り付かないよう、内側に余白を取ったぶん外へ同じだけ逃がして左端を揃える。
+*/}
+<a
+  href={item.url}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="group/around -mx-3 flex gap-3 rounded-md px-3 py-2.5 transition-colors hover:bg-hover"
+>
+  <div class="flex min-w-0 flex-1 flex-col gap-0.5">
+    <div class="flex items-baseline gap-1.5 text-xs">
+      <span class="truncate font-bold">{item.name}</span>
+      {handle && <span class="truncate text-fg-muted">{handle}</span>}
+    </div>
+    <p class="text-xs leading-relaxed text-fg-soft">{item.summary}</p>
+  </div>
+
+  {/* 行が投稿の見た目でも、外へ飛ぶことは矢印で示す */}
+  <ExternalLink
+    className="mt-0.5 size-3.5 shrink-0 text-fg-subtle transition-colors group-hover/around:text-fg"
+    aria-hidden="true"
+  />
+</a>

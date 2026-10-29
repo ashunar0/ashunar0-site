@@ -1,0 +1,23 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getNewsList, type News } from '@/features/news/query';
+import NewsDetail from '@/screens/news-detail/index.astro';
+
+// URL の生成はルーティングの責務なので pages に置く。画面の中身は screens が持つ。
+export const getStaticPaths: GetStaticPaths = async () => {
+  const list = await getNewsList();
+  return list.map((news) => ({
+    params: { slug: news.id },
+    props: { news },
+  }));
+};
+
+// getStaticPaths の props は Astro.props に型が伝わらないので、ここで明示する。
+interface Props {
+  news: News;
+}
+
+const { news } = Astro.props;
+---
+
+<NewsDetail news={news} />
