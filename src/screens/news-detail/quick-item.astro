@@ -1,0 +1,32 @@
+---
+import { ExternalLink } from 'lucide-react';
+import type { News } from '@/features/news/query';
+
+interface Props {
+  item: News['data']['quick'][number];
+}
+
+const { item } = Astro.props;
+---
+
+{/*
+  周辺の行と同じ作り。行ごとに線や枠は引かず、ホバーの面で押せる範囲を示す。
+  「要対応」のような印は付けない。見出しの前に置くと書き出しがずれるうえ、
+  本当に対応が要るかは読む人による。やることは見出しと要約で伝わり、大事さは並び順で示す。
+*/}
+<a
+  href={item.source}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="group/quick -mx-3 flex gap-3 rounded-md px-3 py-2.5 transition-colors hover:bg-hover"
+>
+  <div class="flex min-w-0 flex-1 flex-col gap-1">
+    <span class="text-sm font-bold leading-snug">{item.title}</span>
+    <p class="text-xs leading-relaxed text-fg-muted">{item.summary}</p>
+  </div>
+
+  <ExternalLink
+    className="mt-0.5 size-3.5 shrink-0 text-fg-subtle transition-colors group-hover/quick:text-fg"
+    aria-hidden="true"
+  />
+</a>

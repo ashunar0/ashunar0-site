@@ -1,0 +1,29 @@
+---
+import QuickItem from './quick-item.astro';
+import type { News } from '@/features/news/query';
+
+interface Props {
+  quick: News['data']['quick'];
+}
+
+const { quick } = Astro.props;
+---
+
+{/*
+  1 本のストーリーにするほどではない短いニュースを、1 枚にまとめて並べる。
+  並びは JSON の順のまま（大事な順に置いてもらう。ストーリーと同じ）。
+  見出しは、ストーリーの続きではなく形の違う 1 枚だと分かるように置く。
+  データの名前（quick / 短信）は新聞の用語で読む人に通じないので、画面ではふつうの言葉にする。
+*/}
+<section class="flex flex-col gap-3">
+  <h2 class="text-base font-bold">その他のニュース</h2>
+  <ul class="flex flex-col">
+    {
+      quick.map((item) => (
+        <li>
+          <QuickItem item={item} />
+        </li>
+      ))
+    }
+  </ul>
+</section>

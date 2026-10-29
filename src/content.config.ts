@@ -79,7 +79,6 @@ const news = defineCollection({
         z.object({
           title: z.string(),
           summary: z.string(),
-          urgent: z.boolean(),
           source: z.url(),
         }),
       )

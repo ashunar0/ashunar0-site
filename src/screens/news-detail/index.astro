@@ -3,6 +3,7 @@ import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import BaseLayout from '@/shared/layouts/BaseLayout.astro';
 import Story from './story.astro';
 import EndSlide from './end-slide.astro';
+import QuickSlide from './quick-slide.astro';
 import { formatNewsDate, getNewsList, type News } from '@/features/news/query';
 
 interface Props {
@@ -11,7 +12,10 @@ interface Props {
 
 const { news } = Astro.props;
 const date = formatNewsDate(news.pubDate);
-const { stories } = news.data;
+const { stories, quick } = news.data;
+
+// 進み具合のバーは読むもの（記事と短信）の枚数だけ持つ。最後の 1 枚は数えない
+const segmentCount = stories.length + (quick.length > 0 ? 1 : 0);
 
 // 最後の 1 枚から前後の日へ渡すため。一覧は新しい順なので、後ろが古い日
 const list = await getNewsList();
@@ -46,7 +50,9 @@ const older = list[position + 1];
     >
       <div data-header class="flex flex-col gap-3 px-4 pt-3 pb-2">
         <ol class="flex gap-1" aria-hidden="true">
-          {stories.map(() => <li data-segment class="h-0.5 flex-1 rounded-full bg-border" />)}
+          {Array.from({ length: segmentCount }, () => (
+            <li data-segment class="h-0.5 flex-1 rounded-full bg-border" />
+          ))}
         </ol>
 
         <div class="flex items-center justify-between">
@@ -79,8 +85,16 @@ const older = list[position + 1];
           ))
         }
 
+        {
+          quick.length > 0 && (
+            <div data-story hidden class="px-5 pt-4 pb-10">
+              <QuickSlide quick={quick} />
+            </div>
+          )
+        }
+
         {/*
-          進み具合のバーは記事の本数だけ持つ。ここに来たときは全部が塗られた状態になる。
+          進み具合のバーは記事と短信の枚数だけ持つ。ここに来たときは全部が塗られた状態になる。
           写真を枠いっぱいに敷くので、余白は記事の側にだけ持たせている。
         */}
         <div data-story hidden class="h-full">
