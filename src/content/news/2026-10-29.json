@@ -60,19 +60,9 @@
       "source": "https://www.bleepingcomputer.com/news/security/cisa-warns-of-hackers-now-exploiting-critical-node2shell-flaw/"
     },
     {
-      "title": "GitHub が Copilot Fusion を発表、複数モデルを組み合わせて動かす",
-      "summary": "High / Max の effort を選ぶと、1 つのモデルで足りない場面で複数のモデルとワークフローを協調させる。Artificial Analysis の Coding Agent Index では、Copilot Fusion Max が Claude Code（Opus 5.5 Max）と 2 ポイント以内のスコアだった。",
-      "source": "https://x.com/github/status/2115500310865301921"
-    },
-    {
       "title": "Cloudflare Workflows を eu や us などの jurisdiction に限定できるように",
       "summary": "Workflows の実行とデータを特定の地域内にとどめられ、GDPR や FedRAMP への対応に使える。Wrangler 4.152.0 が必要。",
       "source": "https://x.com/CFchangelog/status/2115488951603499116"
-    },
-    {
-      "title": "Cloudflare Access のログイン・拒否ページをカスタマイズ可能に",
-      "summary": "HTML と Liquid で、ログインページ、アクセス拒否ページ、CLI の承認ページを独自のブランドで作れる。拒否されたユーザーに次の手順を示すこともできる。",
-      "source": "https://x.com/KennyJohnsonATX/status/2115179775899603411"
     },
     {
       "title": "Claude Code の使用量が早く減る問題、Anthropic が調査結果を報告",
@@ -88,11 +78,6 @@
       "title": "Formisch に HonoX アダプターが正式マージ",
       "summary": "Cloudflare Workers Tech Talks in Osaka #3 で紹介されていた、フォームライブラリ Formisch の HonoX アダプターが本体にマージされた。",
       "source": "https://x.com/ysknsid25/status/2115310527178317889"
-    },
-    {
-      "title": "Rolldown の次版で chunk.code の扱いが速くなる",
-      "summary": "プラグインが chunk.code や renderedLength を読むたびに、Rust から JS へコードをコピーしなくなる。バンドルが大きく、chunk.code を読むプラグインが多いほど効果が大きい。",
-      "source": "https://x.com/IWANABETHATGUY2/status/2115472178863087700"
     }
   ]
 }
