@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import { ArrowLeft, ArrowRight, RotateCcw } from 'lucide-react';
+import XIcon from '@/shared/ui/x-icon.astro';
 import { formatNewsDate, type News } from '@/features/news/query';
 import photo from '@/assets/news-og.jpg';
 // 日付の書体。OG 画像と同じ Playfair Display。英数字だけなので latin の分だけが読まれる
@@ -17,6 +18,18 @@ interface Props {
 const { news, older, newer } = Astro.props;
 
 const [year, month, day] = news.id.split('-');
+
+/*
+ * 共有のリンク。作り方の理由（公式ウィジェットを使わない、/intent/tweet を使う、
+ * prefill はタイトルと URL だけ）は post-detail/share-links.astro と同じ。
+ */
+const url = new URL(`/news/${news.id}`, Astro.site);
+const xUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(`News ${formatNewsDate(news.pubDate)}`)}&url=${encodeURIComponent(url.href)}`;
+const hatenaUrl = `https://b.hatena.ne.jp/entry/s/${url.host}${url.pathname}`;
+
+// 形と大きさは記事の共有ボタンと同じ丸。色は写真の上なので「最初から読む」と同じ白の枠線にする
+const share =
+  'inline-flex size-11 items-center justify-center rounded-full border border-white/30 transition-colors hover:bg-white/10';
 
 ---
 
@@ -43,6 +56,22 @@ const [year, month, day] = news.id.split('-');
 
   <div class="relative flex flex-col gap-6">
     <div class="flex flex-col gap-3">
+      <div class="mb-3 flex justify-center gap-3">
+        <a href={xUrl} target="_blank" rel="noopener noreferrer" aria-label="X で共有" class={share}>
+          <XIcon class="size-5" />
+        </a>
+        {/* はてブのロゴは lucide に無いので、記事と同じく B! の字で置く */}
+        <a
+          href={hatenaUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="はてなブックマークに追加"
+          class={share}
+        >
+          <span class="text-lg font-bold" aria-hidden="true">B!</span>
+        </a>
+      </div>
+
       <a
         href="/news"
         class="inline-flex h-10 items-center justify-center rounded-md bg-white px-4 text-sm font-medium text-stone-950 transition-colors hover:bg-white/85"
