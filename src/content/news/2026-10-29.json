@@ -55,9 +55,44 @@
   ],
   "quick": [
     {
+      "title": "Node.js の Brotli 脆弱性 Node2Shell、CISA が悪用を確認して KEV に追加",
+      "summary": "Brotli デコーダの境界外書き込み（CVE-2026-111497）で、細工した圧縮データによりクラッシュやメモリ漏えい、場合によってはリモートコード実行に至る。CISA は 10 月 27 日に KEV へ追加し、米政府機関に 11 月 10 日までの対応を求めた。",
+      "source": "https://www.bleepingcomputer.com/news/security/cisa-warns-of-hackers-now-exploiting-critical-node2shell-flaw/"
+    },
+    {
+      "title": "GitHub が Copilot Fusion を発表、複数モデルを組み合わせて動かす",
+      "summary": "High / Max の effort を選ぶと、1 つのモデルで足りない場面で複数のモデルとワークフローを協調させる。Artificial Analysis の Coding Agent Index では、Copilot Fusion Max が Claude Code（Opus 5.5 Max）と 2 ポイント以内のスコアだった。",
+      "source": "https://x.com/github/status/2115500310865301921"
+    },
+    {
+      "title": "Cloudflare Workflows を eu や us などの jurisdiction に限定できるように",
+      "summary": "Workflows の実行とデータを特定の地域内にとどめられ、GDPR や FedRAMP への対応に使える。Wrangler 4.152.0 が必要。",
+      "source": "https://x.com/CFchangelog/status/2115488951603499116"
+    },
+    {
+      "title": "Cloudflare Access のログイン・拒否ページをカスタマイズ可能に",
+      "summary": "HTML と Liquid で、ログインページ、アクセス拒否ページ、CLI の承認ページを独自のブランドで作れる。拒否されたユーザーに次の手順を示すこともできる。",
+      "source": "https://x.com/KennyJohnsonATX/status/2115179775899603411"
+    },
+    {
+      "title": "Claude Code の使用量が早く減る問題、Anthropic が調査結果を報告",
+      "summary": "共有されたセッション ID を全件調べ、トークンを余計に消費していた小さな問題をいくつか見つけて修正を配信中。単一の原因や Claude Code の退行はなく、多くは xhigh effort や /goal、Agent Teams などを使った重いセッションによるものだったという。",
+      "source": "https://x.com/bcherny/status/2115592371224346734"
+    },
+    {
+      "title": "React Router v8.5.1 リリース",
+      "summary": "React の use() 向けの unstable な <Await unstable_promise> API が入り、19 件のパッチ修正を含む。",
+      "source": "https://x.com/ReactRouter/status/2115460870490779714"
+    },
+    {
+      "title": "Formisch に HonoX アダプターが正式マージ",
+      "summary": "Cloudflare Workers Tech Talks in Osaka #3 で紹介されていた、フォームライブラリ Formisch の HonoX アダプターが本体にマージされた。",
+      "source": "https://x.com/ysknsid25/status/2115310527178317889"
+    },
+    {
       "title": "Rolldown の次版で chunk.code の扱いが速くなる",
-      "summary": "プラグインが chunk.code や renderedLength を読むたびに、Rust から JS へコードをコピーしなくなる。",
-      "source": "https://x.com/voidzerodev/status/2115473594327400687"
+      "summary": "プラグインが chunk.code や renderedLength を読むたびに、Rust から JS へコードをコピーしなくなる。バンドルが大きく、chunk.code を読むプラグインが多いほど効果が大きい。",
+      "source": "https://x.com/IWANABETHATGUY2/status/2115472178863087700"
     }
   ]
 }
