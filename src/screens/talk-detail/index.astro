@@ -94,12 +94,13 @@ const hasBody = (talk.body ?? '').trim().length > 0;
                   alt は空にする。スライドの文字は画像なので読み上げられず、
                   「スライド 3 枚目」と読ませても中身の代わりにはならない。
                   中身を伝えたい部分は本文に書く。
+                  読み込みが終わるまでは枠だけが白く抜けるので、薄いグレーの面を敷いておく。
                 */}
                 <Image
                   src={slide}
                   alt=""
                   width={1600}
-                  class="w-full rounded-lg border border-border"
+                  class="w-full rounded-lg border border-border bg-surface-sunken"
                 />
                 <span class="sr-only">{index + 1} 枚目</span>
               </li>

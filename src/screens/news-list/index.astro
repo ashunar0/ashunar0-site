@@ -1,0 +1,32 @@
+---
+import BaseLayout from '@/shared/layouts/BaseLayout.astro';
+import NewsListItem from './news-list-item.astro';
+import { getNewsList } from '@/features/news/query';
+
+const list = await getNewsList();
+---
+
+{/*
+  一覧はサイトのふつうのページとして置き、1 日分を開いたときだけ全画面のストーリーズになる。
+  並べ方は talks と同じグリッド（ページ幅いっぱい、lg で 3 列）。
+*/}
+<BaseLayout title="News | ashunar0" description="毎朝 X から集めたテックニュース">
+  {/* 見出しに # を付ける表記は Posts / Talks と揃える */}
+  <h1 class="max-w-3xl font-semibold tracking-wider text-fg text-lg"># News</h1>
+
+  <div class="mt-8">
+    {
+      list.length === 0 ? (
+        <p class="text-sm text-fg-muted">まだニュースがない。</p>
+      ) : (
+        <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {list.map((news) => (
+            <li>
+              <NewsListItem news={news} />
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</BaseLayout>

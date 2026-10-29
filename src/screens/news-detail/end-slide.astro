@@ -1,0 +1,104 @@
+---
+import { Image } from 'astro:assets';
+import { ArrowLeft, ArrowRight, RotateCcw } from 'lucide-react';
+import { formatNewsDate, type News } from '@/features/news/query';
+import photo from '@/assets/news-og.jpg';
+// 日付の書体。OG 画像と同じ Playfair Display。英数字だけなので latin の分だけが読まれる
+import '@fontsource/playfair-display/900.css';
+
+interface Props {
+  news: News;
+  /** 1 日前（古い側）のニュース。なければ出さない */
+  older?: News;
+  /** 1 日後（新しい側）のニュース。なければ出さない */
+  newer?: News;
+}
+
+const { news, older, newer } = Astro.props;
+
+const [year, month, day] = news.id.split('-');
+
+---
+
+{/*
+  最後の 1 枚。一覧のサムネや X のカード（OG 画像）と同じ写真と日付で閉じる。
+  伝えるのは「読み終えた」と「次にどこへ行けるか」の 2 つだけ。
+  上の帯（進み具合・日付・閉じる）は出さない。日付はここに大きくあり、閉じる先の一覧も下にある。
+  ここに来たら「次へ」の操作では先に進まない。戻る側だけ効く。
+*/}
+<div class="relative flex h-full flex-col justify-between overflow-hidden p-6 text-white">
+  <Image src={photo} alt="" width={800} class="absolute inset-0 size-full object-cover" />
+
+  {/* トップの hero、OG 画像と同じ覆い方。文字の乗る下を濃く、上も少し沈める */}
+  <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/40"></div>
+
+  <div class="relative flex flex-col">
+    <div class="display flex items-baseline gap-2 text-lg">
+      <span>News</span>
+      <span class="text-white/75">{year}</span>
+    </div>
+    <p class="display text-8xl leading-none tracking-tight">{month}.{day}</p>
+    <p class="display mt-6 text-2xl">That's all for today.</p>
+  </div>
+
+  <div class="relative flex flex-col gap-6">
+    <div class="flex flex-col gap-3">
+      <a
+        href="/news"
+        class="inline-flex h-10 items-center justify-center rounded-md bg-white px-4 text-sm font-medium text-stone-950 transition-colors hover:bg-white/85"
+      >
+        ニュース一覧へ
+      </a>
+      <button
+        type="button"
+        data-restart
+        class="inline-flex h-10 cursor-pointer items-center justify-center gap-2 rounded-md border border-white/30 px-4 text-sm font-medium transition-colors hover:bg-white/10"
+      >
+        <RotateCcw className="size-4" aria-hidden="true" />
+        最初から読む
+      </button>
+    </div>
+
+    {/* 前後の日はある側だけ出す。古い日が左、新しい日が右 */}
+    {
+      (older || newer) && (
+        <nav class="flex justify-between gap-3 text-sm" aria-label="前後の日">
+          {older ? (
+            <a
+              href={`/news/${older.id}`}
+              class="inline-flex items-center gap-1 text-white/75 transition-colors hover:text-white"
+            >
+              <ArrowLeft className="size-4" aria-hidden="true" />
+              {formatNewsDate(older.pubDate)}
+            </a>
+          ) : (
+            <span />
+          )}
+          {newer && (
+            <a
+              href={`/news/${newer.id}`}
+              class="inline-flex items-center gap-1 text-white/75 transition-colors hover:text-white"
+            >
+              {formatNewsDate(newer.pubDate)}
+              <ArrowRight className="size-4" aria-hidden="true" />
+            </a>
+          )}
+        </nav>
+      )
+    }
+
+    {/* サイトのほかの場所へ。ストーリーの画面にはヘッダーがないので、ここで代わりに渡す */}
+    <nav class="flex justify-center gap-5 text-sm text-white/60" aria-label="サイト内">
+      <a href="/" class="transition-colors hover:text-white">Top</a>
+      <a href="/posts" class="transition-colors hover:text-white">Posts</a>
+      <a href="/talks" class="transition-colors hover:text-white">Talks</a>
+    </nav>
+  </div>
+</div>
+
+<style>
+  .display {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+  }
+</style>

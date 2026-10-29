@@ -2,7 +2,8 @@
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import BaseLayout from '@/shared/layouts/BaseLayout.astro';
 import Story from './story.astro';
-import { formatNewsDate, type News } from '@/features/news/query';
+import EndSlide from './end-slide.astro';
+import { formatNewsDate, getNewsList, type News } from '@/features/news/query';
 
 interface Props {
   news: News;
@@ -11,13 +12,24 @@ interface Props {
 const { news } = Astro.props;
 const date = formatNewsDate(news.pubDate);
 const { stories } = news.data;
+
+// 最後の 1 枚から前後の日へ渡すため。一覧は新しい順なので、後ろが古い日
+const list = await getNewsList();
+const position = list.findIndex((item) => item.id === news.id);
+const newer = list[position - 1];
+const older = list[position + 1];
 ---
 
 {/*
   インスタのストーリーズを下敷きにした画面。サイトのヘッダーとフッターは出さず、
   1 本ずつめくって読む。スマホでは画面いっぱい、広い画面では縦長の枠を中央に置く。
 */}
-<BaseLayout title={`News ${date} | ashunar0`} description={`${date} のニュース`} bare>
+<BaseLayout
+  title={`News ${date} | ashunar0`}
+  description={`${date} のニュース`}
+  image={`/og/news/${news.id}.png`}
+  bare
+>
   <div class="flex h-dvh items-center justify-center gap-4 sm:bg-stone-950 sm:p-4">
     {/* 広い画面ではめくる操作を枠の外に出す。スマホでは枠の中のタップで代わる */}
     <button
@@ -32,7 +44,7 @@ const { stories } = news.data;
     <div
       class="flex h-full w-full flex-col bg-surface sm:aspect-[9/16] sm:w-auto sm:max-w-full sm:overflow-hidden sm:rounded-xl"
     >
-      <div class="flex flex-col gap-3 px-4 pt-3 pb-2">
+      <div data-header class="flex flex-col gap-3 px-4 pt-3 pb-2">
         <ol class="flex gap-1" aria-hidden="true">
           {stories.map(() => <li data-segment class="h-0.5 flex-1 rounded-full bg-border" />)}
         </ol>
@@ -43,9 +55,9 @@ const { stories } = news.data;
             <time datetime={news.pubDate.toISOString()} class="text-fg-muted">{date}</time>
           </div>
 
-          {/* 一覧はまだないので、閉じたらトップへ戻す */}
+          {/* 直前が一覧とは限らない（X から直接来る）ので、履歴を戻らず一覧へのリンクにする */}
           <a
-            href="/"
+            href="/news"
             aria-label="閉じる"
             class="-mr-2 flex size-9 items-center justify-center rounded-full text-fg-muted transition-colors hover:bg-hover hover:text-fg"
           >
@@ -58,14 +70,22 @@ const { stories } = news.data;
         中身が収まらないときは、ストーリーの中で縦にスクロールして読む。
         左 1/3 のタップで戻り、残りで進む（リンクや埋め込みの上は除く）。
       */}
-      <div data-scroller class="min-h-0 flex-1 overflow-y-auto px-5 pt-4 pb-10">
+      <div data-scroller class="min-h-0 flex-1 overflow-y-auto">
         {
           stories.map((story, index) => (
-            <div data-story hidden={index !== 0}>
+            <div data-story hidden={index !== 0} class="px-5 pt-4 pb-10">
               <Story story={story} />
             </div>
           ))
         }
+
+        {/*
+          進み具合のバーは記事の本数だけ持つ。ここに来たときは全部が塗られた状態になる。
+          写真を枠いっぱいに敷くので、余白は記事の側にだけ持たせている。
+        */}
+        <div data-story hidden class="h-full">
+          <EndSlide news={news} older={older} newer={newer} />
+        </div>
       </div>
     </div>
 
@@ -88,6 +108,7 @@ const { stories } = news.data;
   const scroller = document.querySelector<HTMLElement>('[data-scroller]')!;
   const prevButton = document.querySelector<HTMLButtonElement>('[data-prev]')!;
   const nextButton = document.querySelector<HTMLButtonElement>('[data-next]')!;
+  const header = document.querySelector<HTMLElement>('[data-header]')!;
 
   let current = 0;
 
@@ -96,6 +117,9 @@ const { stories } = news.data;
     current = index;
 
     stories.forEach((story, i) => (story.hidden = i !== current));
+
+    // 最後の 1 枚は写真を枠いっぱいに見せる。上の帯の日付や閉じるは、その中にあるもので足りる
+    header.hidden = current === stories.length - 1;
 
     // 読み終えたぶんと今いる 1 本を塗る。自動で進めないので、途中まで伸びる動きは持たない
     segments.forEach((segment, i) => {
@@ -110,6 +134,7 @@ const { stories } = news.data;
   };
 
   prevButton.addEventListener('click', () => show(current - 1));
+  document.querySelector('[data-restart]')?.addEventListener('click', () => show(0));
   nextButton.addEventListener('click', () => show(current + 1));
 
   scroller.addEventListener('click', (event) => {

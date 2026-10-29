@@ -1,0 +1,40 @@
+---
+import { Card } from '@/shared/ui/card';
+import { formatNewsDate, type News } from '@/features/news/query';
+
+interface Props {
+  news: News;
+}
+
+const { news } = Astro.props;
+const date = formatNewsDate(news.pubDate);
+const lead = news.data.stories[0]?.title ?? '';
+---
+
+{/* サムネは OG 画像をそのまま使う。日付と 1 本目の見出しは画像に入っている */}
+<Card.Root variant="outline" className="overflow-hidden">
+  <a href={`/news/${news.id}`} class="group/news block">
+    {/*
+      画像の中の文字は読み上げられないので、同じ中身を alt で渡す。
+      OG 画像はビルド時に書き出す静的ファイルで、astro:assets の最適化は通らない。
+      読み込みが終わるまでは枠だけが白く抜けるので、薄いグレーの面を敷いておく。
+    */}
+    <img
+      src={`/og/news/${news.id}.png`}
+      alt={`${date} のニュース。${lead}`}
+      width="1200"
+      height="630"
+      loading="lazy"
+      class="aspect-[1200/630] w-full border-b border-border bg-surface-sunken transition-opacity group-hover/news:opacity-90"
+    />
+
+    {/*
+      talks のカードと同じ「画像 + 下に 1 行」の形に揃える。見出しは画像にあるので書かず、
+      一覧で拾うための日付と、画像からは数えないと分からない本数だけを置く。
+    */}
+    <div class="flex items-center justify-between gap-3 px-5 py-3 text-sm text-fg-muted">
+      <time datetime={news.pubDate.toISOString()}>{date}</time>
+      <span>{news.data.stories.length} 本</span>
+    </div>
+  </a>
+</Card.Root>
