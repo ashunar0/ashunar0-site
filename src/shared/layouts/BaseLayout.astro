@@ -105,16 +105,19 @@ const isCurrent = (href: string) => path === href || path.startsWith(`${href}/`)
               {/*
                 ロゴは文字をアウトライン化した svg なので、読み上げ用に aria-label を持たせる。
                 塗りは currentColor なので、テーマごとに画像を用意せず text-fg を継ぐ。
+                狭い画面ではナビと並びきらないので一回り小さくする。読む人の大半がスマホなので、
+                アバターに置き換えずに文字のロゴのまま残す。
               */}
               <a
                 href="/"
                 aria-label="ashunar0"
                 class="text-fg transition-colors hover:text-fg-soft"
               >
-                <Logo class="h-6 w-auto" />
+                <Logo class="h-5 w-auto sm:h-6" />
               </a>
-              <div class="flex items-center gap-6">
-                <nav class="flex gap-6 text-sm">
+              {/* 狭い画面ではナビとテーマの切り替えのあいだを少し詰める */}
+              <div class="flex items-center gap-4 sm:gap-6">
+                <nav class="flex gap-4 text-sm sm:gap-6">
                   {
                     navItems.map(({ href, label }) => (
                       <a
@@ -130,12 +133,16 @@ const isCurrent = (href: string) => path === href || path.startsWith(`${href}/`)
                   }
                 </nav>
                 <ThemeToggle />
+                {/*
+                  狭い画面ではナビが入りきらないので GitHub を譲る。
+                  フッターとトップの hero にもあるので、ここで消しても辿れなくはならない。
+                */}
                 <a
                   href="https://github.com/ashunar0"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="GitHub"
-                  class="text-fg-muted transition-colors hover:text-fg"
+                  class="hidden text-fg-muted transition-colors hover:text-fg sm:block"
                 >
                   <GithubIcon class="size-5" />
                 </a>

@@ -28,7 +28,12 @@ const { story } = Astro.props;
   {
     story.around.length > 0 && (
       <section class="flex flex-col gap-1">
-        <h3 class="text-xs font-semibold text-fg-muted">周辺</h3>
+        {/*
+          並ぶのはポストそのものではなく「誰が何を言ったか・どう動いたか」の一行要約なので、
+          「関連ポスト」のようにポストを引いてきたと読める言葉は避ける。上の帯の News と揃えて英語にした。
+          データの名前（around / 周辺）はそのまま画面に出さない。
+        */}
+        <h3 class="text-xs font-semibold text-fg-muted">Reactions</h3>
         <ul class="flex flex-col">
           {story.around.map((item) => (
             <li>

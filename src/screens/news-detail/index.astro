@@ -175,10 +175,9 @@ const older = list[position + 1];
   const autoplayButton = document.querySelector<HTMLButtonElement>('[data-autoplay]')!;
 
   /*
-   * 自動再生。1 枚 20 秒でバーが伸び切ったら次へ進む。
-   * 読んでいる途中で勝手に進むのがいちばん嫌なので、その 1 枚の中でスクロールやタップ、
-   * 埋め込みの操作をしたら、その 1 枚のあいだは止める。次の 1 枚に移ればまた動く。
-   * 入り切りは × の左のボタンで、選んだ側を覚えておく。動きを減らす設定の人は既定で切る。
+   * 自動再生。1 枚 20 秒でバーが伸び切ったら次へ進む。20 秒はスクロールして読む時間も込みで決めてあるので、
+   * スクロールやタップで止めることはしない（止めると読んでいる途中でバーが満ちて動かなくなり、壊れて見えた）。
+   * 止めたい人は × の左のボタンで切る。選んだ側を覚えておき、動きを減らす設定の人は既定で切る。
    */
   const DURATION = 20_000;
   const STORAGE_KEY = 'news-autoplay';
@@ -194,14 +193,13 @@ const older = list[position + 1];
   };
 
   let autoplay = loadAutoplay();
-  let held = false; // この 1 枚で触られたので止めている
   let elapsed = 0;
 
   let current = 0;
 
-  const running = () => autoplay && !held && current < segments.length;
+  const running = () => autoplay && current < segments.length;
 
-  // 読み終えたぶんは満たし、今の 1 枚は自動再生で進んだぶんだけ伸ばす。止まっているときは満たしておく
+  // 読み終えたぶんは満たし、今の 1 枚は自動再生で進んだぶんだけ伸ばす。自動再生を切っているときは満たしておく
   const paintSegments = () => {
     segments.forEach((segment, i) => {
       const ratio = i < current ? 1 : i > current ? 0 : running() ? elapsed / DURATION : 1;
@@ -209,16 +207,9 @@ const older = list[position + 1];
     });
   };
 
-  const hold = () => {
-    if (held) return;
-    held = true;
-    paintSegments();
-  };
-
   // remember は押されたときだけ。開いただけで既定値を書き込むと、OS の設定を変えても追従しなくなる
   const setAutoplay = (on: boolean, remember = true) => {
     autoplay = on;
-    held = false;
     autoplayButton.setAttribute('aria-pressed', String(on));
     autoplayButton.querySelector('[data-autoplay-on]')!.classList.toggle('hidden', !on);
     autoplayButton.querySelector('[data-autoplay-off]')!.classList.toggle('hidden', on);
@@ -245,7 +236,6 @@ const older = list[position + 1];
     for (const button of sideButtons) button.hidden = isEnd;
 
     elapsed = 0;
-    held = false;
     paintSegments();
 
     for (const button of prevButtons) button.disabled = current === 0;
@@ -273,16 +263,6 @@ const older = list[position + 1];
   });
 
   autoplayButton.addEventListener('click', () => setAutoplay(!autoplay));
-
-  // 読もうとした合図。タップでめくった場合は、このあと show() が新しい 1 枚で止めを外す
-  scroller.addEventListener('pointerdown', hold);
-  scroller.addEventListener('wheel', hold, { passive: true });
-  scroller.addEventListener('touchstart', hold, { passive: true });
-
-  // 埋め込み（iframe）の中の操作はページに届かない。iframe にフォーカスが移ったことで拾う
-  window.addEventListener('blur', () => {
-    if (document.activeElement instanceof HTMLIFrameElement) hold();
-  });
 
   let last = performance.now();
   const tick = (now: number) => {
