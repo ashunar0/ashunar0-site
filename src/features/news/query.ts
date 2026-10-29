@@ -1,3 +1,4 @@
+import { existsSync } from 'node:fs';
 import { getCollection, type CollectionEntry } from 'astro:content';
 
 /**
@@ -39,4 +40,19 @@ export function formatNewsDate(pubDate: Date): string {
 export function handleOf(url: string): string | undefined {
   const name = new URL(url).pathname.split('/')[1];
   return name ? `@${name}` : undefined;
+}
+
+/*
+ * 周辺に出る人のアイコン。Grok bot が JSON を置くときに X から取ってきて、
+ * public/news/avatars/<ハンドルの小文字>.<拡張子> に保存する（手順は docs/news.md）。
+ * 見る人のブラウザから外部サービスへ取りに行かせないため、サイトの中に置いて配る。
+ */
+const AVATAR_DIR = 'public/news/avatars';
+const AVATAR_EXTENSIONS = ['jpg', 'png', 'webp'];
+
+/** ハンドル（`@yusukebe`）のアイコンのパス。まだ保存されていなければ undefined。 */
+export function avatarOf(handle: string): string | undefined {
+  const name = handle.replace(/^@/, '').toLowerCase();
+  const extension = AVATAR_EXTENSIONS.find((ext) => existsSync(`${AVATAR_DIR}/${name}.${ext}`));
+  return extension && `/news/avatars/${name}.${extension}`;
 }

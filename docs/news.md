@@ -9,13 +9,14 @@ Grok bot が毎朝やること。X から集めたテックニュースを 1 日
 ```sh
 git pull --rebase                         # 1. 最新にする
 # 2. src/content/news/YYYY-MM-DD.json を書く（下の形）
-pnpm astro sync                           # 3. 形を検査する。exit 1 なら直す
-git add src/content/news/YYYY-MM-DD.json
+# 3. around に出てくる人のアイコンを public/news/avatars/ に保存する（下の「アイコン」）
+pnpm astro sync                           # 4. 形を検査する。exit 1 なら直す
+git add src/content/news/YYYY-MM-DD.json public/news/avatars
 git commit -m "feat: YYYY-MM-DD のニュースを追加"
-git push                                  # 4. これで公開される
+git push                                  # 5. これで公開される
 ```
 
-- 触るのは `src/content/news/` の、その日の 1 ファイルだけ。ほかのファイルは変えない
+- 触るのは `src/content/news/` の、その日の 1 ファイルと、`public/news/avatars/` のアイコンだけ。ほかのファイルは変えない
 - 検査（`pnpm astro sync`）が通らないまま push しない。push するとビルドが落ちて、その日のニュースも出ない
 - 同じ日のファイルがもうあるときは上書きしない
 
@@ -81,6 +82,18 @@ git push                                  # 4. これで公開される
 | `title` | 見出し。日本語で 1 行 |
 | `summary` | 要約。1〜2 文 |
 | `source` | 元の投稿や記事の URL |
+
+## アイコン
+
+`around` に出てくる人のアイコンは、画面で名前の左に丸く出る。見る人のブラウザから X に取りに行かせないため、
+JSON を置くときに一緒にリポジトリへ保存する。
+
+- 置き場所: `public/news/avatars/<ハンドル>.jpg`（`png` / `webp` でもよい）
+- ハンドルは `around` の `url` の `x.com/<ハンドル>/status/…` の部分を**小文字にしたもの**。`RyanCarniato` なら `ryancarniato.jpg`
+- 大きさは 96×96 くらい。画面では 32px で出すので、それ以上大きくしない（1 枚数 KB に収める）
+- すでにある人も、出てくるたびに取り直して上書きしてよい（アイコンを変えた人が新しくなる）
+- 取れなかった人は保存しなくてよい。画面では人型の仮のアイコンが出るだけで、検査もビルドも落ちない
+- `main` の投稿の人や、`quick` の分は要らない（画面に出ない）
 
 ## 中身のルール
 

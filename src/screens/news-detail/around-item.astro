@@ -1,6 +1,6 @@
 ---
-import { ExternalLink } from 'lucide-react';
-import { handleOf, type News } from '@/features/news/query';
+import { ExternalLink, User } from 'lucide-react';
+import { avatarOf, handleOf, type News } from '@/features/news/query';
 
 interface Props {
   item: News['data']['stories'][number]['around'][number];
@@ -9,12 +9,11 @@ interface Props {
 const { item } = Astro.props;
 
 const handle = handleOf(item.url);
+const avatar = handle && avatarOf(handle);
 ---
 
 {/*
-  X の投稿の並びに寄せて「名前 @ハンドル」と本文を置く。
-  アイコンは今は出さない。見る人のブラウザから外部サービスに取りに行くと回数の上限があるので、
-  ニュースを置くときに一度だけ取ってきてサイトに保存する形で、あとから足す。
+  X の投稿の並びに寄せる。左にアイコン、右に「名前 @ハンドル」と本文。
   行ごとに線や枠は引かず、ホバーの面だけで押せる範囲を示す。
   面が文字に貼り付かないよう、内側に余白を取ったぶん外へ同じだけ逃がして左端を揃える。
 */}
@@ -24,6 +23,27 @@ const handle = handleOf(item.url);
   rel="noopener noreferrer"
   class="group/around -mx-3 flex gap-3 rounded-md px-3 py-2.5 transition-colors hover:bg-hover"
 >
+  {/*
+    アイコンの場所は、画像があってもなくても同じ大きさで必ず取る。行ごとに左端がずれないように。
+    画像がまだない人は、X でアイコン未設定の人に出るのと同じく人型を置く（頭文字は誰かを示せないので使わない）。
+  */}
+  {
+    avatar ? (
+      <img
+        src={avatar}
+        alt=""
+        width="32"
+        height="32"
+        loading="lazy"
+        class="size-8 shrink-0 rounded-full bg-surface-sunken object-cover"
+      />
+    ) : (
+      <span class="flex size-8 shrink-0 items-center justify-center rounded-full bg-surface-sunken text-fg-subtle">
+        <User className="size-4" aria-hidden="true" />
+      </span>
+    )
+  }
+
   <div class="flex min-w-0 flex-1 flex-col gap-0.5">
     <div class="flex items-baseline gap-1.5 text-xs">
       <span class="truncate font-bold">{item.name}</span>
