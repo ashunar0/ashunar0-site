@@ -1,5 +1,5 @@
 ---
-import { ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Pause, Play, X } from 'lucide-react';
 import BaseLayout from '@/shared/layouts/BaseLayout.astro';
 import Story from './story.astro';
 import EndSlide from './end-slide.astro';
@@ -46,12 +46,15 @@ const older = list[position + 1];
     </button>
 
     <div
-      class="flex h-full w-full flex-col bg-surface sm:aspect-[9/16] sm:w-auto sm:max-w-full sm:overflow-hidden sm:rounded-xl"
+      class="relative flex h-full w-full flex-col bg-surface sm:aspect-[9/16] sm:w-auto sm:max-w-full sm:overflow-hidden sm:rounded-xl"
     >
       <div data-header class="flex flex-col gap-3 px-4 pt-3 pb-2">
         <ol class="flex gap-1" aria-hidden="true">
           {Array.from({ length: segmentCount }, () => (
-            <li data-segment class="h-0.5 flex-1 rounded-full bg-border" />
+            <li class="h-0.5 flex-1 overflow-hidden rounded-full bg-border">
+              {/* 自動再生の進み具合をここの幅で見せる。幅はスクリプトが動かす */}
+              <div data-segment class="h-full w-0 bg-fg" />
+            </li>
           ))}
         </ol>
 
@@ -61,14 +64,28 @@ const older = list[position + 1];
             <time datetime={news.pubDate.toISOString()} class="text-fg-muted">{date}</time>
           </div>
 
-          {/* 直前が一覧とは限らない（X から直接来る）ので、履歴を戻らず一覧へのリンクにする */}
-          <a
-            href="/news"
-            aria-label="閉じる"
-            class="-mr-2 flex size-9 items-center justify-center rounded-full text-fg-muted transition-colors hover:bg-hover hover:text-fg"
-          >
-            <X className="size-5" aria-hidden="true" />
-          </a>
+          <div class="-mr-2 flex items-center">
+            {/* 自動再生の入り切り。押すと何が起きるかを絵で示すので、再生中は一時停止の絵を出す */}
+            <button
+              type="button"
+              data-autoplay
+              aria-pressed="true"
+              aria-label="自動再生"
+              class="flex size-9 cursor-pointer items-center justify-center rounded-full text-fg-muted transition-colors hover:bg-hover hover:text-fg"
+            >
+              <Pause data-autoplay-on className="size-4" aria-hidden="true" />
+              <Play data-autoplay-off className="hidden size-4" aria-hidden="true" />
+            </button>
+
+            {/* 直前が一覧とは限らない（X から直接来る）ので、履歴を戻らず一覧へのリンクにする */}
+            <a
+              href="/news"
+              aria-label="閉じる"
+              class="flex size-9 items-center justify-center rounded-full text-fg-muted transition-colors hover:bg-hover hover:text-fg"
+            >
+              <X className="size-5" aria-hidden="true" />
+            </a>
+          </div>
         </div>
       </div>
 
@@ -101,6 +118,36 @@ const older = list[position + 1];
           <EndSlide news={news} older={older} newer={newer} />
         </div>
       </div>
+
+      {/*
+        スマホでめくるためのボタン。X の埋め込みの上はタップが iframe に吸われてページに届かず、
+        埋め込みが画面の大半を占めると押せる場所がなくなるため、中身とは別の帯に置く。
+        広い画面では枠の外の矢印が同じ役目を持つので出さない。
+      */}
+      {/*
+        スマホでめくるための矢印。X の埋め込みの上はタップが iframe に吸われてページに届かず、
+        埋め込みが画面の大半を占めると押せる場所がなくなるため、中身の上に重ねて必ず押せるようにする。
+        半透明にして、下の文字や投稿が透けるようにしてある。
+        広い画面では枠の外の矢印が同じ役目を持つので出さない。
+      */}
+      <button
+        type="button"
+        data-prev
+        data-side
+        aria-label="前のニュース"
+        class="absolute top-1/2 left-2 z-10 flex size-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-black/35 text-white backdrop-blur-sm transition-opacity disabled:invisible sm:hidden"
+      >
+        <ChevronLeft className="size-5" aria-hidden="true" />
+      </button>
+      <button
+        type="button"
+        data-next
+        data-side
+        aria-label="次のニュース"
+        class="absolute top-1/2 right-2 z-10 flex size-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-black/35 text-white backdrop-blur-sm transition-opacity disabled:invisible sm:hidden"
+      >
+        <ChevronRight className="size-5" aria-hidden="true" />
+      </button>
     </div>
 
     <button
@@ -120,11 +167,70 @@ const older = list[position + 1];
   const stories = [...document.querySelectorAll<HTMLElement>('[data-story]')];
   const segments = [...document.querySelectorAll<HTMLElement>('[data-segment]')];
   const scroller = document.querySelector<HTMLElement>('[data-scroller]')!;
-  const prevButton = document.querySelector<HTMLButtonElement>('[data-prev]')!;
-  const nextButton = document.querySelector<HTMLButtonElement>('[data-next]')!;
+  // めくるボタンは、広い画面の枠の外の矢印と、スマホの枠の中の矢印の 2 組ある
+  const prevButtons = [...document.querySelectorAll<HTMLButtonElement>('[data-prev]')];
+  const nextButtons = [...document.querySelectorAll<HTMLButtonElement>('[data-next]')];
   const header = document.querySelector<HTMLElement>('[data-header]')!;
+  const sideButtons = [...document.querySelectorAll<HTMLElement>('[data-side]')];
+  const autoplayButton = document.querySelector<HTMLButtonElement>('[data-autoplay]')!;
+
+  /*
+   * 自動再生。1 枚 20 秒でバーが伸び切ったら次へ進む。
+   * 読んでいる途中で勝手に進むのがいちばん嫌なので、その 1 枚の中でスクロールやタップ、
+   * 埋め込みの操作をしたら、その 1 枚のあいだは止める。次の 1 枚に移ればまた動く。
+   * 入り切りは × の左のボタンで、選んだ側を覚えておく。動きを減らす設定の人は既定で切る。
+   */
+  const DURATION = 20_000;
+  const STORAGE_KEY = 'news-autoplay';
+
+  const loadAutoplay = () => {
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) return stored === 'on';
+    } catch {
+      // 保存が使えない環境でも、既定値で動けばよい
+    }
+    return !matchMedia('(prefers-reduced-motion: reduce)').matches;
+  };
+
+  let autoplay = loadAutoplay();
+  let held = false; // この 1 枚で触られたので止めている
+  let elapsed = 0;
 
   let current = 0;
+
+  const running = () => autoplay && !held && current < segments.length;
+
+  // 読み終えたぶんは満たし、今の 1 枚は自動再生で進んだぶんだけ伸ばす。止まっているときは満たしておく
+  const paintSegments = () => {
+    segments.forEach((segment, i) => {
+      const ratio = i < current ? 1 : i > current ? 0 : running() ? elapsed / DURATION : 1;
+      segment.style.width = `${ratio * 100}%`;
+    });
+  };
+
+  const hold = () => {
+    if (held) return;
+    held = true;
+    paintSegments();
+  };
+
+  // remember は押されたときだけ。開いただけで既定値を書き込むと、OS の設定を変えても追従しなくなる
+  const setAutoplay = (on: boolean, remember = true) => {
+    autoplay = on;
+    held = false;
+    autoplayButton.setAttribute('aria-pressed', String(on));
+    autoplayButton.querySelector('[data-autoplay-on]')!.classList.toggle('hidden', !on);
+    autoplayButton.querySelector('[data-autoplay-off]')!.classList.toggle('hidden', on);
+    if (remember) {
+      try {
+        localStorage.setItem(STORAGE_KEY, on ? 'on' : 'off');
+      } catch {
+        // 覚えられないだけで、この場の入り切りは効く
+      }
+    }
+    paintSegments();
+  };
 
   const show = (index: number) => {
     if (index < 0 || index >= stories.length) return;
@@ -132,24 +238,25 @@ const older = list[position + 1];
 
     stories.forEach((story, i) => (story.hidden = i !== current));
 
-    // 最後の 1 枚は写真を枠いっぱいに見せる。上の帯の日付や閉じるは、その中にあるもので足りる
-    header.hidden = current === stories.length - 1;
+    // 最後の 1 枚は写真を枠いっぱいに見せる。上の帯の日付や閉じるも、左右の矢印も出さない。
+    // その中にあるもの（一覧へ・最初から）と左側のタップで足りる
+    const isEnd = current === stories.length - 1;
+    header.hidden = isEnd;
+    for (const button of sideButtons) button.hidden = isEnd;
 
-    // 読み終えたぶんと今いる 1 本を塗る。自動で進めないので、途中まで伸びる動きは持たない
-    segments.forEach((segment, i) => {
-      segment.classList.toggle('bg-fg', i <= current);
-      segment.classList.toggle('bg-border', i > current);
-    });
+    elapsed = 0;
+    held = false;
+    paintSegments();
 
-    prevButton.disabled = current === 0;
-    nextButton.disabled = current === stories.length - 1;
+    for (const button of prevButtons) button.disabled = current === 0;
+    for (const button of nextButtons) button.disabled = isEnd;
 
     scroller.scrollTop = 0;
   };
 
-  prevButton.addEventListener('click', () => show(current - 1));
+  for (const button of prevButtons) button.addEventListener('click', () => show(current - 1));
+  for (const button of nextButtons) button.addEventListener('click', () => show(current + 1));
   document.querySelector('[data-restart]')?.addEventListener('click', () => show(0));
-  nextButton.addEventListener('click', () => show(current + 1));
 
   scroller.addEventListener('click', (event) => {
     // リンクを押したとき、文字を選んだときはめくらない
@@ -165,6 +272,34 @@ const older = list[position + 1];
     if (event.key === 'ArrowRight') show(current + 1);
   });
 
+  autoplayButton.addEventListener('click', () => setAutoplay(!autoplay));
+
+  // 読もうとした合図。タップでめくった場合は、このあと show() が新しい 1 枚で止めを外す
+  scroller.addEventListener('pointerdown', hold);
+  scroller.addEventListener('wheel', hold, { passive: true });
+  scroller.addEventListener('touchstart', hold, { passive: true });
+
+  // 埋め込み（iframe）の中の操作はページに届かない。iframe にフォーカスが移ったことで拾う
+  window.addEventListener('blur', () => {
+    if (document.activeElement instanceof HTMLIFrameElement) hold();
+  });
+
+  let last = performance.now();
+  const tick = (now: number) => {
+    // 裏のタブから戻ったときに、離れていたぶんを一度に進めない
+    const delta = Math.min(now - last, 100);
+    last = now;
+
+    if (running() && !document.hidden) {
+      elapsed += delta;
+      if (elapsed >= DURATION) show(current + 1);
+      else paintSegments();
+    }
+    requestAnimationFrame(tick);
+  };
+
+  setAutoplay(autoplay, false);
   show(0);
+  requestAnimationFrame(tick);
   mountTweets([...document.querySelectorAll<HTMLElement>('.tweet-embed')]);
 </script>
