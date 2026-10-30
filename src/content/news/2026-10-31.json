@@ -1,0 +1,112 @@
+{
+  "stories": [
+    {
+      "title": "Durable Objects がデプロイ時のコード更新を処理完了まで待つように",
+      "main": "https://x.com/eth415/status/2116260001992044654",
+      "body": "Durable Objects に新しいコードをデプロイしても、動作中のオブジェクトは処理中のリクエストを中断されず、次にハイバネートしたタイミングで新しいコードに切り替わるようになった。ハイバネートまでの猶予はデフォルト 5 分で、最大 24 時間まで設定できる。長時間動くエージェントのターンを、頻繁なデプロイ中でも最後まで走らせるための変更。",
+      "around": [
+        {
+          "url": "https://x.com/irvinebroque/status/2116265551320465420",
+          "name": "Brendan Irvine-Broque",
+          "summary": "オブジェクトごとに処理の完了を待ってから新コードに更新する。長時間動くエージェント向けの改善はまだ続く"
+        },
+        {
+          "url": "https://x.com/ashleypeacock/status/2116293158401184106",
+          "name": "Ashley Peacock",
+          "summary": "デフォルトで 5 分、最大 24 時間までハイバネートを待ってから強制更新する"
+        }
+      ]
+    },
+    {
+      "title": "ChatGPT Sites の中身は Cloudflare Workers、Void との相性に注目",
+      "main": "https://x.com/nakasyou0/status/2116176314621460594",
+      "body": "nakasyou さんが、ChatGPT Plus 以上なら作り放題の ChatGPT Sites は中身が Cloudflare Workers で、サイトごとに 10 GB の D1 が付き、R2 もほぼ使い放題だと紹介。Durable Objects や Vectorize は使えない。D1 が env.D1 でバインドされる点が Void のデフォルトバインディングと同じで、Void で書いたものを ChatGPT Sites にデプロイできる形になるとも指摘している。",
+      "around": [
+        {
+          "url": "https://x.com/nakasyou0/status/2116179192283025785",
+          "name": "nakasyou",
+          "summary": "ChatGPT Sites の D1 バインディング名 env.D1 は Void のデフォルトと同じで、相性がいい"
+        }
+      ]
+    },
+    {
+      "title": "Hono、PR 無効化後の「fork ブランチを載せて」という案内も削除",
+      "main": "https://x.com/yusukebe/status/2116105874414674229",
+      "body": "Hono では PR を無効化する代わりに「Issue を立て、fork したブランチがあればそのアドレスを載せてほしい。取り込むこともある」と案内していた。ところが fork ブランチのアドレスばかりが集まるようになったため、yusukebe さんがその記載も消した。",
+      "around": []
+    },
+    {
+      "title": "Cloudflare Agents SDK v0.32.0、スキルを SKILL.md ファイルで置けるように",
+      "main": "https://x.com/CFchangelog/status/2116228841123295482",
+      "body": "Agents SDK のエージェントは、ワークスペースの .agents/skills に SKILL.md を置くだけでスキルを使えるようになった。ビルドもデプロイも要らず、次のターンから使える。agents v0.32.0 か Think v0.23.0 が必要。",
+      "around": [
+        {
+          "url": "https://x.com/multilayer/status/2115956463101493554",
+          "name": "multilayer",
+          "summary": "/workspace/.agents/skills/ に置けば次のターンから使え、エージェント自身がスキルを書くこともできる"
+        }
+      ]
+    },
+    {
+      "title": "Claude の Max プランが Max と Ultra に改名、Ultra は 5 時間制限を撤廃",
+      "main": "https://x.com/claudeai/status/2116220869479428500",
+      "body": "Claude が Max 5x を Max、Max 20x を Ultra に改名した。料金は Max が月 100 ドル、Ultra が月 200 ドルのまま。認証済みの Ultra アカウントは 5 時間ごとの上限がなくなり、新しいアカウントは認証まで一時的な制限が残る。週ごとの上限は変わらない。",
+      "around": [
+        {
+          "url": "https://x.com/bcherny/status/2116222842413142111",
+          "name": "Boris Cherny",
+          "summary": "認証済みの Ultra アカウントから 5 時間制限を外す"
+        }
+      ]
+    },
+    {
+      "title": "Claude Code 2.1.314、作業ディレクトリ外への書き込みを禁止する設定",
+      "main": "https://x.com/ClaudeCodeLog/status/2115960578887798825",
+      "body": "Claude Code 2.1.314 で、どのパーミッションモードでも作業ディレクトリの外への書き込みを止める設定が入った。claude -p が起動時に失敗したとき、これまでは出力なしで exit 0 になっていたが、エラーを出して exit 1 で終わるようになった。続く 2.1.315 もリリース間近。",
+      "around": [
+        {
+          "url": "https://x.com/marquisehurtt/status/2116247210920730781",
+          "name": "Marq",
+          "summary": "別々の worktree で並列に動くエージェントが、互いのチェックアウトを編集できなくなる"
+        },
+        {
+          "url": "https://x.com/vibedifceo/status/2116250252147921089",
+          "name": "Napoleon At VibeDIf",
+          "summary": "claude -p の起動失敗が空の成功に見えていた問題が直り、エラー表示と exit 1 に"
+        },
+        {
+          "url": "https://x.com/ClaudeCodeLog/status/2116276284137316575",
+          "name": "Claude Code Changelog",
+          "summary": "Claude Code 2.1.315 がまもなくリリース"
+        }
+      ]
+    }
+  ],
+  "quick": [
+    {
+      "title": "Cursor の拡張マーケットに改ざん版 Claude Code 拡張",
+      "summary": "改ざんされた Claude Code の VS Code 拡張が Cursor の拡張マーケット経由で配布され、最大 5,000 ユーザーに影響。Anthropic 製ではなく、Cursor は Claude Code for VS Code 2.1.314 への更新を呼びかけている。",
+      "source": "https://x.com/cursor_ai/status/2116074289053175808"
+    },
+    {
+      "title": "Hono の Zod / Valibot バリデーターで 400 レスポンスを型に含める PR",
+      "summary": "Zod と Valibot のバリデーターが返すデフォルトの 400 エラーを、推論される型にも出す PR が honojs/middleware に出た。",
+      "source": "https://x.com/slawekkolodziej/status/2116085831635009581"
+    },
+    {
+      "title": "Cloudflare が eMudhra 証明書の問題への対応と悪用状況を公開",
+      "summary": "eMudhra の証明書を使う未パッチの接続について、Cloudflare がネットワークの修正方法、観測した悪用の試み、インターネット全体でまだ影響を受ける範囲をまとめた。",
+      "source": "https://x.com/Cloudflare/status/2116274009813692578"
+    },
+    {
+      "title": "Workers VPC の VPC Network バインディングで仮想ネットワークを選べるように",
+      "summary": "Workers VPC で、VPC Network バインディングに使う仮想ネットワークを選択できるようになった。",
+      "source": "https://x.com/CFchangelog/status/2116160926504063323"
+    },
+    {
+      "title": "OSS の Durable Objects 代替 Rivet に注目集まる",
+      "summary": "Rivet の Nathan Flurry さんが、新しく見に来た人に向けて、2024 年 12 月から保守を続けておりセルフホストを最優先にしていると投稿した。",
+      "source": "https://x.com/NathanFlurry/status/2116281534726692958"
+    }
+  ]
+}
