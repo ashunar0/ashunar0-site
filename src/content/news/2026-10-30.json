@@ -1,0 +1,121 @@
+{
+  "stories": [
+    {
+      "title": "Astro のコンポーネントを ほかの Vite アプリの中で描けるようになる",
+      "main": "https://x.com/matthewcp/status/2115830490057826455",
+      "body": "Matthew Phillips さんが、Astro のコンポーネントをアイランドごと任意の Vite アプリの中で描画できるようになると予告した。デモは Hono のアプリの中で Astro コンポーネントを動かしている。",
+      "around": []
+    },
+    {
+      "title": "AI に同じアプリを作らせてフレームワークごとのコストを比べた記事、首位は Hono + htmx",
+      "main": "https://x.com/yusukebe/status/2115653031941517484",
+      "body": "AI に PokéAPI を使ったアプリを各フレームワークで作らせ、コスト、コード量、Lighthouse の点数を比べた記事を yusukebe さんが紹介した。一位は Hono + htmx、二位は Astro で、静的なサイト寄りのバイアスはあるという。",
+      "around": []
+    },
+    {
+      "title": "Cloudflare の Durable Objects・D1・Workflows でエラー率が上がる障害",
+      "main": "https://x.com/Vemly_ai/status/2115817189781455112",
+      "body": "Cloudflare のステータスページに「Increased Durable Objects, D1 and Workflows Error Rates」が出て、のちに解決済みになった。利用者からは Durable Objects が約 1.5 時間止まった、D1 のエラーでサイトが落ちた、という声が出ている。",
+      "around": [
+        {
+          "url": "https://x.com/Vemly_ai/status/2115846137525526899",
+          "name": "Vemly",
+          "summary": "Cloudflare がこの障害を解決済みにした"
+        },
+        {
+          "url": "https://x.com/tobimori/status/2115836969741611031",
+          "name": "Tobias Möritz",
+          "summary": "今日も Durable Objects が 1.5 時間ほど止まった"
+        },
+        {
+          "url": "https://x.com/DavidFrosdick/status/2115830134808936919",
+          "name": "David Frosdick",
+          "summary": "D1 のエラーで朝の障害に続いてさらに 1 時間落ちた"
+        }
+      ]
+    },
+    {
+      "title": "Shopify Editions が React をやめて Remix 3 で作り直された",
+      "main": "https://x.com/Danetag/status/2115825386269585527",
+      "body": "Shopify の Arnaud Tanielian さんが、Shopify Editions Fall 2026 の作り方を連投で解説した。React をやめて Remix 3 に移り、再レンダーやハイドレーション、JavaScript を減らしてよりブラウザネイティブな体験にした。ページは HTML として描かれ、インタラクティブなアイランドだけが clientEntry とそのチャンク、データを送る。",
+      "around": [
+        {
+          "url": "https://x.com/Danetag/status/2115825388572025262",
+          "name": "Arnaud Tanielian",
+          "summary": "React から Remix 3 へ移行、暗黙の副作用もなくなった"
+        },
+        {
+          "url": "https://x.com/Danetag/status/2115825391432798593",
+          "name": "Arnaud Tanielian",
+          "summary": "クリティカルパスを細く保ち、アプリ全体のデータをソースに入れずに済む"
+        },
+        {
+          "url": "https://x.com/mjackson/status/2115828511575515466",
+          "name": "MJ",
+          "summary": "Remix 3 はページ全体ではなく必要な部分だけをハイドレートする"
+        }
+      ]
+    },
+    {
+      "title": "Node.js 26「Lithium」が LTS に",
+      "main": "https://x.com/nodejs/status/2115550905991069744",
+      "body": "Node.js 26 が LTS になり、v26.13.0 が出た。更新は 2029 年 4 月まで続く。以前の LTS から上げる Linux ユーザーは libatomic を別途入れる必要がある場合がある。",
+      "around": [
+        {
+          "url": "https://x.com/rauchg/status/2115941392698798365",
+          "name": "Guillermo Rauch",
+          "summary": "Vercel が最新 LTS に素早く対応、fetch が HTTP/2 をデフォルトで使うので性能向上が見込める"
+        },
+        {
+          "url": "https://x.com/nodejs/status/2115840331790832106",
+          "name": "Node.js",
+          "summary": "Node.js 24.22.2「Krypton」も V8 のバックポートなどを含めて出た"
+        }
+      ]
+    },
+    {
+      "title": "TanStack DB 1.0 RC1 が公開",
+      "main": "https://x.com/tan_stack/status/2115848459479863667",
+      "body": "TanStack DB 1.0 RC1 が出た。型付きのコレクション、ライブクエリ、すぐ反映されてから同期される編集が特長で、REST API から始めて、あとから永続化やオフライン書き込み、リアルタイム同期を足せる。",
+      "around": [
+        {
+          "url": "https://x.com/kylemathews/status/2115849692043178204",
+          "name": "Kyle Mathews",
+          "summary": "1.0 までに数か月、数百の PR、42 万行の新しいテストがかかった"
+        },
+        {
+          "url": "https://x.com/tannerlinsley/status/2115856818279006540",
+          "name": "Tanner Linsley",
+          "summary": "TanStack Query の上級者向けに、同期エンジンでありクライアント側 DB でもあると紹介"
+        }
+      ]
+    }
+  ],
+  "quick": [
+    {
+      "title": "Workers の静的アセットを URL のパス配下で配信できるように",
+      "summary": "Wrangler 4.148.0 以降で base_path を設定すると、ディレクトリ構成を変えずに /blog などのパスでアセットを出せる。",
+      "source": "https://x.com/CFchangelog/status/2115791054481842218"
+    },
+    {
+      "title": "Agents SDK v0.31.0 で内部ホスト名に対応",
+      "summary": "エージェントがローカルの開発サーバーを、インターネットに公開せずにプレビューできるようになった。",
+      "source": "https://x.com/CFchangelog/status/2115798492463669534"
+    },
+    {
+      "title": "Oxlint の次版で JS プラグインの raw AST transfer が 5 倍速く",
+      "summary": "Node.js 24 以降で JS プラグインを使っている場合に効く改善。",
+      "source": "https://x.com/wan9chi/status/2115630645640933804"
+    },
+    {
+      "title": "Bun AOT がマージされた",
+      "summary": "既存の Bun や Node のアプリをコード変更なしで動かす設計で、リリースまでにはまだ修正とファジングが残っている。",
+      "source": "https://x.com/jarredsumner/status/2115677436574826641"
+    },
+    {
+      "title": "Zed の DeltaDB は Rust・SQLite・Durable Objects で作られている",
+      "summary": "エージェントの文脈のための Git 互換のバージョン管理で、すべての編集をそれを生んだ会話に結びつけて残す。",
+      "source": "https://x.com/zeddotdev/status/2115831160840290394"
+    }
+  ]
+}
