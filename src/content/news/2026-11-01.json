@@ -1,0 +1,112 @@
+{
+  "stories": [
+    {
+      "title": "D1、11 月 4 日からクエリ結果を 50 MB までに制限",
+      "main": "https://x.com/CFchangelog/status/2116606298196189548",
+      "body": "Cloudflare D1 は 2026 年 11 月 4 日から、結果が 50 MB を超えるクエリをエラーにする。必要な列だけを選び、結果をページングして上限に収めるよう案内している。",
+      "around": [
+        {
+          "url": "https://x.com/ndrwlmns/status/2116643852933300227",
+          "name": "Andrew 🍋",
+          "summary": "上限はデータベースごとではなく結果 1 件ごとの 50 MB。エクスポートや移行には wrangler d1 export がある"
+        },
+        {
+          "url": "https://x.com/marcusykim/status/2116635264605176005",
+          "name": "Marcus Kim",
+          "summary": "100 行のページでも、各行に大きなテキストがあれば上限に届きうる"
+        }
+      ]
+    },
+    {
+      "title": "Claude Code 2.1.316、サブエージェントの effort を別に指定できるように",
+      "main": "https://x.com/sunset_evm/status/2116366288826024091",
+      "body": "Claude Code 2.1.316 で CLAUDE_CODE_SUBAGENT_EFFORT が入り、ほかに指定がないときサブエージェントはセッションの effort を引き継がず、この値で動くようになった。CLAUDE_CODE_DISABLE_ULTRATHINK で ultrathink キーワードを無効にすることもできる。",
+      "around": [
+        {
+          "url": "https://x.com/akxwire/status/2116523272032436474",
+          "name": "AK×",
+          "summary": "Opus 4.8 の fast mode は非推奨になり 11 月 30 日に削除。以降はフォールバックせずエラーになる"
+        },
+        {
+          "url": "https://x.com/pillitterip/status/2116429663606395266",
+          "name": "Pasquale Pillitteri",
+          "summary": "ある検証では同じ 5 行のタスクで出力トークンが low で 586、max で 10,921"
+        }
+      ]
+    },
+    {
+      "title": "Cloudflare、データ所在地を選べる仕組みを Workers と Durable Objects で再構築",
+      "main": "https://x.com/Cloudflare/status/2116522276988371217",
+      "body": "Cloudflare がコントロールプレーンとログの基盤を Workers と Durable Objects の上に作り直している。WAF ルール、Workers、ログをどこに置くかをクリック 1 つで選び、あとから変えられるようにする。Data Residency Architecture のプライベートベータの申し込みを受け付けている。",
+      "around": [
+        {
+          "url": "https://x.com/YoDevp/status/2116610383272165600",
+          "name": "YorkDev",
+          "summary": "EU に顧客を持つチームにとって大きな一手"
+        }
+      ]
+    },
+    {
+      "title": "streamAppendHTML() で AI の回答を HTML のままストリーミング描画",
+      "main": "https://x.com/yusukebe/status/2116668374239617371",
+      "body": "yusukebe さんが azukiazusa.dev の記事を紹介した。LLM の回答を逐次描画するとき、届いた文字列全体を毎回パースして DOM を置き換えると、要素が作り直され続けてテキストの選択状態が失われる。streamAppendHTML() は WritableStream を返し、届いた HTML を要素の末尾へ順にパースする。",
+      "around": []
+    },
+    {
+      "title": "Anthropic、Claude に書かせて Messages API を Rust に移行",
+      "main": "https://x.com/somi_ai/status/2116050219989373170",
+      "body": "Anthropic が Messages API を Rust で書き直した。チームに Rust 開発者はおらず、コードは Claude が書き、人間は計画と、実トラフィックで新旧の結果が一致するかの確認を担った。CPU 使用量は 40〜50% 下がったと Latent Space で語られている。",
+      "around": [
+        {
+          "url": "https://x.com/swyx/status/2116305528330785190",
+          "name": "swyx",
+          "summary": "Anthropic はバックエンドを Rust へ vibecode していたが、誰も気づかなかった"
+        }
+      ]
+    },
+    {
+      "title": "「AI 時代に TypeScript は不要」論に反論が相次ぐ",
+      "main": "https://x.com/realmpyw/status/2116449162694991959",
+      "body": "「AI 時代に TypeScript は不要」という声に対し、mpyw さんが、AI の堅牢な出力は型システムというガードレールに支えられていると反論し、引用で議論が広がった。",
+      "around": [
+        {
+          "url": "https://x.com/flipflop_jp/status/2116645594492236012",
+          "name": "flipflop",
+          "summary": "自分は JavaScript 派だが、AI に書かせるものはまず TypeScript 化する。AI こそ間違うから"
+        },
+        {
+          "url": "https://x.com/mumei_himazin/status/2116590640415060070",
+          "name": "ムメイさん",
+          "summary": "AI が書いたコードを人が確かめるとき、想定していた型が読める点でも TypeScript 一択"
+        }
+      ]
+    }
+  ],
+  "quick": [
+    {
+      "title": "Cloudflare、プライベート IP のオリジンへの公開トラフィックが GA",
+      "summary": "プロキシ設定した DNS レコードにプライベート IP を指定すると Cloudflare One 経由でオリジンに届き、オリジンを非公開のまま WAF やキャッシュ、Workers を使える。",
+      "source": "https://x.com/nagasawatsubasa/status/2116584304675570041"
+    },
+    {
+      "title": "Nuxt Image / IPX の脆弱性に Cloudflare が緊急 WAF ルール",
+      "summary": "Managed Ruleset に検出ルールが追加された。有効化して露出を抑えるよう案内している。",
+      "source": "https://x.com/CFchangelog/status/2116659277838385262"
+    },
+    {
+      "title": "Workers から BYOIP 宛てのサブリクエストが元のクライアント情報を保持",
+      "summary": "コンテキストと Bot シグナルが引き継がれ、セキュリティルールが内部接続ではなく元のクライアントを評価するようになった。",
+      "source": "https://x.com/CFchangelog/status/2116485528120103025"
+    },
+    {
+      "title": "Browser Run の既定が Chrome 152 に",
+      "summary": "コードを変えずに新しい Web プラットフォーム機能とセキュリティ修正が入る。",
+      "source": "https://x.com/CFchangelog/status/2116614084007231832"
+    },
+    {
+      "title": "Workers Paid プランなら .dev / .app ドメインが初年度 0.99 ドル",
+      "summary": "Workers Paid プランの利用者は、最初の .dev か .app ドメインを 1 年目 0.99 ドルで取得できる。",
+      "source": "https://x.com/CloudflareDev/status/2116557809710137716"
+    }
+  ]
+}
