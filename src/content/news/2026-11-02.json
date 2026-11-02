@@ -1,0 +1,79 @@
+{
+  "stories": [
+    {
+      "title": "yusukebe が FOSS4G 分科会で「HonoがPRを閉じた理由」を講演、資料を公開",
+      "main": "https://x.com/yusukebe/status/2116772733677981763",
+      "body": "Hono 作者の yusukebe が、GIS学会 FOSS4G分科会シンポジウム 2026「AI時代のFOSS4G」で「HonoがPRを閉じた理由」と題して話し、スライドを slides.yusu.ke で公開した。AI 時代の OSS で Hono が PR をどう扱っているかがテーマ。",
+      "around": [
+        {
+          "url": "https://x.com/yusukebe/status/2116758046248681799",
+          "name": "Yusuke Wada",
+          "summary": "講演当日、会場から「HonoがPRを閉じた理由」という題で話すと告知"
+        }
+      ]
+    },
+    {
+      "title": "Zenn 記事「Agent DX 〜 AI時代にフレームワークHonoは必要か」公開",
+      "main": "https://x.com/yusukebe/status/2116893171531809099",
+      "body": "yusukebe が Zenn に「Agent DX 〜 AI時代にフレームワークHonoは必要か」を書いた。AI エージェントがコードを書く時代に、Hono のようなフレームワークが持つ意味を Agent DX という観点から論じている。",
+      "around": []
+    },
+    {
+      "title": "Cloudflare ブログ、D1 が数百万のデータベースを捌くコントロールプレーンの仕組みを解説",
+      "main": "https://x.com/bibryam/status/2116883203655110950",
+      "body": "Cloudflare のブログ記事「Under the hood, off the hot path: how D1 scales to millions of databases」が共有された。D1 が数百万のデータベースを管理するためにコントロールプレーンをどう設計し、データプレーンのクエリをエッジに置いたままにしているかを掘り下げ、Developer Platform で作るときの指針もまとめている。",
+      "around": []
+    },
+    {
+      "title": "DeepSeek、Claude Code に対抗する自律型コーディングエージェントのプロトタイプを公開",
+      "main": "https://x.com/miraclemasui/status/2116769104430526661",
+      "body": "Bloomberg によると、DeepSeek が Claude Code に対抗する、より自律的なコーディングエージェントのプロトタイプをリリースした。DeepSeek Harness 上で動く dsh-superagent で、GitHub の issue や PR を自分で処理し、複数のエージェントを並列に動かす。",
+      "around": [
+        {
+          "url": "https://x.com/wintern_ai/status/2116840678856495294",
+          "name": "wINTERN",
+          "summary": "dsh-superagent のリポジトリは 1 日で 4.8k スターを集めた"
+        },
+        {
+          "url": "https://x.com/nakasyou0/status/2116922950020653489",
+          "name": "nakasyou",
+          "summary": "DeepSeek Harness が TUI をやめて Web にしたのが良い"
+        },
+        {
+          "url": "https://x.com/nextaurame/status/2116867503888712002",
+          "name": "张理壮",
+          "summary": "同じモデル・同じプロンプトで DeepSeek Harness は 12.8 分 $0.19、Codex は 14.5 分 $0.49（1 回だけの比較）"
+        }
+      ]
+    },
+    {
+      "title": "「AI に任せたコードを全部読まずに説明できるようにする4つの手順」が話題",
+      "main": "https://x.com/Shumpei/status/2116704309866106949",
+      "body": "白石俊平さんが、Claude Code や Codex に書かせたコードを全部は読まないままリリースしている人に向けて、それでも自分で説明できるようにするための 4 つの手順を記事にまとめた。投稿は 1,600 以上のいいねを集めている。",
+      "around": []
+    },
+    {
+      "title": "Claude Code プラグイン prompt-rail 0.9.0、プロンプト履歴をレールで表示",
+      "main": "https://x.com/oikon48/status/2116908874435272951",
+      "body": "Oikon さんの Claude Code 向けプラグイン「prompt-rail」が 50 スターを超え、0.9.0 が出た。自分のプロンプトをレール状に並べて見せるもので、新たに /prompt-rail below でレールをプロンプト入力欄の下に置けるようになった。",
+      "around": []
+    }
+  ],
+  "quick": [
+    {
+      "title": "yusukebe、ブログの文章を選んでコメントしエージェントに書き換えさせる道具を手元で作成",
+      "summary": "ブログを書くときに、文章を選択してコメントを付け、エージェントに書き換えてもらう仕組みを作ったら便利だったと動画で紹介した。",
+      "source": "https://x.com/yusukebe/status/2116895677527818711"
+    },
+    {
+      "title": "Docker、Claude Code などのコーディングエージェントをサンドボックスで隔離するガイドを紹介",
+      "summary": "Docker Captain のガイドで、エージェントを実リポジトリ上で安全に動かすために隔離し、アクセスできる範囲を設定する方法を解説している。",
+      "source": "https://x.com/Docker/status/2116938398216720385"
+    },
+    {
+      "title": "Matt Pocock の Sandcastle、コーディングエージェントを隔離サンドボックスで並列に動かす TypeScript ライブラリ",
+      "summary": "Claude Code や Codex のようなエージェントを呼び出し、それぞれ隔離したサンドボックスで作業させてブランチ上のコミットを合流させる。",
+      "source": "https://x.com/trise981/status/2117020824574271746"
+    }
+  ]
+}
