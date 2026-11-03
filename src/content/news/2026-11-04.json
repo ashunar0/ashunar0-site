@@ -1,0 +1,133 @@
+{
+  "stories": [
+    {
+      "title": "Hono CLI の RC 版が公開、agent-init で AI エージェントが Hono アプリを書きやすく",
+      "main": "https://x.com/yusukebe/status/2117591296638595232",
+      "body": "yusukebe さんが Hono CLI の RC 版を公開。プロジェクトで `npx @hono/cli@next agent-init` を実行すると、AI エージェントが Hono アプリを効率よく速く書けるようになるとしている。",
+      "around": [
+        {
+          "url": "https://x.com/atch1993/status/2117748130729087084",
+          "name": "ATCH",
+          "summary": "AI に渡す前提がコマンド 1 つで揃う。触らないでほしいフォルダやいつものコマンドを足すと寄り道がさらに減りそう"
+        },
+        {
+          "url": "https://x.com/proxyxd_s/status/2117654483610300638",
+          "name": "Proxy",
+          "summary": "フレームワーク側がエージェント用の文脈を配るのは良い。agent-init はインストール済みの Hono のバージョンに合わせるのか、と質問"
+        }
+      ]
+    },
+    {
+      "title": "Cloudflare Workers、11/17 から request.signal と新しいモジュールレジストリが既定に",
+      "main": "https://x.com/CFchangelog/status/2117678409895809372",
+      "body": "Workers で 11 月 17 日から request.signal が既定で有効になり、クライアントの切断を検知して外向きのリクエストを取り消せるようになる。同じ日から JavaScript Workers は新しいモジュールレジストリが既定になり、互換性フラグなしで `require()` と `import.meta` を使ってモジュールを読み込める。対象は互換性日付が 2026-11-17 以降の JavaScript Workers。",
+      "around": [
+        {
+          "url": "https://x.com/CFchangelog/status/2117685997471199558",
+          "name": "Cloudflare Changelog",
+          "summary": "JavaScript Workers は 2026 年 11 月 17 日に新しいモジュールレジストリが既定になる"
+        },
+        {
+          "url": "https://x.com/multilayer/status/2117416662706376948",
+          "name": "multilayer",
+          "summary": "対象は互換性日付が 2026-11-17 以降の JavaScript Workers。新しいレジストリは JS 標準や Node.js との互換性を高める"
+        }
+      ]
+    },
+    {
+      "title": "Void、サーバーコードの要らない静的ページは Worker を通さず配信できるように",
+      "main": "https://x.com/serkodev/status/2117608186329120832",
+      "body": "SerKo さんの Void への初 PR で、サーバーコードを必要としない静的ページが Worker を完全にスキップできるようになった。Cloudflare は静的アセットを Free プランでもリクエスト数無制限・無料で配信する。周辺では Void の来歴と中身を整理した Zenn 記事や「Void + Vue」の記事も出ている。",
+      "around": [
+        {
+          "url": "https://x.com/yusukebe/status/2117566682113945638",
+          "name": "Yusuke Wada",
+          "summary": "Nkzn さんの「ポートフォリオをVoidで作り直したので、Voidの来歴と中身を整理する」を「よくまとまっている」と紹介"
+        },
+        {
+          "url": "https://x.com/allex_jp/status/2117594761578299721",
+          "name": "アレックス | Cloudflareガチ勢",
+          "summary": "記事「「Void + Vue」が気持ちよすぎた」を公開"
+        }
+      ]
+    },
+    {
+      "title": "Claude Code 2.1.317、アカウントのメールを送る前に確認、フックの onFailure: \"block\" など",
+      "main": "https://x.com/sunset_evm/status/2117533992220025227",
+      "body": "Claude Code 2.1.317 で、web や shell のツール呼び出しがアカウントのメールアドレスをネットワークに送る前に許可を求めるようになった。Agent SDK のフックコールバックに onFailure: \"block\" が加わり、コールバック自体が失敗したときに動作を止められる。実行中のバックグラウンドエージェントへの SendMessage が早く届くようになり、次の 2.1.318 も間もなく出る。",
+      "around": [
+        {
+          "url": "https://x.com/sunset_evm/status/2117542309336146394",
+          "name": "artem",
+          "summary": "onFailure: \"block\" を付けると、フックのコールバックが失敗したときにアクションがブロックされる"
+        },
+        {
+          "url": "https://x.com/gmziven/status/2117652555836866629",
+          "name": "Evan",
+          "summary": "バックグラウンドエージェントの実行中のコマンドは止めずに裏へ回り、メッセージが早く届く。Ctrl+C で全バックグラウンドエージェントが止まる不具合も修正"
+        },
+        {
+          "url": "https://x.com/vibedifceo/status/2117711173642817634",
+          "name": "Napoleon At VibeDIf",
+          "summary": "ディスク不足などでトランスクリプトを失ったとき claude -p が 0 で終わっていた問題を修正し、エラーを出して 1 で終了する"
+        },
+        {
+          "url": "https://x.com/ClaudeCodeLog/status/2117738744346280256",
+          "name": "Claude Code Changelog",
+          "summary": "Claude Code 2.1.318 がまもなくリリース"
+        }
+      ]
+    },
+    {
+      "title": "Claude のプラグインがログイン時に自動接続できるように",
+      "main": "https://x.com/ClaudeDevs/status/2117680635561312732",
+      "body": "Claude にログインすると、Claude を信頼できる発行者として受け入れる MCP サーバーのプラグインに自動で接続できるようになった。プラグインを作る側が対応すれば、ユーザーは再認可なしで接続されたままになる。",
+      "around": [
+        {
+          "url": "https://x.com/bcherny/status/2117693181651542387",
+          "name": "Boris Cherny",
+          "summary": "Team と Enterprise の管理者が設定すれば、チームメイトは初めてプラグインを使うときに自動で接続される"
+        }
+      ]
+    },
+    {
+      "title": "Playwright 1.64.1 同梱の Chromium に既知の CVE、AI エージェントのブラウザ操作に注意喚起",
+      "main": "https://x.com/nisten/status/2117322879859568756",
+      "body": "nisten さんが、最新の Playwright 1.64.1 でも初期の Chromium 156 が同梱されていて CVE-2026-118306 など 4 件を抱え、Playwright のサンドボックスは既定でオフだと注意喚起した。Google は 10 月 27 日に Chrome 156.0.8078.73 で 52 件のセキュリティ修正を出しているが、各ツールが同梱する Chromium は自動更新されない。対処として、古いブラウザキャッシュを消し、Playwright MCP を `--browser chrome --sandbox` で自動更新される Chrome に向ける方法が広まっている。",
+      "around": [
+        {
+          "url": "https://x.com/dave_deguzza/status/2117561292936606163",
+          "name": "dave",
+          "summary": "Playwright を消すのではなく、156.0.8078.73 より古い Chromium を消して MCP 設定に --browser chrome --sandbox を足すよう Claude Code に頼むプロンプト"
+        },
+        {
+          "url": "https://x.com/0xCortiq/status/2117652528615624886",
+          "name": "Cortiq",
+          "summary": "Playwright や Puppeteer、Electron 系アプリは独自の Chromium を持ち、Chrome を更新しても追従しない"
+        }
+      ]
+    }
+  ],
+  "quick": [
+    {
+      "title": "Cloudflare、脆弱性情報フィード Zero Wire を Cloudflare Radar で公開",
+      "summary": "重大なセキュリティ動向をニュース通信のようにわかりやすく伝える、公開の脆弱性インテリジェンスフィード。",
+      "source": "https://x.com/Cloudflare/status/2117619065514512463"
+    },
+    {
+      "title": "次の Oxc でパースが最大 20% 速く、Rolldown のバンドルも約 6% 高速化",
+      "summary": "boshen_c さんの作業によるもので、Rolldown のバンドルベンチマークでは約 6% の高速化につながる。",
+      "source": "https://x.com/Cameron_C2/status/2117620475937411257"
+    },
+    {
+      "title": "Cloudflare AI Search の課金開始が 2026 年 12 月 1 日に延期",
+      "summary": "それまでは無料で試作できる。既定の同期間隔は 24 時間になったが、API で間隔を変えられる。",
+      "source": "https://x.com/CFchangelog/status/2117708595110293710"
+    },
+    {
+      "title": "Flagship のバインディングが開発中はローカルでフラグを評価",
+      "summary": "リモートのアプリを呼ばずに評価するので、Wrangler v4.135.0 以降ならオフラインで変更を試せる。",
+      "source": "https://x.com/CFchangelog/status/2117580232353861995"
+    }
+  ]
+}
