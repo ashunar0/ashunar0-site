@@ -45,10 +45,18 @@ const older = list[position + 1];
       <ChevronLeft className="size-5" aria-hidden="true" />
     </button>
 
+    {/*
+      広い画面の枠は 9:16。幅は整数に丸める。端数が出ると、整数に丸められるスクロール位置とずれて、
+      隣の 1 枚が端に細い線として覗く。計算の 2rem は外側の sm:p-4 の上下ぶん。
+    */}
     <div
-      class="relative flex h-full w-full flex-col bg-surface sm:aspect-[9/16] sm:w-auto sm:max-w-full sm:overflow-hidden sm:rounded-xl"
+      class="relative flex h-full w-full flex-col bg-surface sm:w-[round(down,calc((100dvh-2rem)*9/16),1px)] sm:max-w-full sm:overflow-hidden sm:rounded-xl"
     >
-      <div data-header class="flex flex-col gap-3 px-4 pt-3 pb-2">
+      {/*
+        中身は枠いっぱいに横へ並べ、この帯はその上に重ねる。最後の 1 枚の写真を帯の下まで敷くため。
+        高さは中身で決まる 70px で、各 1 枚の mt-[4.375rem] がこの値と揃っている必要がある。
+      */}
+      <div data-header class="absolute inset-x-0 top-0 z-20 flex flex-col gap-3 bg-surface px-4 pt-3 pb-2">
         <ol class="flex gap-1" aria-hidden="true">
           {Array.from({ length: segmentCount }, () => (
             <li class="h-0.5 flex-1 overflow-hidden rounded-full bg-border">
@@ -90,22 +98,32 @@ const older = list[position + 1];
       </div>
 
       {/*
-        中身が収まらないときは、ストーリーの中で縦にスクロールして読む。
+        1 枚ずつ横に並べて、ブラウザの横スクロールとスナップでめくる。指についてくる動きも、
+        勢いで次へ飛ぶ判定も、縦スクロールとの区別もブラウザに任せられる。
+        埋め込みの上で始めた横スワイプも、iframe の中で横に動けなければここへ渡ってくる。
+        中身が収まらないときは、1 枚の中で縦にスクロールして読む。
         左 1/3 のタップで戻り、残りで進む（リンクや埋め込みの上は除く）。
       */}
-      <div data-scroller class="min-h-0 flex-1 overflow-y-auto">
+      <div
+        data-scroller
+        class="absolute inset-0 flex snap-x snap-mandatory overflow-x-auto overscroll-x-contain scrollbar-none"
+      >
         {
-          stories.map((story, index) => (
-            <div data-story hidden={index !== 0} class="px-5 pt-4 pb-10">
-              <Story story={story} />
+          stories.map((story) => (
+            <div data-story class="mt-[4.375rem] h-[calc(100%-4.375rem)] w-full shrink-0 snap-start snap-always overflow-y-auto overscroll-y-contain scrollbar-none">
+              <div class="px-5 pt-4 pb-10">
+                <Story story={story} />
+              </div>
             </div>
           ))
         }
 
         {
           quick.length > 0 && (
-            <div data-story hidden class="px-5 pt-4 pb-10">
-              <QuickSlide quick={quick} />
+            <div data-story class="mt-[4.375rem] h-[calc(100%-4.375rem)] w-full shrink-0 snap-start snap-always overflow-y-auto overscroll-y-contain scrollbar-none">
+              <div class="px-5 pt-4 pb-10">
+                <QuickSlide quick={quick} />
+              </div>
             </div>
           )
         }
@@ -114,7 +132,7 @@ const older = list[position + 1];
           進み具合のバーは記事と短信の枚数だけ持つ。ここに来たときは全部が塗られた状態になる。
           写真を枠いっぱいに敷くので、余白は記事の側にだけ持たせている。
         */}
-        <div data-story hidden class="h-full">
+        <div data-story class="h-full w-full shrink-0 snap-start snap-always overflow-y-auto overscroll-y-contain scrollbar-none">
           <EndSlide news={news} older={older} newer={newer} />
         </div>
       </div>
@@ -223,30 +241,77 @@ const older = list[position + 1];
     paintSegments();
   };
 
-  const show = (index: number) => {
-    if (index < 0 || index >= stories.length) return;
+  const lastIndex = stories.length - 1;
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
+
+  // 今どの 1 枚を読んでいるかが変わったときの更新。スクロールの位置そのものには触らない
+  const setCurrent = (index: number) => {
+    if (index !== current) elapsed = 0;
     current = index;
-
-    stories.forEach((story, i) => (story.hidden = i !== current));
-
-    // 最後の 1 枚は写真を枠いっぱいに見せる。上の帯の日付や閉じるも、左右の矢印も出さない。
-    // その中にあるもの（一覧へ・最初から）と左側のタップで足りる
-    const isEnd = current === stories.length - 1;
-    header.hidden = isEnd;
-    for (const button of sideButtons) button.hidden = isEnd;
-
-    elapsed = 0;
     paintSegments();
 
     for (const button of prevButtons) button.disabled = current === 0;
-    for (const button of nextButtons) button.disabled = isEnd;
-
-    scroller.scrollTop = 0;
+    for (const button of nextButtons) button.disabled = current === lastIndex;
   };
+
+  // 最後の 1 枚は写真を枠いっぱいに見せるので、上の帯と左右の矢印は近づくほど薄くして消す。
+  // その中にあるもの（一覧へ・最初から）と左側のタップで足りる
+  const paintEndFade = (position: number) => {
+    const opacity = Math.min(1, Math.max(0, lastIndex - position));
+    for (const element of [header, ...sideButtons]) {
+      element.style.opacity = String(opacity);
+      element.style.visibility = opacity === 0 ? 'hidden' : '';
+    }
+  };
+
+  const position = () => scroller.scrollLeft / (scroller.clientWidth || 1);
+  const isSettled = () => Math.abs(position() - Math.round(position())) < 0.01;
+
+  // ボタンなどでめくっている最中の行き先。途中の 1 枚を「今の 1 枚」と取り違えないために持つ
+  let target: number | null = null;
+
+  const show = (index: number, behavior?: ScrollBehavior) => {
+    if (index < 0 || index > lastIndex) return;
+    target = index;
+    setCurrent(index);
+    scroller.scrollTo({
+      left: index * scroller.clientWidth,
+      behavior: behavior ?? (reduceMotion.matches ? 'auto' : 'smooth'),
+    });
+  };
+
+  scroller.addEventListener('scroll', () => {
+    paintEndFade(position());
+
+    const nearest = Math.round(position());
+    if (target === null) {
+      if (nearest !== current) setCurrent(nearest);
+    } else if (isSettled()) {
+      // 行き先以外で止まったなら、指で割り込まれたということ。止まった場所を正とする
+      if (nearest !== target) setCurrent(nearest);
+      target = null;
+    }
+
+    // 離れた 1 枚は、戻ってきたときに頭から読めるようにしておく。見えている間は動かさない
+    if (isSettled()) {
+      stories.forEach((story, i) => {
+        if (i !== nearest) story.scrollTop = 0;
+      });
+    }
+  });
+
+  // 回転などで幅が変わると位置がずれるので合わせ直す。高さだけの変化（アドレスバーの伸縮）では触らない
+  let width = scroller.clientWidth;
+  new ResizeObserver(() => {
+    if (scroller.clientWidth === width) return;
+    width = scroller.clientWidth;
+    scroller.scrollLeft = current * width;
+  }).observe(scroller);
 
   for (const button of prevButtons) button.addEventListener('click', () => show(current - 1));
   for (const button of nextButtons) button.addEventListener('click', () => show(current + 1));
-  document.querySelector('[data-restart]')?.addEventListener('click', () => show(0));
+  // 全部の 1 枚を流して見せても仕方ないので、最初へは一度に戻る
+  document.querySelector('[data-restart]')?.addEventListener('click', () => show(0, 'auto'));
 
   scroller.addEventListener('click', (event) => {
     // リンクを押したとき、文字を選んだときはめくらない
@@ -272,14 +337,17 @@ const older = list[position + 1];
 
     if (running() && !document.hidden) {
       elapsed += delta;
-      if (elapsed >= DURATION) show(current + 1);
-      else paintSegments();
+      // 指で動かしている途中にめくると取り合いになるので、止まるまで待つ
+      if (elapsed >= DURATION) {
+        if (isSettled()) show(current + 1);
+      } else paintSegments();
     }
     requestAnimationFrame(tick);
   };
 
   setAutoplay(autoplay, false);
-  show(0);
+  show(0, 'auto');
+  paintEndFade(0);
   requestAnimationFrame(tick);
   mountTweets([...document.querySelectorAll<HTMLElement>('.tweet-embed')]);
 </script>

@@ -263,6 +263,15 @@
   transition: none !important;
 }
 
+/* スクロールはできるまま、バーだけ出さない */
+@utility scrollbar-none {
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 @utility scrollbar-soft {
   scrollbar-width: thin;
   scrollbar-color: color-mix(in oklab, var(--color-fg-muted) 30%, transparent)
