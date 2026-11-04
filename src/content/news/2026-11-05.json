@@ -1,0 +1,90 @@
+{
+  "stories": [
+    {
+      "title": "Postman Desktop が Claude Code と Codex に無断でプラグインを入れていた",
+      "main": "https://x.com/itsMikeKipruto/status/2118011929390190816",
+      "body": "GitHub の issue によると、macOS の Postman Desktop 12.33.4 が確認なしに Claude Code と OpenAI Codex へプラグインを入れていた。Codex では ~/.codex/config.toml に Postman のマーケットプレイスとプラグインが追加され、Postman 自身のセッション開始フックが信頼済みとして登録されていた。",
+      "around": [
+        {
+          "url": "https://x.com/aiparabellum/status/2117821672216527331",
+          "name": "aiparabellum",
+          "summary": "Claude Code には claude plugin install postman@claude-plugins-official --scope user で入り、全プロジェクトで読み込まれる"
+        },
+        {
+          "url": "https://x.com/kspringfield13/status/2118078180237988038",
+          "name": "kyle",
+          "summary": "確認手順として claude plugin list、Codex 設定の trusted_hash、~/.local/bin の postman バイナリを挙げる"
+        }
+      ]
+    },
+    {
+      "title": "Claude Code のバックグラウンドサブエージェント、ステータス更新のコストが約99%減",
+      "main": "https://x.com/ClaudeDevs/status/2118063143167693011",
+      "body": "動いているサブエージェントは 30 秒ごとにステータスラインを更新し、そのたびに会話全体を読み直していた。これを Haiku 5.5 が短いメモから書く方式に変え、1 回の更新コストが約 99% 下がった。",
+      "around": [
+        {
+          "url": "https://x.com/oikon48/status/2118085071676833886",
+          "name": "Oikon | Claude Code本出しました",
+          "summary": "サブエージェント本体のモデルはそのままで、変わるのはステータスの書き手だけと整理"
+        }
+      ]
+    },
+    {
+      "title": "Cloudflare、コーディングエージェントを脆弱性監査役にする OSS スキルを公開",
+      "main": "https://x.com/CloudflareDev/status/2118013149538390253",
+      "body": "Cloudflare の脆弱性発見ハーネスの元になったオープンソースのスキルを公開。コードベースの把握、脆弱性探し、候補への反証、記録、検証、確定・却下・要確認の報告という 6 段階で進める。",
+      "around": []
+    },
+    {
+      "title": "Cloudflare、人の代わりにサイトを訪れるパーソナルエージェントの分析とアクセス制御を追加",
+      "main": "https://x.com/Cloudflare/status/2117983857773310086",
+      "body": "人の代理でサイトにアクセスするパーソナルエージェントの動きを把握できる新しい分析と、より細かいアクセスポリシーを公開した。",
+      "around": [
+        {
+          "url": "https://x.com/CloudflareDev/status/2117993268265013537",
+          "name": "Cloudflare Developers",
+          "summary": "エージェントの発見と x402 による支払いを組み合わせ、無料・有料・アクセス不可をサイト側が決める仕組みを解説"
+        }
+      ]
+    },
+    {
+      "title": "Agents SDK v0.33.0 が Pi 1.5 に対応、ストレージ書き込み 27 分の 1",
+      "main": "https://x.com/CFchangelog/status/2118003084961960322",
+      "body": "Cloudflare の Agents SDK v0.33.0 が Pi 1.5 をサポート。アップグレードでストレージへの書き込みが 27 分の 1 になり、スループットは 4 倍になる。",
+      "around": []
+    },
+    {
+      "title": "Remix 3.2 リリース、csp() ミドルウェアで CSP に対応",
+      "main": "https://x.com/remix_run/status/2118109297716728109",
+      "body": "新しい csp() ミドルウェアで Content Security Policy に対応し、コンポーネントのランタイムは約 10% 小さくなった。remix/test にモックの制御が入り、ナビゲーション、css()、セッションストレージの修正も含まれる。",
+      "around": []
+    }
+  ],
+  "quick": [
+    {
+      "title": "yusukebe さん、自作スライドアプリについての発表スライドを公開",
+      "summary": "#yokohamanorth での発表で、スライドもそのスライドアプリで作られている。",
+      "source": "https://x.com/yusukebe/status/2117919567347597513"
+    },
+    {
+      "title": "Claude Desktop に /storage コマンド",
+      "summary": "Claude が過去のタスクやワークツリーを整理してストレージの空きを作る。",
+      "source": "https://x.com/oikon48/status/2118085586859053565"
+    },
+    {
+      "title": "R2 のメトリクスがリージョン別トラフィックと HTTP エラーコードで分かれるように",
+      "summary": "リージョンごとのレイテンシやエラーの傾向を追いやすくなった。",
+      "source": "https://x.com/CFchangelog/status/2118071052852949063"
+    },
+    {
+      "title": "Browser Run のクロール結果に URL ごとの結果と robots.txt の診断",
+      "summary": "クロールが失敗した理由を、ステータスコードとブロック理由で確認できる。",
+      "source": "https://x.com/CFchangelog/status/2118003120244453523"
+    },
+    {
+      "title": "Cloudflare WAF、新しい PHP RCE 攻撃向けのルールを更新",
+      "summary": "2026-11-03 の CTF で見つかった攻撃に対応し、CVE-2026-109618 と CVE-2026-115560 を防ぐ。",
+      "source": "https://x.com/CFchangelog/status/2118116586951450995"
+    }
+  ]
+}
