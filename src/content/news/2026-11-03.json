@@ -1,0 +1,116 @@
+{
+  "stories": [
+    {
+      "title": "Claude の Messages API に message threads が public beta で登場、会話をサーバー側で保持",
+      "main": "https://x.com/ClaudeDevs/status/2117332449382510884",
+      "body": "Anthropic が Messages API に message threads を public beta で追加した。API がターン間で会話をサーバー側にキャッシュするので、2 ターン目以降は会話全体を送り直さず、新しいメッセージと直前のメッセージ ID だけを送ればよく、応答の開始も早くなる。50万〜100万トークンのリクエストでは最初のトークンまでの時間（中央値）が約 35% 短くなり、多くの Claude Code ユーザーではすでに既定で有効になっている。",
+      "around": [
+        {
+          "url": "https://x.com/Bokingdmnw/status/2117354048395284818",
+          "name": "Boking",
+          "summary": "公式の数字として、50万〜100万トークンで TTFT 中央値が 35% 減、リクエストは約 800KB から 1.8KB に縮むと紹介"
+        },
+        {
+          "url": "https://x.com/sunset_evm/status/2117352859662491821",
+          "name": "artem",
+          "summary": "message-threads-2026-08-12 の beta ヘッダーで有効化し、スレッドは最後のリクエストから 5 分で失効すると整理"
+        },
+        {
+          "url": "https://x.com/WesRoth/status/2117391303533302106",
+          "name": "Wes Roth",
+          "summary": "Claude Code のほとんどのユーザーではすでに既定で有効、料金は通常のトークン単価のまま"
+        }
+      ]
+    },
+    {
+      "title": "Analog v3 が Bring Your Own Server に対応、Hono や NestJS の上で SSR を動かせる",
+      "main": "https://x.com/brandontroberts/status/2117315108808585604",
+      "body": "Brandon Roberts が、Angular 向けの analogjs v3 では自前のサーバーを持ち込んで、SSR・server functions・page load functions といった Analog の機能を使えると紹介した。組み合わせ先の例として NestJS、Hono、Node.js の http が挙げられている。",
+      "around": [
+        {
+          "url": "https://x.com/GauravBrief/status/2117319974901694858",
+          "name": "𝙶𝚊𝚞𝚛𝚊𝚟 𝚃𝚒𝚠𝚊𝚛𝚒",
+          "summary": "Analog の SSR と server functions を保ったまま NestJS や Hono を使えるのは Angular 開発者にとって柔軟性が大きいと反応"
+        },
+        {
+          "url": "https://x.com/markfenner/status/2117364421534401019",
+          "name": "Hybrid 🏃🏾",
+          "summary": "既存のサーバーをそのまま使えるので、動いているアプリで試しやすいと評価"
+        }
+      ]
+    },
+    {
+      "title": "Hono の JSX から Cloudflare Workers で OGP 画像を作る、WASM 製エンジンの Zenn 記事",
+      "main": "https://x.com/SoraKumo001/status/2117113351507742760",
+      "body": "空雲 が、Hono の JSX を経由して Cloudflare Workers 上で OGP 画像を生成する記事を Zenn に公開した。描画エンジンは WASM で構成されていてブラウザの助けが要らず、Mermaid の図表もそのまま描画できる。",
+      "around": [
+        {
+          "url": "https://x.com/SoraKumo001/status/2117261935448400176",
+          "name": "空雲",
+          "summary": "Cloudflare Workers でも動く JSDOM のようなライブラリ wasm-quickjs-dom も紹介"
+        }
+      ]
+    },
+    {
+      "title": "Vercel Labs が tsc-ts を公開、TypeScript 7 のコンパイラを TypeScript で書き直してネイティブ化",
+      "main": "https://x.com/ctatedev/status/2116945207967261176",
+      "body": "Vercel Labs の Chris Tate が 10 月の成果（95 リリース、730 issue クローズ、3,500 以上の PR マージ）をまとめ、新作として tsc-ts を挙げた。TypeScript 7 のコンパイラを TypeScript で書き、scriptc でネイティブにコンパイルしたもの。",
+      "around": [
+        {
+          "url": "https://x.com/chebyte/status/2117318869408977000",
+          "name": "chebyte",
+          "summary": "TypeScript 7.0.2 のコンパイラ（tsgo）の移植で、npm install -D tsc-ts → npx tsc-ts -p tsconfig.json で使える。Apache 2.0 の実験扱い"
+        },
+        {
+          "url": "https://x.com/Ryrenz/status/2117257681329127928",
+          "name": "Ren",
+          "summary": "パーサや型チェッカーなどを約 1.25 万のテストファイルで tsgo の結果と突き合わせており、--api も TypeScript 7.0.2 の tsc --api と同じインターフェース"
+        }
+      ]
+    },
+    {
+      "title": "Ryan Carniato、AI に書かせやすい設計を platform・process・primitives の 3 方向で比較",
+      "main": "https://x.com/RyanCarniato/status/2117356093194334664",
+      "body": "Ryan Carniato が、AI によるコーディングに向く設計を 3 方向に整理した。低抽象で学習データの多い「platform」、useReducer や XState、Effect のように処理を明示させる「process」、React Compiler や Solid のようにルールを言語側に組み込む「primitives」。Solid のルールを組み込んだ独自言語 ReactiveScript での途中結果では、コストは platform が最良、小さいモデルでの正しさは primitives が最良だった。",
+      "around": [
+        {
+          "url": "https://x.com/RyanCarniato/status/2117357242597191869",
+          "name": "Ryan Carniato",
+          "summary": "一番の驚きは学習データとの戦いで、エージェントはシンプルなコードが正しいと信じず、テストしたがる"
+        },
+        {
+          "url": "https://x.com/RyanCarniato/status/2117360492444614772",
+          "name": "Ryan Carniato",
+          "summary": "コード量はコストにほとんど効かず、primitives 版は 300〜400 行、vanilla や Foldkit 版は 1000 行以上になった"
+        }
+      ]
+    }
+  ],
+  "quick": [
+    {
+      "title": "Vercel、既知の悪意ある npm パッケージをビルド時に自動ブロック",
+      "summary": "install スクリプトが走る前に既知の悪意ある npm パッケージを止めるようになった。設定は不要。",
+      "source": "https://x.com/vercel_dev/status/2117325624344035671"
+    },
+    {
+      "title": "Claude Code が既存ゲームの再現を断るように、Anthropic がプロンプトへの 2 文追加を認める",
+      "summary": "Opus 5.5 の Claude Code のプロンプトに、特定の既存ゲームの再現は名前を変えても作らないという指示が加わった。オリジナルやジャンルもの、ユーザー自身の素材によるゲームは引き続き作れる。",
+      "source": "https://x.com/tetumemo/status/2117013882975961414"
+    },
+    {
+      "title": "Findy、100 以上のプロジェクトを持つ Nx モノレポを TypeScript 7 へ移行した記事を公開",
+      "summary": "Findy Tech Blog に、大規模な Nx モノレポを TypeScript 7 に移行した実践記録が公開された。",
+      "source": "https://x.com/dai___you/status/2117295740519321782"
+    },
+    {
+      "title": "Alchemy Domain がイベントリプレイに対応、数百万の Durable Objects に fan-out",
+      "summary": "View や Projection を追加・更新したときに再計算するイベントリプレイを、alchemy deploy が束ねる fan-out workflow として実装した。",
+      "source": "https://x.com/samgoodwin89/status/2117367781444444417"
+    },
+    {
+      "title": "GitHub の Issue artifacts が public preview に",
+      "summary": "10 月 28 日付の GitHub changelog で Issue artifacts が public preview になった。ryoppippi が「good bye long PR body!!」と共有している。",
+      "source": "https://x.com/ryoppippi/status/2117089556256456900"
+    }
+  ]
+}
