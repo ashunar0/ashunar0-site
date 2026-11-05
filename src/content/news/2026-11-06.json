@@ -1,0 +1,108 @@
+{
+  "stories": [
+    {
+      "title": "yusukebeがVoid向けhono/jsxのプロトタイプを公開",
+      "main": "https://x.com/yusukebe/status/2118323866108137517",
+      "body": "Yusuke WadaさんがVoidのhono/jsx対応について関心を取り、プロトタイプとしてGitHubリポジトリ yusukebe/void-hono-jsx を共有した。PRを作る前の試作として置いたもので、Void上でHonoのJSXを使う方向の実装を試している。",
+      "around": [
+        {
+          "url": "https://x.com/yusukebe/status/2118288467209896062",
+          "name": "Yusuke Wada",
+          "summary": "Voidのhono/jsx対応に興味があるか尋ねた投稿"
+        },
+        {
+          "url": "https://x.com/ashunar0/status/2118322022212350433",
+          "name": "asahi",
+          "summary": "興味あり、ローカルでも試していると返信"
+        },
+        {
+          "url": "https://x.com/kei_english_ca/status/2118345291342758254",
+          "name": "Kei@Wix|Base44",
+          "summary": "VoidはコードからCloudflareの設定・デプロイ・ホスティングまで進めるフルスタックFWだと紹介"
+        }
+      ]
+    },
+    {
+      "title": "VoidZeroの10月まとめ、tsrsやVoid SDK公開など",
+      "main": "https://x.com/voidzerodev/status/2118356909971456455",
+      "body": "VoidZeroが「Tales from the Void: October 2026 Recap」を公開した。TypeScriptのRust移植tsrsは最大8倍速いとし、Void SDKとプラットフォームのオープンソース化、Vitest 5.1の影響テスト再実行、ViteConfトークのYouTube公開などを挙げている。",
+      "around": [
+        {
+          "url": "https://x.com/yusukebe/status/2118346622015045699",
+          "name": "Yusuke Wada",
+          "summary": "Void体験の紹介投稿を引用し「試して！」と呼びかけ"
+        }
+      ]
+    },
+    {
+      "title": "Cursorがライブアプリをリンク共有できる機能を発表",
+      "main": "https://x.com/cursor_ai/status/2118458629091426304",
+      "body": "Cursor公式が、Cursor内でライブアプリを作りリンクで共有できる機能を発表した。欲しいツールを説明するとビルドし、データベースの用意、決定的およびエージェントによるセキュリティチェック、デプロイまで進めるとしている。",
+      "around": [
+        {
+          "url": "https://x.com/rauchg/status/2118474519925158186",
+          "name": "Guillermo Rauch",
+          "summary": "XのBot/Cursorで作りVercelへデプロイし、Xで配信・収益化するループがほぼ揃ったと反応"
+        }
+      ]
+    },
+    {
+      "title": "AI Gatewayにモデルエイリアス、プール切替がデプロイなしで可能に",
+      "main": "https://x.com/CFchangelog/status/2118395580015673851",
+      "body": "Cloudflare Changelogによると、AI Gatewayがmodel aliasesに対応した。ひとつの名前でモデルのプールを呼び、失敗時のフォールバック順やスマートルーティングで選び、アプリを再デプロイせずモデルを差し替えられる。",
+      "around": [
+        {
+          "url": "https://x.com/Jilles/status/2118383017597026442",
+          "name": "Jilles Soeters",
+          "summary": "エイリアスはモデルのプールで、順序フォールバックかリクエストごとのスマート選択ができると説明"
+        }
+      ]
+    },
+    {
+      "title": "Claude Code 2.1.318、ログイン期限をauth statusで見える化",
+      "main": "https://x.com/webtkdev/status/2118423604392345833",
+      "body": "Claude Code 2.1.318では、claude auth statusにloginExpiresAtが出て、claude -pのJSONにcredential_expires_atが含まれる。テキスト出力では期限の10日前から標準エラーへ警告が出る、と投稿されている。cronやCIの未ログイン失敗を先に検知する用途が挙げられている。",
+      "around": [
+        {
+          "url": "https://x.com/hamuputa30/status/2118465002286022801",
+          "name": "プタ｜AIエージェント実験室",
+          "summary": "変更履歴ベースでloginExpiresAtや切れ時のauth login / setup-token案内を日本語で整理"
+        }
+      ]
+    },
+    {
+      "title": "CloudflareのQ3、売上7.825億ドルで39%増、通年見通しも上方修正",
+      "main": "https://x.com/wallstengine/status/2118452289274806421",
+      "body": "Cloudflareの2026年Q3は売上7.825億ドル（予想7.39億）、調整後EPS 0.38ドル（予想0.34ドル）で前年比約39%増だったとまとめられている。通年売上見通しは約29.6億ドル、Q4売上は8.45〜8.46億ドルのガイダンスが示されている。",
+      "around": [
+        {
+          "url": "https://x.com/WOLF_Financial/status/2118452303900385382",
+          "name": "WOLF",
+          "summary": "同じQ3数字とQ4ガイダンスを速報形式で整理"
+        }
+      ]
+    }
+  ],
+  "quick": [
+    {
+      "title": "Account Abuse ProtectionがどのAIアシスタントのログインかを識別",
+      "summary": "Early AccessのAccount Abuse Protectionで、ログインやサインアップを行う認識済みAIアシスタントを個別に調べられるようになった。アシスタント全体を止めずに特定の乱用を調べる用途が示されている。",
+      "source": "https://x.com/CFchangelog/status/2118395618624172275"
+    },
+    {
+      "title": "Private Load Balancerがセッションアフィニティに対応",
+      "summary": "プライベートLBで同一エンドポイントへ留められるようになった。APIのip_cookie、ダッシュボードのhash steeringが案内されている。",
+      "source": "https://x.com/CFchangelog/status/2118433432699023591"
+    },
+    {
+      "title": "Thoughtworks Technology RadarのoRPC紹介にHonoが登場",
+      "summary": "Thoughtworks Technology RadarのoRPC項目の説明にHonoが載っている、という指摘投稿があった。",
+      "source": "https://x.com/gosukenator/status/2118273238329598349"
+    },
+    {
+      "title": "ClaudeにPersonal Financeベータ（米国）",
+      "summary": "Claude公式が米国のPro/Max/Ultra向けにPersonal Financeベータを発表。選んだ口座を読み取り専用でつなぎ、残高や取引について日常語で答え、送金や投資はしないとしている。",
+      "source": "https://x.com/claudeai/status/2118403114890137895"
+    }
+  ]
+}
