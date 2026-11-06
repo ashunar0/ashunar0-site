@@ -27,7 +27,7 @@ https://blog.x.com/en/engineering/rebuilding-the-global-town-square-from-scratch
 
 Fastify なんだ！？
 
-めずらしい。Fastify を採用しているプロダクトを今まで知らなかったので、ここで　名前を聞くとは思いませんでした。
+めずらしい。Fastify を採用しているプロダクトを今まで知らなかったので、ここで名前を聞くとは思いませんでした。
 
 じゃあなんで Fastify を選んだのかというと、記事のどこにも書いてありません。なのでこの記事では、X がなぜ Fastify を選んだのかを勝手に考えてみます。
 
