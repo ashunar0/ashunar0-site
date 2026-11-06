@@ -1,0 +1,106 @@
+{
+  "stories": [
+    {
+      "title": "Cloudflare WorkersでTemporal APIが使えるように",
+      "main": "https://x.com/CloudflareDev/status/2118748243203088511",
+      "body": "Cloudflare Developersが、JavaScriptの現代的な日付・時刻APIであるTemporalをWorkersで利用可能だと発表した。タイムゾーン処理、カレンダーを意識した日付計算、予期せず変わらないイミュータブルな値が使えるとし、compatibility flagのtemporalを有効にすると利用できる。",
+      "around": []
+    },
+    {
+      "title": "Durable Objectsがfetch/RPCを最大4回まで自動リトライ",
+      "main": "https://x.com/CFchangelog/status/2118735386197549137",
+      "body": "Cloudflare Changelogによると、Durable Objectsは失敗したfetchとRPC呼び出しを最大4回まで自動でリトライするようになった。一時的なネットワークエラー向けのリトライロジックを自分で書かなくてよく、Wrangler 4.158.0以上への更新が案内されている。",
+      "around": [
+        {
+          "url": "https://x.com/CloudflareDev/status/2118709488270078371",
+          "name": "Cloudflare Developers",
+          "summary": "DOの呼び出しがよりdurableになったとして元投稿を引用"
+        },
+        {
+          "url": "https://x.com/ashleypeacock/status/2118369332866556008",
+          "name": "Ashley Peacock",
+          "summary": "ランタイムがゼロコード変更でfetch/RPCを自動リトライすると説明"
+        }
+      ]
+    },
+    {
+      "title": "wrangler.jsoncからcloudflare.config.tsへ、$ cf migrate",
+      "main": "https://x.com/Jilles/status/2118758680699023459",
+      "body": "CloudflareのJilles Soetersさんが、wrangler.jsoncからcloudflare.config.tsへ移るには`$ cf migrate`の1コマンドだと紹介した。エージェントがダッシュボードでやるような操作に約3000個アクセスできる、としている。",
+      "around": [
+        {
+          "url": "https://x.com/onetogregorio/status/2118777045543211388",
+          "name": "Neto Gregório",
+          "summary": "Astro+Honoのpnpmモノレポで、betaのいま移行する利点を質問"
+        },
+        {
+          "url": "https://x.com/yusukebe/status/2118817629272248370",
+          "name": "Yusuke Wada",
+          "summary": "Jillesさんの投稿をRT"
+        }
+      ]
+    },
+    {
+      "title": "XのWebがViteで動いているとEvan Youが報告",
+      "main": "https://x.com/evanyou/status/2118566402911281623",
+      "body": "Evan Youさんが「X web now running on Vite!」と投稿した。引用先では、遅い回線でプロフィールの最初の投稿表示が旧Webで22秒超だったのが、新Webでは2.7秒になったと説明されている。",
+      "around": [
+        {
+          "url": "https://x.com/yagiznizipli/status/2118048136270672058",
+          "name": "Yagiz Nizipli",
+          "summary": "遅い回線で最初の投稿表示が22秒超から2.7秒になったと説明"
+        }
+      ]
+    },
+    {
+      "title": "次期Rolldown、プラグイン差分同期で準備が26倍速く",
+      "main": "https://x.com/hyfdev/status/2118568690878951909",
+      "body": "Yunfei Heさんによると、次のRolldownではgenerateBundleとwriteBundleからのプラグイン変更を、変わった分だけオンデマンドでRust側へ同期する。大きなViteアプリでの準備が1,015msから39msになり、26倍速くなったとしている。",
+      "around": [
+        {
+          "url": "https://x.com/voidzerodev/status/2118577353878364624",
+          "name": "VoidZero",
+          "summary": "hyfdevさんの投稿をRT"
+        },
+        {
+          "url": "https://x.com/evanyou/status/2118568780918108223",
+          "name": "Evan You",
+          "summary": "同じくhyfdevさんの投稿をRT"
+        }
+      ]
+    },
+    {
+      "title": "Claude CodeがアカウントメールをUser-Agentに載せて外部送信",
+      "main": "https://x.com/hqmank/status/2118634539123712287",
+      "body": "Kaiさんによると、Claude Codeがユーザーのアカウントメールを外部サイトへ知らないうちに送っていた問題があり、Anthropicのチームが確認して謝罪した。モデルがcurlのUser-Agentにメールを入れることがあり、2.1.317でプライバシーチェックが入ったがすべてを防げず、今後の更新でコンテキストからメールを外す予定だという。GitHub Issueは#107757。",
+      "around": []
+    }
+  ],
+  "quick": [
+    {
+      "title": "User APIトークンのダッシュボードがAccount APIと揃う形に刷新",
+      "summary": "ユーザー向けトークンの作成・確認UIがAccount APIトークンと同じデザインになった。",
+      "source": "https://x.com/CFchangelog/status/2118841085883478465"
+    },
+    {
+      "title": "GitHubの新Gitストレージ、5000エージェント・毎秒7200プッシュを実証",
+      "summary": "内部テストで、1リポジトリに対し同時5000エージェント、毎秒7200プッシュをさばきつつ読み取りレイテンシを保ったとしている。",
+      "source": "https://x.com/github/status/2118830274431873379"
+    },
+    {
+      "title": "12/5 会津大学でWorkers Tech Talks in Fukushima",
+      "summary": "yusukebeさんが12月5日(土) 18:00〜20:00、会津大学でのCloudflare Workers Tech Talksを告知した。",
+      "source": "https://x.com/yusukebe/status/2118597340953223455"
+    },
+    {
+      "title": "11/17のイベントでyusukebeがRamen APIを発表",
+      "summary": "11月17日(火)『ねぇ、これ見て。』に参加し、Ramen APIについて話すと告知した。",
+      "source": "https://x.com/yusukebe/status/2118613594820751495"
+    },
+    {
+      "title": "Cloudflare Accessがpasskeysに対応",
+      "summary": "保護アプリとApp Launcher向けにpasskeysが使え、一度登録すれば端末・セキュリティキー・パスワードマネージャでサインインできる。",
+      "source": "https://x.com/KennyJohnsonATX/status/2118786791235113280"
+    }
+  ]
+}
