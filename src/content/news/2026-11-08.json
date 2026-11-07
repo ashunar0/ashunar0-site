@@ -1,0 +1,100 @@
+{
+  "stories": [
+    {
+      "title": "Claude Code 2.1.319、MCP タスクのバックグラウンド実行と権限プロンプトを拒否で流す設定",
+      "main": "https://x.com/oikon48/status/2118926759232225282",
+      "body": "Claude Code 2.1.319 で、MCP サーバーがツール呼び出しをタスクとして走らせるとバックグラウンドに移り、終わったら結果を Claude に伝えるようになった。permissions.denyInsteadOfPrompting を設定すると、権限プロンプト待ちになる呼び出しは拒否されてターンが続く。テレメトリや feature flag がオフの auto mode では、サーバーが判定できない呼び出しが組み込み分類器にフォールバックせず確認か拒否になり、旧挙動は CLAUDE_CODE_AUTO_MODE_SERVER=0 で戻せる。",
+      "around": [
+        {
+          "url": "https://x.com/simonlo/status/2118865998262722786",
+          "name": "Simon Lo",
+          "summary": "細工した env プレフィックスでコマンドの一部が権限チェックから隠れる Bash の権限バイパスも修正された"
+        },
+        {
+          "url": "https://x.com/timwork_notes/status/2119135452078960677",
+          "name": "Tim Notes",
+          "summary": "auto mode の黙ったローカル分類器フォールバックがなくなり、チェックできない呼び出しは確認か拒否に"
+        }
+      ]
+    },
+    {
+      "title": "Claude Duet がスマホから Claude Code のセッションを扱えるように",
+      "main": "https://x.com/davidsuttonca/status/2118785613436698719",
+      "body": "David Sutton さんが、Claude Duet に Claude Code セッション対応が入ったと発表。動いているものの確認、変更の承認、指示の送信をスマホからでき、手元のコンピュータ上のセッションとクラウドのセッションの両方に対応する。",
+      "around": [
+        {
+          "url": "https://x.com/navbryce/status/2118926491170042057",
+          "name": "#!/bin/bryce",
+          "summary": "Claude Duet チームのエンジニア。アプリ内でブラウザを見る機能も最近出したと紹介"
+        },
+        {
+          "url": "https://x.com/daniel_mac8/status/2118828958267724284",
+          "name": "Dan McAteer",
+          "summary": "クラウドと接続済みデバイス上のローカル、両方の Claude Code セッションに届くのが欠けていたピースだと評価"
+        },
+        {
+          "url": "https://x.com/oikon48/status/2119015302801604633",
+          "name": "Oikon | Claude Code本出しました",
+          "summary": "Claude Duet が使えるようになれば全部解決しそうなので早く使いたい"
+        }
+      ]
+    },
+    {
+      "title": "Claude Code の「今後は確認しない」で承認したコマンドの秘密情報が GitHub に",
+      "main": "https://x.com/Prynoid/status/2119149259669090739",
+      "body": "Apiiro の調査で、公開されている .claude/settings.local.json 104,185 件のうち 1,122 件に 1,379 個の秘密情報が含まれていた。「Yes, and don't ask again」で承認すると、コマンドが資格情報ごとそのまま保存されることがある。対処として、秘密情報のローテーション、git rm --cached での追跡解除、.gitignore への追加が挙げられている。",
+      "around": [
+        {
+          "url": "https://x.com/modularciso/status/2119127744092962861",
+          "name": "modularciso",
+          "summary": "履歴なども含めると 1,994 の公開リポジトリで 2,539 個、Gitleaks と TruffleHog が見逃したファイルも 215 件"
+        },
+        {
+          "url": "https://x.com/sudheerdotai/status/2119028207420588510",
+          "name": "Sudheer",
+          "summary": "調べた 16 のコーディングエージェントのうち、既定でこうなるのは Claude Code だけ"
+        }
+      ]
+    },
+    {
+      "title": "Durable Objects を Tailscale の tailnet に参加させる tailnet-do",
+      "main": "https://x.com/undefined_void/status/2118941877487685762",
+      "body": "divy さんが、Durable Objects を Tailscale の tailnet の後ろに置ける tailnet-do を公開。Durable Object が自分の 100.x アドレスを持ち、プライベートなマシンに接続できるほか、exit node や subnet router としても動く。",
+      "around": []
+    },
+    {
+      "title": "yusukebe さん、PR をひたすら捌くゲーム「Pull Request Time Attack」を公開",
+      "main": "https://x.com/yusukebe/status/2118988220176404623",
+      "body": "yusukebe さんが、ひたすらプルリクエストを捌くだけのゲーム「Pull Request Time Attack」を作って公開した。pr-time-attack.yusuke.run で遊べる。",
+      "around": []
+    },
+    {
+      "title": "Cloudflare Access がログイン方法としてパスキーに対応",
+      "main": "https://x.com/CFchangelog/status/2119150565372670121",
+      "body": "Cloudflare Access のログイン方法にパスキーが加わった。ワンタイム PIN や IdP の設定なしでログインできる。",
+      "around": []
+    }
+  ],
+  "quick": [
+    {
+      "title": "Workers AI のモデルカタログ刷新、非推奨モデルの置き換えを案内",
+      "summary": "v4.1 と v5.3 系のモデルでカタログを更新。非推奨モデルは @cf/deepseek-ai/deepseek-v4.1-flash-1017 などの推奨モデルへの切り替えが案内されている。",
+      "source": "https://x.com/CFchangelog/status/2118871219680227509"
+    },
+    {
+      "title": "Apple 公式の Xcode プラグインが Claude Code のプラグインディレクトリに",
+      "summary": "ビルド・実行・テスト、SwiftUI プレビューの描画、シミュレータや実機の操作ができる。/plugin install xcode@claude-plugins-official で入り、最新の Xcode が必要。",
+      "source": "https://x.com/RoundtableSpace/status/2119043277173207238"
+    },
+    {
+      "title": "yusukebe さん「時代は Code Mode」",
+      "summary": "競技エージェントのデバッグ方法が、事前に用意したスクリプトではなく都度動的にコードを生成する Code Mode のようなものだったという laiso さんの記事を紹介。",
+      "source": "https://x.com/yusukebe/status/2119018890261074256"
+    },
+    {
+      "title": "Rivet Actors がネイティブ Rust に対応",
+      "summary": "Nathan Flurry さんが、WASM と JS のグルーのオーバーヘッドなしで Rivet Actors が Rust をネイティブに扱えるようになったとして、Rivet 3.0 を速い Durable Objects として紹介。",
+      "source": "https://x.com/NathanFlurry/status/2119157855324647600"
+    }
+  ]
+}
