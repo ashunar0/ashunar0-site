@@ -1,0 +1,110 @@
+{
+  "stories": [
+    {
+      "title": "Anthropic、Claude の記憶を整理する「dreaming」をエンジニアリングブログで解説",
+      "main": "https://x.com/AnthropicAI/status/2118814753154064501",
+      "body": "Anthropic がエンジニアリングブログで、セッションの合間に過去のログを読み返してメモを直し、整理し直す「dreaming」を紹介した。ポケモン赤の実験では、Sonnet 3.7 が 413 ファイル・225 フォルダの記憶でバッジ 1 個だったのに対し、Fable 5 は 9 ファイルと global.md でバッジ 4 個。Claude Code の自動メモリは MEMORY.md の先頭 200 行（25KB）を読み込むとも書かれている。",
+      "around": [
+        {
+          "url": "https://x.com/RLanceMartin/status/2118815962573291545",
+          "name": "Lance Martin",
+          "summary": "筆者本人。dreaming（オフライン計算）で記憶の誤りを直し、新しい表現を作れると紹介"
+        },
+        {
+          "url": "https://x.com/ANTNetworkNews/status/2119059810910097476",
+          "name": "ANT Network News",
+          "summary": "Claude Code の自動メモリは MEMORY.md の先頭 200 行 / 25KB を注入する、と要点を整理"
+        },
+        {
+          "url": "https://x.com/segfaultexe/status/2119531173978268152",
+          "name": "segfault",
+          "summary": "413 ファイルで 1 バッジ、9 ファイルで 4 バッジ。小さい記憶ほど強かったという読み"
+        }
+      ]
+    },
+    {
+      "title": "Opus 5.5 の推論が 11/3 から変わった？ Claude Code 1,400 セッションの分析",
+      "main": "https://x.com/shanemelaugh/status/2119192075505893695",
+      "body": "Shane Melaugh さんが Gemini 4 Argon に Claude Code の 1,400 セッションを分析させたところ、モデル名は同じまま 11 月 3 日を境に推論の仕方が大きく変わっていたという。high では考える量が急減し、実際のバグでは 3 時間かけても直せなかった一方、xhigh は数分で修正にたどり着いた。",
+      "around": [
+        {
+          "url": "https://x.com/shanemelaugh/status/2119192078773260496",
+          "name": "Shane Melaugh",
+          "summary": "high での推論量が急落したグラフを提示"
+        },
+        {
+          "url": "https://x.com/shanemelaugh/status/2119192081251906001",
+          "name": "Shane Melaugh",
+          "summary": "high は 3 時間で修正できず、xhigh は少し考えて数分で修正"
+        }
+      ]
+    },
+    {
+      "title": "Claude Code のクラウドセッションが環境構築を自分で進めるように",
+      "main": "https://x.com/noahzweben/status/2118820232953536660",
+      "body": "Anthropic の Noah Zweben さんによると、Claude がアプリを作るのに必要なネットワーク、依存関係、API へのアクセスをユーザーと一緒に整えるようになった。エージェントのループがクラウドへ移るなかで、よく構成されたクラウド環境が重要になるとしている。",
+      "around": [
+        {
+          "url": "https://x.com/Joshua_WD/status/2119347216674418748",
+          "name": "Josh Builds",
+          "summary": "便利だが、環境変数やセットアップスクリプトは共有相手からも読める点に注意と指摘"
+        },
+        {
+          "url": "https://x.com/masa_aicoding/status/2119207006913613852",
+          "name": "まさ@AI実装ログ｜Gemini3 & Antigravity",
+          "summary": "依存関係・ネットワーク許可・API キーを Claude が判断、Pro・Max・Ultra で利用可能とまとめ"
+        }
+      ]
+    },
+    {
+      "title": "Next.js 一択から、Vite + React + Hono API や Workers 構成へ",
+      "main": "https://x.com/mddanishyusuf/status/2119320177485787221",
+      "body": "Mohd Danish さんが用途別の技術選定を公開。ランディングやドキュメントは Astro、ダッシュボードや SaaS は Vite + React + Hono API、1 フレームワークで済ませるなら SvelteKit か React Router v7 とし、ビルドが速く VPS のメモリも減ったという。日本でも Workers 上に Hono や Void を載せる構成の投稿が続いた。",
+      "around": [
+        {
+          "url": "https://x.com/muse_jp_sol/status/2119262949768577298",
+          "name": "Muse",
+          "summary": "Workers 上に React / TanStack Router / Hono / oRPC / Better Auth / Drizzle、D1 と R2 の構成図"
+        },
+        {
+          "url": "https://x.com/kazeusagi_dev/status/2119360784916693356",
+          "name": "kazeusagi",
+          "summary": "Hono + Vite で悩む型共有とルーティングを Void は全部込みでやってくれる、という感想"
+        },
+        {
+          "url": "https://x.com/yusukebe/status/2119375038734536930",
+          "name": "Yusuke Wada",
+          "summary": "縛りのないハッカソンでもデプロイのファーストチョイスが Cloudflare になっている"
+        }
+      ]
+    },
+    {
+      "title": "SurrealDB が Cloudflare Workers 上で無料枠を提供",
+      "main": "https://x.com/SurrealDB/status/2119484875275120862",
+      "body": "SurrealDB が Cloudflare Workers 上で動く無料プランを発表した。300 万リクエスト、100 データベース、エグレス無制限、330 以上のリージョンで、カード登録は不要としている。",
+      "around": []
+    }
+  ],
+  "quick": [
+    {
+      "title": "Claude Code の秘密情報保存問題、Anthropic 側は対策を検討中",
+      "summary": "「今後は確認しない」で設定ファイルに秘密情報が残る件に、担当者が自動モードでの検出やスキャンを試作する方針と回答。修正済みではなく、公開した認証情報は失効・再発行を、としている。",
+      "source": "https://x.com/aitrylab/status/2119562756311708141"
+    },
+    {
+      "title": "AI Gateway でプロバイダーキーごとの利用状況が見られるように",
+      "summary": "プロバイダー別にまとめて、ローテーションや削除が必要なキーを見つけられる。",
+      "source": "https://x.com/CFchangelog/status/2119211075308523991"
+    },
+    {
+      "title": "Shopify アプリは Remix から React Router へ",
+      "summary": "Remix テンプレートは重大なセキュリティ修正のみになり、新しいアプリは React Router で始める形になった。",
+      "source": "https://x.com/everdenepublic/status/2119494169853043091"
+    },
+    {
+      "title": "求人 400 万件超のサイトで React Router v7・Kysely・Go を選んだ理由",
+      "summary": "SEO 重視で React Router v7、発行 SQL が見える Kysely + Atlas を採用。439 万行 CSV のバッチ比較では Go が TS の 1.6 倍速かったという記事。",
+      "source": "https://x.com/__su888/status/2119552291111895470"
+    }
+  ]
+}
