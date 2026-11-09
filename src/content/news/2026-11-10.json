@@ -1,0 +1,145 @@
+{
+  "stories": [
+    {
+      "title": "Claude Fable 5.2 と Mythos 5.2 が登場、速度向上と値下げ",
+      "main": "https://x.com/claudeai/status/2119867114450268322",
+      "body": "Anthropic が Claude Fable 5.2 と Claude Mythos 5.2 を発表した。5.1 比で出力生成が最大30%速く、オプションの Fast モードでは最大2.5倍速（料金は倍）。API 料金は $10/$50 から $8/$40（100万トークンあたり入力/出力）に下がった。",
+      "around": [
+        {
+          "url": "https://x.com/ClaudeDevs/status/2119868704544711108",
+          "name": "ClaudeDevs",
+          "summary": "Ultra と Team Premium に加入期間に応じた Fable リセット（1〜3回、3月8日まで）を配布。Pro と Team Standard は1週間、週間上限の半分まで Fable 5.2 を試せる"
+        },
+        {
+          "url": "https://x.com/ClaudeDevs/status/2119868703265419688",
+          "name": "ClaudeDevs",
+          "summary": "蒸留対策で Fable 5.2 は全 API アカウントで preserved thinking が有効に。過去のコンテキストを編集すると 400 になり得るが、Claude Code や Agent SDK は対応済み"
+        },
+        {
+          "url": "https://x.com/oikon48/status/2119924891164225998",
+          "name": "Oikon | Claude Code本出しました",
+          "summary": "速度と価格の改善点を日本語でまとめた"
+        }
+      ]
+    },
+    {
+      "title": "Codex のエージェントループを Durable Object で動かす例を Cloudflare が公開",
+      "main": "https://x.com/mattzcarey/status/2119858443695853976",
+      "body": "Cloudflare が、OpenAI Codex の Rust 製ターン処理を WebAssembly にして Durable Object の中で動かす実験的な例を出した。会話、ファイル、終わったツール呼び出しの結果が再起動後も残る。同じ流れで Rust 製ハーネスの Nanocode も Durable Objects で動くようになった。",
+      "around": [
+        {
+          "url": "https://x.com/agentwirenews/status/2119849736085639597",
+          "name": "AgentWire News",
+          "summary": "Codex の Rust のターン処理を Wasm 化して Durable Object で実行し、チャットやファイル、完了したツール呼び出しが再起動をまたいで残る"
+        },
+        {
+          "url": "https://x.com/mattzcarey/status/2119860705298088200",
+          "name": "Matt Carey",
+          "summary": "Claude Code のループは Durable Object の中では動かせないが、耐久性のために Durable Object から駆動はできる"
+        },
+        {
+          "url": "https://x.com/gakonst/status/2119853135963599222",
+          "name": "Georgios Konstantopoulos",
+          "summary": "Nanocode × Durable Objects。耐久性、Code Mode、ハーネスとモデルの協調設計を掲げ、正式リリースに向けて準備中"
+        },
+        {
+          "url": "https://x.com/theomlondhe/status/2119805748389851251",
+          "name": "Om Londhe",
+          "summary": "終わった手順は再起動後に再利用されるが、中断した手順は再実行され得るので、ツールは二度走っても安全である必要がある"
+        },
+        {
+          "url": "https://x.com/R0u9h/status/2119918125961691553",
+          "name": "LaPh",
+          "summary": "Agents SDK のドキュメントに追加された nanocode を調べ、セッション永続化に加えサブエージェントや Code Mode まで入ったハーネスと見た"
+        }
+      ]
+    },
+    {
+      "title": "Vite Ecosystem Fund の第1弾、44 のプロジェクトとメンテナに $301,300",
+      "main": "https://x.com/voidzerodev/status/2119778924016103477",
+      "body": "VoidZero が Cloudflare 参加時に発表した $1M の Vite エコシステム基金から、最初の $301,300 を 44 のプロジェクトとメンテナに配分した。受け取り先は Vite、Vitest、Rolldown、Oxc、Vite+ のコアチームによるパネルが選んだ。",
+      "around": [
+        {
+          "url": "https://x.com/Cloudflare/status/2119791254997279118",
+          "name": "Cloudflare",
+          "summary": "Vite Ecosystem Fund の最初の $301,300 を OSS プロジェクトとメンテナに配ると発表"
+        },
+        {
+          "url": "https://x.com/mdong1909/status/2119777577162399990",
+          "name": "Michael Dong",
+          "summary": "受け取り先は Vite、Vitest、Rolldown、Oxc、Vite+ のコアメンバーによるパネルが選定"
+        },
+        {
+          "url": "https://x.com/nagasawatsubasa/status/2119851747766325704",
+          "name": "長沢 翼@LIFULL CTO & CAIO",
+          "summary": "ESLint、Prettier、Rollup、pnpm、Babel なども対象で、コアメンテナには月最大 $4,000 の手当があると整理"
+        },
+        {
+          "url": "https://x.com/__syumai/status/2119807132635967864",
+          "name": "syumai",
+          "summary": "Cloudflare による買収で、Evan You や Ryan Dahl が OSS の収益化に悩まず開発しやすくなったのは素晴らしいと感じている"
+        },
+        {
+          "url": "https://x.com/TheAlexLichter/status/2119781507669606694",
+          "name": "Alexander Lichter",
+          "summary": "OSS にはもっと資金が必要で、世界中の独立メンテナを支援できることを誇りに思う"
+        }
+      ]
+    },
+    {
+      "title": "React Conf Japan 2027 の公式サイト公開、登壇者第一弾も発表",
+      "main": "https://x.com/reactconfjp/status/2119751769186259115",
+      "body": "React Conf Japan 2027 の公式サイトが公開され、登壇者の第一弾とスポンサー募集も同時に発表された。今回は登壇者の公募（CfP）を実施しないと案内している。",
+      "around": [
+        {
+          "url": "https://x.com/reactconfjp/status/2119754733305127385",
+          "name": "React Conf Japan",
+          "summary": "登壇者第一弾を発表"
+        },
+        {
+          "url": "https://x.com/reactconfjp/status/2119762404410347756",
+          "name": "React Conf Japan",
+          "summary": "React Conf Japan 2027 では CfP を実施しない"
+        },
+        {
+          "url": "https://x.com/_n13u_/status/2119768683186934002",
+          "name": "n13u",
+          "summary": "Async React を実プロダクトで活かす国内のユースケースの話を聞きたい"
+        }
+      ]
+    },
+    {
+      "title": "Ryan Carniato「データフロー対制御フローは古い論争、AI でデータフローが花開く」",
+      "main": "https://x.com/RyanCarniato/status/2119887263228473431",
+      "body": "Ryan Carniato さんが、リアクティビティ（データフロー）とステートマシン（制御フロー）の対立は OOP 対 FP のような古い論争の一つだと投稿した。人間は昔からデータフローを扱うのに苦労してきたが、AI によってデータフローがようやく本領を発揮すると見ている。",
+      "around": []
+    }
+  ],
+  "quick": [
+    {
+      "title": "Workers AI の一部モデル廃止は 11月20日に延期",
+      "summary": "当初 11月15日とされていた 24 モデルの廃止が、公式 Changelog では 11月20日に変わった。以降は HTTP 410 Gone（エラーコード 5028）になる。",
+      "source": "https://x.com/evisu_dev/status/2119675100362682848"
+    },
+    {
+      "title": "Meta の Muse Ember が Cloudflare AI Gateway で利用可能に",
+      "summary": "同クラスでトップの速度と性能をうたう効率的なモデルで、サブエージェント用途に向くとしている。",
+      "source": "https://x.com/CloudflareDev/status/2119885000229142764"
+    },
+    {
+      "title": "yusukebe さんと chimame さんに聞く Workers 本番運用の勘所、11月11日開催",
+      "summary": "Offers の DeepDive イベントで、Cloudflare Workers の全体像から実践的なユースケースまでを扱う。11月11日 19:00 からオンライン。",
+      "source": "https://x.com/Offers_jp/status/2119718029080580117"
+    },
+    {
+      "title": "Sasha Koss さんが VoidZero / Cloudflare に参加",
+      "summary": "初日を迎え、これからの開発ツールづくりに加わると投稿した。",
+      "source": "https://x.com/kossnocorp/status/2119887205820957016"
+    },
+    {
+      "title": "Oikon さんが Claude Code の最近の Tips をまとめた記事を公開",
+      "summary": "「Claude Codeで最近使っているTips【2026/11】」を X の記事として公開した。",
+      "source": "https://x.com/oikon48/status/2119923293985914951"
+    }
+  ]
+}
