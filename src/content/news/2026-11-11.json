@@ -1,0 +1,105 @@
+{
+  "stories": [
+    {
+      "title": "Vite の開発サーバーに RCE の脆弱性、8.3.7 / 7.3.8 / 6.4.6 などで修正",
+      "main": "https://x.com/nurhayatdev/status/2120248802904793440",
+      "body": "Vite の開発サーバーに、細工したリクエストでコード実行やファイル読み出しができる脆弱性（GHSA-p4f5-76q4-ffq7、CVSS 9.1）が公開された。影響を受けるのは --host や server.host で開発サーバーをネットワークに公開している場合で、修正版は Vite 8.3.7 / 8.2.5 / 8.1.7 / 7.3.8 / 6.4.6 と Vite+ 1.5.1。",
+      "around": [
+        {
+          "url": "https://x.com/Khaled865412521/status/2120232472197669314",
+          "name": "ふきゅう",
+          "summary": "dev container やクラウドのマシンなど、開発サーバーがネットワークから届く環境が対象"
+        },
+        {
+          "url": "https://x.com/fengmk2/status/2119806557810725158",
+          "name": "mk2.js",
+          "summary": "Vite+ 1.5.1 を公開。高深刻度の修正 2 件を含み、Vite 8.3.7 と Rolldown 1.2.18 を同梱"
+        }
+      ]
+    },
+    {
+      "title": "Claude Code 2.1.321 / 2.1.322、MCP OAuth のトークン送信先と Bash サンドボックスを修正",
+      "main": "https://x.com/oikon48/status/2119967920948449776",
+      "body": "Claude Code 2.1.321 で、サーバーがリダイレクトしたときに MCP OAuth の refresh token などが別のホストへ送られる不具合と、読み取り専用の Bash コマンドがサンドボックスを経由しない不具合が直った。claude remote-control には、始めるすべてのセッションに設定ファイルを当てる --settings が入り、続く 2.1.322 では Vertex で fast mode が使えるようになった。",
+      "around": [
+        {
+          "url": "https://x.com/linklin63793/status/2119949806827340251",
+          "name": "link lin",
+          "summary": "2.1.321 の MCP OAuth の秘密情報の送信先と、Bash サンドボックスの修正を紹介"
+        },
+        {
+          "url": "https://x.com/ZST_WIP/status/2120279584947995004",
+          "name": "ZST｜AI/開発/ツールのニュースを毎朝",
+          "summary": "remote-control の --settings と、2.1.322 の Vertex での fast mode をまとめた"
+        },
+        {
+          "url": "https://x.com/ClaudeCodeLog/status/2119975541298077741",
+          "name": "Claude Code Changelog",
+          "summary": "2.1.322 のリリース予告"
+        }
+      ]
+    },
+    {
+      "title": "Durable Objects がアイドル後も同じリージョンにとどまるように",
+      "main": "https://x.com/CFchangelog/status/2120237751593263337",
+      "body": "Durable Objects が、アイドルになった後も同じリージョンにとどまることを優先するようになった。データを手元に置いたままにすることで、再びアクティブになる SQLite のオブジェクトのコールドスタートが減る。",
+      "around": []
+    },
+    {
+      "title": "Solid Server Components の broadcast、1 回のサーバーレンダリングを全タブへ配信",
+      "main": "https://x.com/RyanCarniato/status/2120285828295614677",
+      "body": "Ryan Carniato さんが、Solid Server Components の broadcast を新しい Netlify Server 上で動かすデモを公開した。1 回のサーバーレンダリングが、開いているすべてのタブにライブのテーブルを流し続ける。解説のブログ記事は 2 週間以内に出る予定。",
+      "around": [
+        {
+          "url": "https://x.com/RyanCarniato/status/2120286374859616747",
+          "name": "Ryan Carniato",
+          "summary": "デモのソースを solid リポジトリの examples で公開。ブログ記事は 2 週間以内"
+        },
+        {
+          "url": "https://x.com/Netlify/status/2120237002885136563",
+          "name": "Netlify",
+          "summary": "アプリのバックエンド用の常駐サーバー Netlify Server を Early Access で公開"
+        }
+      ]
+    },
+    {
+      "title": "Claude の有料プラン全員に、全モデル・全上限の無料フルリセット 1 回",
+      "main": "https://x.com/ClaudeDevs/status/2120275296637321476",
+      "body": "Anthropic が Pro、Max、Ultra、Team の全ユーザーに、すべてのモデルと上限をまとめて戻せる無料のフルリセットを 1 回配った。12 月 10 日 午後 2 時（PT）までの好きなときに使える。上限を想定より多く消費していた小さな問題をいくつか直したことも合わせて伝えている。",
+      "around": []
+    },
+    {
+      "title": "rspack-plugin-cloudflare v0.3.0、rspack でも workerd 上で Worker を HMR",
+      "main": "https://x.com/CherryJimbo/status/2120162946147864654",
+      "body": "James Ross さんが rspack-plugin-cloudflare v0.3.0 を公開した。rspack serve 中に Cloudflare Workers を workerd で動かし、Worker 自体の中で HMR が効く。rspack build の後は wrangler deploy でき、wrangler の設定とバインディングは Vite プラグインと同じものを使う。",
+      "around": []
+    }
+  ],
+  "quick": [
+    {
+      "title": "Go 1.27.4 と 1.26.11 で 12 件のセキュリティ修正",
+      "summary": "標準ライブラリとツールチェーンに対する 12 件のセキュリティ修正を含むリリース。",
+      "source": "https://x.com/golang/status/2120259262182219988"
+    },
+    {
+      "title": "Cloudflare の Markdown for Agents が GA、分析とトレースつき",
+      "summary": "ダッシュボードで変換率を見たり、失敗をデバッグしたりできるようになった。",
+      "source": "https://x.com/CFchangelog/status/2120215475409793271"
+    },
+    {
+      "title": "Exo のエージェントを Durable Objects と Sandboxes で動かせるように",
+      "summary": "エージェントを Markdown で定義し、CLI か HTTP から実行する。",
+      "source": "https://x.com/CFchangelog/status/2120116995891085767"
+    },
+    {
+      "title": "React Router Auto Routes v2.0、依存 1 つでインストールが 95% 小さく",
+      "summary": "移行用 CLI を別パッケージに分け、oxc-parser への依存がなくなった。node_modules は 3,560 KB から 184 KB に。",
+      "source": "https://x.com/kenn/status/2120189427968516524"
+    },
+    {
+      "title": "Claude Whiteboards、Claude Sheets、Claude Data を順次提供開始",
+      "summary": "ボードで計画を練る、シートでトラッカーを作る、データで説明する、の 3 つの機能。",
+      "source": "https://x.com/claudeai/status/2120206365759094857"
+    }
+  ]
+}
