@@ -1,0 +1,106 @@
+{
+  "stories": [
+    {
+      "title": "Ryan Dahl、celld の考え方をオープンソースの workerd に取り込み中と表明",
+      "main": "https://x.com/rough__sea/status/2120559717907046753",
+      "body": "Ryan Dahl が Cloudflare Connect での celld のトークを公開。celld は object store のバケットだけをバックエンドに、Workers・Durable Objects・Queues・Workflows をセルフホストできる仕組みで、そのアイデアをオープンソースの workerd にマージしている最中だという。「新しい workerd」についての続報も予告した。",
+      "around": [
+        {
+          "url": "https://x.com/R0u9h/status/2120644184621375533",
+          "name": "LaPh",
+          "summary": "Cloudflare Connect の celld トークをちゃんと見ておこうと共有"
+        },
+        {
+          "url": "https://x.com/anilturaga1/status/2120580203361828869",
+          "name": "Anil",
+          "summary": "本当の意味で OSS な Durable Objects への期待は消えたのか、と反応"
+        }
+      ]
+    },
+    {
+      "title": "workerd に実験的な REPL を追加する PR",
+      "main": "https://x.com/R0u9h/status/2120474548181270696",
+      "body": "cloudflare/workerd に jasnell による REPL の PR（#8357）が出ている。`workerd repl --experimental` で config を読み込み、その場で Worker に fetch できる。投稿者は hono request をこれベースにできるのでは、と書いている。",
+      "around": [
+        {
+          "url": "https://x.com/__syumai/status/2120485456030863469",
+          "name": "syumai",
+          "summary": "workerd が徐々に普通の JS ランタイムっぽく使えるようになってきている"
+        }
+      ]
+    },
+    {
+      "title": "OpenAI Codex が Durable Objects 上で動くように",
+      "main": "https://x.com/CloudflareDev/status/2120408689035399442",
+      "body": "Cloudflare Developers が、OpenAI Codex をラップトップ上と同じように Durable Objects で動かせるようになったと発表した。同じ日に Matt Carey は、plannotator のフォークを Dynamic Workers と Durable Objects で動かし、クラウドエージェント向けのマルチプレイヤーなレビュー体験を試している。",
+      "around": [
+        {
+          "url": "https://x.com/mattzcarey/status/2120564560587530410",
+          "name": "Matt Carey",
+          "summary": "plannotator を Dynamic Workers と Durable Objects で動かすスパイク。Workers 上のエージェントに簡単な API で追加できる"
+        },
+        {
+          "url": "https://x.com/plannotator/status/2120568233942278240",
+          "name": "plannotator",
+          "summary": "Durable Objects で自前のマルチプレイヤー plannotator を、と紹介"
+        }
+      ]
+    },
+    {
+      "title": "Node.js がセキュリティリリース、22.x・24.x・26.x が対象",
+      "main": "https://x.com/nodejs/status/2120574018311123265",
+      "body": "Node.js が 26.x・24.x・22.x 向けのセキュリティアップデートを公開。依存関係では llhttp（22/24/26）、undici（24/26）、sqlite（22/24）が更新された。Chris Rohlf は、Claude が CVE-2026-123864・CVE-2026-123866・CVE-2026-123874 を見つけて連鎖させ、リモートで悪用できたとしている。",
+      "around": [
+        {
+          "url": "https://x.com/chrisrohlf/status/2120581261894840541",
+          "name": "chrisrohlf",
+          "summary": "前の2つはリモートのメモリ漏えい、3つ目は stream.respondWithFile/FD を使うアプリで RCE に使える。今週中にパッチを"
+        },
+        {
+          "url": "https://x.com/DanielLockyer/status/2120585012500127776",
+          "name": "Daniel Lockyer",
+          "summary": "セキュリティリリースが出た、修正がとても多い"
+        }
+      ]
+    },
+    {
+      "title": "Cloudflare、未デプロイの合意アルゴリズム QuePaxa で実験的な合意サービスを構築",
+      "main": "https://x.com/Cloudflare/status/2120518173292110101",
+      "body": "Cloudflare が、これまで本番で使われたことのない合意アルゴリズム QuePaxa を使った実験的な合意サービスを作っていると発表。ブログ「Choosing QuePaxa, an unusual consensus algorithm」で仕組みと選んだ理由を解説している。",
+      "around": []
+    },
+    {
+      "title": "Cloudflare Workflows に Workflow ごとの同時実行数の上限",
+      "main": "https://x.com/CFchangelog/status/2120539782488957178",
+      "body": "Wrangler 4.127.0 以降で、設定に `concurrency.limit` を書くと、1 つの Workflow で同時に動くインスタンス数に上限をかけられる。データベースや API が過負荷にならないようにするための機能。",
+      "around": []
+    }
+  ],
+  "quick": [
+    {
+      "title": "Rivet Actors の SQLite がフォーク可能に",
+      "summary": "オープンソースの Durable Objects 代替 Rivet Actors で SQLite のフォークができるようになった。数百 GB でも 20ms でフォークでき、データをコピーしない。",
+      "source": "https://x.com/NathanFlurry/status/2120516548381364280"
+    },
+    {
+      "title": "yusukebe さんが今週中めどにお休み",
+      "summary": "しばらく（今週中をめどに）休み、Hono は最低限のメンテナンスのみ行うとのこと。",
+      "source": "https://x.com/yusukebe/status/2120479874934845547"
+    },
+    {
+      "title": "Rolldown の perf-kit、エージェントに Core Web Vitals 改善用のデータを渡す",
+      "summary": "Chrome のコードカバレッジを含め、Core Web Vitals を改善するためのデータをエージェントに渡す取り組み。社内では起動時間・FCP・LCP が大きく改善しているという。",
+      "source": "https://x.com/boshen_c/status/2120359423311044690"
+    },
+    {
+      "title": "Cloudflare への問い合わせは CDN より MCP・Workers AI・Cloudflare OS が多い",
+      "summary": "Offers の DeepDive イベントで出た話として syumai さんが紹介。",
+      "source": "https://x.com/__syumai/status/2120464662223528276"
+    },
+    {
+      "title": "GitHub で Actions・Pages・Copilot に障害",
+      "summary": "GitHub Status が Actions、Pages、Copilot など複数のプロダクトに影響する問題を調査中と告知した。",
+      "source": "https://x.com/githubstatus/status/2120621795208314899"
+    }
+  ]
+}
