@@ -1,0 +1,115 @@
+{
+  "stories": [
+    {
+      "title": "Rivet が OpenOrange を公開、Workers と Durable Objects を他クラウドで動かす",
+      "main": "https://x.com/rivet_dev/status/2120911497190584499",
+      "body": "Rivet が OpenOrange を発表した。Cloudflare Workers や Durable Objects、Workflows などを AWS、GCP、Azure、Hetzner や自前サーバーでコード変更なしに動かすもので、Rivet の比較ではコンピュートが 4.8 倍、ストレージが 8.7 倍安く、ランタイム制限のない素の Node.js / Bun で動く。Wrangler と同じ API で、wrangler dev を orange dev に替えれば同じ設定・コード・バインディングのまま使え、ダウンタイムなしで Cloudflare から移行する手順も用意されている。",
+      "around": [
+        {
+          "url": "https://x.com/NathanFlurry/status/2120915021517459519",
+          "name": "Nathan Flurry 🔩",
+          "summary": "celld との違いとして、actor forking や bottomless disk、agentOS など Rivet 側の機能の多さを挙げる"
+        },
+        {
+          "url": "https://x.com/rivet_dev/status/2120911499396784369",
+          "name": "Rivet",
+          "summary": "移行用エンドポイントでデータを流し、DNS を切り替え、Durable Objects は初回リクエストでデータをコピーする無停止移行の流れ"
+        },
+        {
+          "url": "https://x.com/R0u9h/status/2120946859934167171",
+          "name": "LaPh",
+          "summary": "Workers のプロジェクトをそのままセルフホストの Rivet Actors に移せると紹介"
+        }
+      ]
+    },
+    {
+      "title": "shadcn が UI SDK を発表、エージェントが使う前提の UI の抽象化",
+      "main": "https://x.com/shadcn/status/2120951116682682646",
+      "body": "shadcn が UI SDK を発表した。エージェントがインターフェースの作り手にも使い手にもなるという前提で、Select のポップアップや選択ロジック、キーボード操作、フォーカス管理といった振る舞いをどこで抽象化するかを問い直したもの。Vue / Nuxt 対応も同時に出ている。",
+      "around": [
+        {
+          "url": "https://x.com/rauchg/status/2120966768483262648",
+          "name": "Guillermo Rauch",
+          "summary": "UI SDK はエージェントがその場で UI コンポーネントを作るための x86 命令セットのようなものだと評する"
+        },
+        {
+          "url": "https://x.com/gota_bara/status/2120987264407027766",
+          "name": "Gota",
+          "summary": "バグが起きがちな UI の振る舞いを再利用でき、毎回実装・検証しなくて済むと反応"
+        },
+        {
+          "url": "https://x.com/shadcn/status/2120988150772248826",
+          "name": "shadcn",
+          "summary": "Vue / Nuxt 対応への謝辞"
+        }
+      ]
+    },
+    {
+      "title": "Durable Objects のリクエストルーティングが高速化",
+      "main": "https://x.com/CFchangelog/status/2120970131903742059",
+      "body": "Cloudflare Changelog によると、Durable Objects のリクエストルーティングで転送用レコードの往復を減らし、コードを変えずに p99 レイテンシが下がった。Ashley Peacock さんは、別の場所へ移された Durable Objects のキャッシュミス時に p50 / p99 レイテンシが約 45% 下がる変更を入れたと投稿している。",
+      "around": [
+        {
+          "url": "https://x.com/ashleypeacock/status/2120876715602067539",
+          "name": "Ashley Peacock",
+          "summary": "移動した Durable Objects のキャッシュミス時の p50 / p99 レイテンシを約 45% 削減"
+        },
+        {
+          "url": "https://x.com/ashleypeacock/status/2120962008690389320",
+          "name": "Ashley Peacock",
+          "summary": "Durable Object へのルーティング自体は課金対象ではなく、DO から DO への呼び出しでは wall time の削減になると返信"
+        }
+      ]
+    },
+    {
+      "title": "Workers の Rate Limiting binding が 1 回で複数ユニットを消費できるように",
+      "main": "https://x.com/CloudflareDev/status/2120918055882461192",
+      "body": "Workers の Rate Limiting binding の limit() が省略可能な delta を受け取るようになった。1 回の呼び出しで同じ枠から複数ユニットを消費でき、軽い検索とデータベースに重い検索とでレート制限の重みを分けられる。",
+      "around": []
+    },
+    {
+      "title": "Claude Meetings がベータ公開、ビデオ会議に Claude が参加",
+      "main": "https://x.com/claudeai/status/2120973994191094179",
+      "body": "Claude の公式アカウントが Claude Meetings を発表し、Team と Enterprise プランでベータ提供を始めた。Claude が見える参加者として会議に入り、話している間にドキュメントやホワイトボードなどを作る。会議後はノート、アクションアイテム、文字起こし、作ったものが会議のページに残り、まず Google Meet から対応する。",
+      "around": [
+        {
+          "url": "https://x.com/claudeai/status/2120973996304830859",
+          "name": "Claude",
+          "summary": "声やチャットで質問したりドキュメント作成を頼んだりでき、チームは作っている途中を見て直せる"
+        },
+        {
+          "url": "https://x.com/claudeai/status/2120974000746582357",
+          "name": "Claude",
+          "summary": "最初は Google Meet から、ほかのビデオ会議サービスにも順次対応"
+        }
+      ]
+    }
+  ],
+  "quick": [
+    {
+      "title": "Durable Objects で北米のエラー率が上昇",
+      "summary": "北米のコロで Durable Objects のエラー率が上がっていると Cloudflare が報告。急なトラフィック増が原因とされる。",
+      "source": "https://x.com/outageslive/status/2121010790958596521"
+    },
+    {
+      "title": "Hyperdrive の上限が Workers Paid で拡大",
+      "summary": "設定は最大 100 個、1 インスタンスあたり 1500 のデータベース接続まで扱えるようになった。",
+      "source": "https://x.com/CFchangelog/status/2120924777070117132"
+    },
+    {
+      "title": "Anthropic が IPO を正式告知",
+      "summary": "Nasdaq に上場予定でティッカーは ANT。価格帯は 1 株 $70〜$78、発行は約 8.25 億株の Class A 普通株式。",
+      "source": "https://x.com/oikon48/status/2120843322742976794"
+    },
+    {
+      "title": "Claude Code 2.1.323 がまもなくリリース",
+      "summary": "Claude Code Changelog が 2.1.323 のリリース予告を投稿した。",
+      "source": "https://x.com/ClaudeCodeLog/status/2120977740379587007"
+    },
+    {
+      "title": "Hono と Drizzle ベースのフレームワーク Ghuri",
+      "summary": "「Django for TypeScript」をうたい、Cloudflare で始めて自前サーバーと Postgres へ同じコードで移れるとする。npm create ghuri@latest で始められる。",
+      "source": "https://x.com/kmrifat/status/2120845189032099895"
+    }
+  ]
+}
