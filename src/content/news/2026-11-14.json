@@ -1,0 +1,117 @@
+{
+  "stories": [
+    {
+      "title": "Cloudflare が Spend Management をオープンベータで公開、Workers と Durable Objects から",
+      "main": "https://x.com/CloudflareDev/status/2121244234967830797",
+      "body": "Cloudflare が Spend Management をオープンベータで公開した。支出のしきい値を設定し、到達したら Cloudflare にアクティビティを一時停止させるかを選べる。対象は従量課金（pay-as-you-go）の顧客で、まず Workers と Durable Objects から始まる。",
+      "around": [
+        {
+          "url": "https://x.com/ritakozlov/status/2121256209596420270",
+          "name": "rita kozlov 🐀",
+          "summary": "Workers と Durable Objects の支出上限を出荷、ほかのプロダクトも続く"
+        },
+        {
+          "url": "https://x.com/zaru/status/2121349449637343433",
+          "name": "zaru",
+          "summary": "Durable Objects で無限にお金がなくなることがなくなった"
+        },
+        {
+          "url": "https://x.com/a_lungeanu/status/2121345355841188216",
+          "name": "Andrei Lungeanu",
+          "summary": "上限到達で一時停止できるが、報告に遅延があるため請求が上限を超えることはある"
+        }
+      ]
+    },
+    {
+      "title": "Cloudflare AI Search が D1 をデータソースとしてサポート",
+      "main": "https://x.com/CloudflareDev/status/2121183172918722910",
+      "body": "Cloudflare AI Search が D1 データベースをデータソースとして使えるようになった。用途として、アプリのデータに対して RAG を行うエージェント、ヘルプセンターに基づくサポートボット、商品カタログのセマンティック検索が挙げられている。",
+      "around": [
+        {
+          "url": "https://x.com/CFchangelog/status/2121272048110772478",
+          "name": "Cloudflare Changelog",
+          "summary": "AI Search ベータで、読み取り専用クエリでインデックスし自動で同期を保つ"
+        }
+      ]
+    },
+    {
+      "title": "Workers 上で動くブラウザエンジン Kitesurf がオープンソースに",
+      "main": "https://x.com/CFchangelog/status/2121362696587149656",
+      "body": "Cloudflare の Kitesurf が Apache 2.0 ライセンスで GitHub に公開された。リポジトリを fork して Wrangler でローカル実行したり、自分の Cloudflare にカスタムインスタンスをデプロイしたりできる。",
+      "around": [
+        {
+          "url": "https://x.com/__syumai/status/2121026423599284316",
+          "name": "syumai",
+          "summary": "Cloudflare 製の AI エージェント向け軽量ブラウザがオープンソースになった"
+        },
+        {
+          "url": "https://x.com/R0u9h/status/2121034929903689966",
+          "name": "LaPh",
+          "summary": "Cloudflare Workers 上で動く Rust 製のヘッドレスブラウザ"
+        }
+      ]
+    },
+    {
+      "title": "Claude Code 2.1.325、sandbox 内の Bash も既定で確認を求めるように",
+      "main": "https://x.com/alexmichael/status/2121343049653420143",
+      "body": "Claude Code 2.1.325 で、sandbox 内の Bash コマンドも既定で実行前に確認を求めるようになった。従来の挙動は sandbox.autoAllowBashIfSandboxed で戻せる。scheduled tasks と /loop も、独自のツールを持つスキルを動かす前に確認するようになった。",
+      "around": [
+        {
+          "url": "https://x.com/cryptokoala_/status/2121346372540760480",
+          "name": "koala",
+          "summary": "変更は 139 件。VS Code に Tab で受け入れるプロンプト候補、zstd レスポンスのデコードのセキュリティ修正"
+        },
+        {
+          "url": "https://x.com/Khaled865412521/status/2121359097127657928",
+          "name": "ふきゅう",
+          "summary": "npm の latest に入った。バックグラウンドセッションが起動元シェルの API キーで課金されていた問題が修正"
+        }
+      ]
+    },
+    {
+      "title": "Ryan Carniato が AI で UI を書くための言語 ReactiveScript を公開",
+      "main": "https://x.com/RyanCarniato/status/2121303910623359274",
+      "body": "Ryan Carniato が、この 1 か月 AI で UI を作るための言語を作っていたと公開した。Solid のランタイムの保証をコンパイル時に与え、エージェントが間違えにくい書き方で Solid の性能を出すことを狙う。",
+      "around": [
+        {
+          "url": "https://x.com/RyanCarniato/status/2121304665048662525",
+          "name": "Ryan Carniato",
+          "summary": "エージェントが非決定的なのでテストが難しく、その過程で Solid 2.0 のエッジケースを多数修正した"
+        }
+      ]
+    },
+    {
+      "title": "Rolldown の永続キャッシュ PoC、再起動後の Vite ビルドが 31〜41% 速く",
+      "main": "https://x.com/_h_ana___/status/2121184906810364117",
+      "body": "Rolldown の永続キャッシュの概念実証で、再起動した Vite のビルドが 2 つの大規模アプリで 31〜41% 速くなった。まだ初期の PoC で、本番向けではない。",
+      "around": []
+    }
+  ],
+  "quick": [
+    {
+      "title": "Worker の静的アセットを base_path でサブパス配信",
+      "summary": "設定に base_path を書くだけで、ビルド出力を変えずに /blog/ のようなパスから静的アセットを配信できる。Wrangler 4.148.0 以降が必要。",
+      "source": "https://x.com/CFchangelog/status/2121000297476600192"
+    },
+    {
+      "title": "Wrangler 4.160.0 でカスタム API ヘッダーに対応",
+      "summary": "Wrangler 4.160.0 と CLI 1.0.0-beta.29 で、CLOUDFLARE_API_HEADERS 環境変数から独自ヘッダーの追加や既定値の上書きができる。",
+      "source": "https://x.com/CFchangelog/status/2121083309950148764"
+    },
+    {
+      "title": "Claude Code の Projects が大きく更新",
+      "summary": "並列スレッドのタスクを取りまとめるコーディネーターがより能動的になり、プロジェクトのチャットで質問に答え、進行中スレッドの状況を伝えるようになった。",
+      "source": "https://x.com/ClaudeDevs/status/2121375309287301360"
+    },
+    {
+      "title": "OpenOrange は celld 比でエージェント用途の S3 コストが 34.8 倍低いと主張",
+      "summary": "Rivet の Nathan Flurry が、Rivet のストレージエンジン上に作った OpenOrange と celld を比較した。",
+      "source": "https://x.com/NathanFlurry/status/2121320866646782293"
+    },
+    {
+      "title": "EmbeddingGemma 2 が Workers AI で利用可能に",
+      "summary": "テキスト、画像、動画、コードを 1 つのベクトル空間にマッピングできる。",
+      "source": "https://x.com/CFchangelog/status/2121302353903063224"
+    }
+  ]
+}
