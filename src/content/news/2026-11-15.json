@@ -1,0 +1,117 @@
+{
+  "stories": [
+    {
+      "title": "workerd を複数台つなぐバケットバックエンドが実験フラグ付きで入る",
+      "main": "https://x.com/rough__sea/status/2121741642218828035",
+      "body": "Ryan Dahl さんが、クラスタ化した workerd インスタンス向けのバケットバックエンドがすでにマージされ、npm の workerd に入っていると明かした。実験フラグの裏にあり、ドキュメントはまだない。新しいサイトとドキュメントを準備中で、今すぐ試したいならエージェントにソースを読ませて聞いてほしいとしている。",
+      "around": [
+        {
+          "url": "https://x.com/rough__sea/status/2121401274491183116",
+          "name": "Ryan Dahl",
+          "summary": "多数の workerd をオブジェクトストアのバックエンドでつなぐ機能で、celld の考え方を本物の Workers ランタイムに移植したもの"
+        },
+        {
+          "url": "https://x.com/KentonVarda/status/2121735946991526253",
+          "name": "Kenton Varda",
+          "summary": "workerd での Durable Object のちゃんとしたルーティングはとても新しく、HA 構成はまだ固まっていないかもしれない"
+        },
+        {
+          "url": "https://x.com/KentonVarda/status/2121703022627565611",
+          "name": "Kenton Varda",
+          "summary": "workerd は本番で動かせるし、実際に動かしている人もいる"
+        }
+      ]
+    },
+    {
+      "title": "Cursor がセキュリティインシデントの詳細報告を公開",
+      "main": "https://x.com/cursor_ai/status/2121411147714970092",
+      "body": "Cursor が先のセキュリティインシデントについて、何が起きたかと対応策をまとめた報告を公開した。Cursor が Fireworks に発行したアクセスキーが Fireworks 側から流出し、攻撃者が共有ストレージから過去のエージェントログを持ち出したとしている。改ざんされた Claude Code 拡張 2.1.312 と 2.1.313 が 10 月 29 日に約 11 時間マーケットプレイスのキャッシュに置かれ、最大 5,000 ユーザーが受け取った可能性がある。",
+      "around": [
+        {
+          "url": "https://x.com/oikon48/status/2121582130589577227",
+          "name": "Oikon | Claude Code本出しました",
+          "summary": "流出したエージェントログの中に、一部ユーザーの認証情報が平文で含まれていた"
+        },
+        {
+          "url": "https://x.com/tsnmediahub/status/2121694802953552381",
+          "name": "tsn_hub",
+          "summary": "改ざん版は 2.1.312 と 2.1.313、受け取った可能性があるのは最大 5,000 ユーザー"
+        }
+      ]
+    },
+    {
+      "title": "Claude Code デスクトップで mods によるカスタムテーマが作れるように",
+      "main": "https://x.com/ClaudeDevs/status/2121392666244186327",
+      "body": "Claude Code のデスクトップアプリで、mods を使ってカスタムテーマを作れるようになった。色を変えたり、動く背景を足したりでき、Claude に見た目を伝えるか theme-examples プラグインから始められる。今はデスクトップアプリのローカルセッションのみで、クラウドセッション対応は近日予定。",
+      "around": [
+        {
+          "url": "https://x.com/oikon48/status/2121421313365667933",
+          "name": "Oikon | Claude Code本出しました",
+          "summary": "/custom-theme のようなコマンドはなく、Claude に「〇〇のテーマの mod を作って」と頼んで変える"
+        }
+      ]
+    },
+    {
+      "title": "Claude Duet、米国のウェイトリスト登録者全員に招待",
+      "main": "https://x.com/ahuja_karan/status/2121332990836163033",
+      "body": "Claude Duet について、前日時点でウェイトリストに入っていた米国の Pro、Max、Ultra 契約者全員に招待を送ったと karan ahuja さんが投稿した。まだの人向けにウェイトリストも開いている。",
+      "around": [
+        {
+          "url": "https://x.com/oikon48/status/2121435232960483835",
+          "name": "Oikon | Claude Code本出しました",
+          "summary": "米国以外でもそろそろ展開されそう"
+        }
+      ]
+    },
+    {
+      "title": "Alchemy が Rivet Actors とサンドボックス 5 種に対応",
+      "main": "https://x.com/samgoodwin89/status/2121695454026981872",
+      "body": "インフラを宣言的に書く Alchemy が、Actor フレームワークとサンドボックス基盤への対応に向けた大きなリリースを出した。Rivet か Effect Cluster で Actor のサービスを作り、レイヤーを 1 つ差し替えるだけでドメインモデルを Cloudflare から別のプラットフォームへ移せるとしている。",
+      "around": [
+        {
+          "url": "https://x.com/samgoodwin89/status/2121695456061165890",
+          "name": "sam",
+          "summary": "Rivet をファーストクラスでサポート。Durable Objects に慣れていれば似た書き味で、今は Rivet 3 のみ"
+        },
+        {
+          "url": "https://x.com/samgoodwin89/status/2121695461295755773",
+          "name": "sam",
+          "summary": "サンドボックスのプロバイダーを 5 つ追加。ベースイメージを alchemy deploy で作り、セッションごとに fork する"
+        },
+        {
+          "url": "https://x.com/NathanFlurry/status/2121709492970909949",
+          "name": "Nathan Flurry 🔩",
+          "summary": "Alchemy で Rivet をセルフホストするか Rivet Cloud にデプロイできる"
+        }
+      ]
+    },
+    {
+      "title": "D1 のエクスポートが仮想テーブルを含む DB に対応",
+      "main": "https://x.com/CFchangelog/status/2121430572341887427",
+      "body": "Cloudflare D1 のエクスポートが、仮想テーブルを持つデータベースに対応した。sqlite3_cli_only 互換モードを使うと、FTS5 や R*Tree のテーブルもエクスポートに含められる。",
+      "around": []
+    }
+  ],
+  "quick": [
+    {
+      "title": "Browser Run Quick Actions がローカルの Chrome で動くように",
+      "summary": "npx wrangler dev でのローカル開発時に、Quick Actions がローカルの Chrome インスタンスに対して実行され、バインディングを手元で試せる。",
+      "source": "https://x.com/CFchangelog/status/2121672220657287374"
+    },
+    {
+      "title": "Drizzle の rc6 で独自の Postgres ドライバーが入る予定",
+      "summary": "Drizzle ORM が、Effect のネイティブ API を持つ独自の Postgres ドライバーを作り、大きく速くなったと投稿。リリースノートを準備中としている。",
+      "source": "https://x.com/DrizzleORM/status/2121690721845743922"
+    },
+    {
+      "title": "Workers AI に Inkling 2 Small が登場",
+      "summary": "画像入力に対応し、100 万トークンのコンテキストウィンドウを持つモデルが Workers AI で使えるようになった。",
+      "source": "https://x.com/CFchangelog/status/2121377819976434148"
+    },
+    {
+      "title": "Hono や Valibot のアイコンを足した IT Icons が Cloudflare で公開",
+      "summary": "skill-icons をフォークし、Valibot、Hono、Nitro、ESLint、CodeRabbit など 29 個のアイコンを追加したもの。GitHub の README に使える。",
+      "source": "https://x.com/ysknsid25/status/2121614165655609693"
+    }
+  ]
+}
