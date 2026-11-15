@@ -1,0 +1,84 @@
+{
+  "stories": [
+    {
+      "title": "Cloudflare が AI 侵入テスト基盤 ARTEX などへの対策をブログで公開",
+      "main": "https://x.com/Cloudflare/status/2121727861773987969",
+      "body": "Cloudflare が、ARTEX のような AI がオーケストレーションする侵入テスト基盤が実際の攻撃に使われている状況と、その対策をブログで公開した。10 月 1 日以降 AI ペンテストのトラフィックは 30 倍に増え、直近 3 日で 50 を超えるフレームワーク系統が顧客をスキャンし、その 6 割超が ARTEX のフォークだった。侵入の足がかりは期限のない CI/CD トークンで、制限のない API に 1 時間で 400 回の DB ダンプ要求を出した例もある。",
+      "around": [
+        {
+          "url": "https://x.com/FBICyberBranch/status/2121317398305186287",
+          "name": "FBI Cyber Branch",
+          "summary": "ARTEX が 2026 年 8 月以降、金融・政府・テック企業を狙う攻撃に使われているとして FLASH を発行"
+        },
+        {
+          "url": "https://x.com/ResilientCyber/status/2121981868438413723",
+          "name": "Chris Hughes",
+          "summary": "FLASH では初期の標的化から特権取得まで 3 時間未満の侵入もあり、元リポジトリは 10 月 8 日に消されたがフォークは出回っている"
+        },
+        {
+          "url": "https://x.com/thesystemprompt/status/2121959318534652342",
+          "name": "The System Prompt",
+          "summary": "Cloudflare のブログの数字（30 倍、50 超の系統、静的な CI/CD トークン）をまとめた"
+        }
+      ]
+    },
+    {
+      "title": "Claude Code の実験機能 Code Mode、ツール呼び出しを JavaScript 1 本にまとめる",
+      "main": "https://x.com/ZeeshhDecodes/status/2121981560085701104",
+      "body": "Claude Code v2.1.323 で入った Code Mode は、Claude がツールを 1 回ずつ呼ぶ代わりに JavaScript を書いてまとめて呼ぶ実験機能で、既定ではオフ。環境変数 CLAUDE_CODE_EXPERIMENTAL_CODE_MODE=1 で有効になり、1 本のコードの中でコマンドを並列に走らせたり、前の結果を次に渡したりして、絞り込んだ出力だけをモデルに返す。auto モードでは個々のツール呼び出しではなく、書かれたコードがチェックの対象になる。",
+      "around": [
+        {
+          "url": "https://x.com/ak12kpoot/status/2121975292902211757",
+          "name": "uber master",
+          "summary": "公式ドキュメントをもとに有効化の手順と対象範囲を整理。プロジェクトの settings に書いた変数は無視され、ゲートウェイや Bedrock などは対象外"
+        }
+      ]
+    },
+    {
+      "title": "EC サイトを Claude Code 中心に刷新、Hono と Drizzle で DB から画面まで型をつなぐ",
+      "main": "https://x.com/__su888/status/2122088503219474835",
+      "body": "every.tv のテックブログで、EC サイトを 3 か月弱・61 万行の規模で Claude Code を中心に作り直した事例が公開された。TypeScript に統一し、Hono と Drizzle で DB から画面まで型をつなぐことで、直し漏れを実行前に検出する。分析出力や監査ログの列分類も型で強制し、書き忘れが通らないようにしている。",
+      "around": []
+    },
+    {
+      "title": "yusukebe さんが 11 月 17 日のレバテック LAB の LT で Ramen API を話す",
+      "main": "https://x.com/yusukebe/status/2121941308877271422",
+      "body": "Yusuke Wada さんが、11 月 17 日（火）にレバテック LAB の LT 大会「ねぇ、これ見て。— 大真面目に「くだらないもの」を作ったひとたちの発表会 —」で Ramen API について話すと告知した。ほかにも「くだらないもの」を作った人たちの発表が並ぶ。",
+      "around": []
+    },
+    {
+      "title": "Claude Pro での Fable 5.2 の提供が太平洋時間 11 月 16 日 23:59 まで",
+      "main": "https://x.com/theaicatchup/status/2122039500897431597",
+      "body": "Anthropic のヘルプセンターによると、Pro と Team の標準シートで Fable 5.2 を週の上限内（最大 50%）で使えるのは、太平洋時間 11 月 16 日 23:59 まで。以降は usage credits での課金になり、同じ期限の Fable リセットも 1 回付いている。Max、Ultra、premium シートには契約期間に応じて 1〜3 回のリセットが配られ、2027 年 3 月 8 日まで有効。",
+      "around": [
+        {
+          "url": "https://x.com/oikon48/status/2121878116427809076",
+          "name": "Oikon | Claude Code本出しました",
+          "summary": "Fable リセット券を使うと、Fable の週間使用量と、Fable で使った分の全モデルの週間使用量がリセットされる"
+        }
+      ]
+    }
+  ],
+  "quick": [
+    {
+      "title": "GitHub Copilot アプリにセキュリティ拡張、code scanning のアラートを直せる",
+      "summary": "Copilot にアラートを探させ、説明させ、修正や却下までさせられる。パブリックプレビュー。",
+      "source": "https://x.com/github/status/2122058578005487774"
+    },
+    {
+      "title": "TypeScript 7 のベンチマークは自分の環境で測るべきという指摘",
+      "summary": "Martin Ferret さんが、自身が公開した「4.0 倍速い」は実際には 3.5 倍だったと訂正し、自分のコードと CI で測る CLI を出した。",
+      "source": "https://x.com/FerretMartin1/status/2122029717624947072"
+    },
+    {
+      "title": "mizchi さんがブラウザで分散 SQLite を動かす sqlike などを公開",
+      "summary": "LTX ストリームに対応したブラウザで動く SQLite サブセットの sqlike のほか、TLA+ や Alloy の Rust 移植、wat のスーパーセット言語 Walz Lang を公開。",
+      "source": "https://x.com/mizchi/status/2122070878196482093"
+    },
+    {
+      "title": "Facebook から Cloudflare へ、cnakazawa さんのインタビュー",
+      "summary": "大学時代に MooTools の開発に関わったことがキャリアの始まりで、作者へ送った 1 通のメールから JS エコシステムに関心を持ったという話。",
+      "source": "https://x.com/serima/status/2122103501824340076"
+    }
+  ]
+}
