@@ -1,0 +1,84 @@
+{
+  "stories": [
+    {
+      "title": "workerd に D1 を内蔵する PR、Miniflare の D1 シミュレーションを置き換える予定",
+      "main": "https://x.com/R0u9h/status/2122280504447889737",
+      "body": "workerd に D1 を内蔵する PR が出ている。データベースごとに SQLite の Durable Object に保存する作りで、Miniflare 側の D1 シミュレーションを置き換える予定。PR の作者は Ryan Dahl。",
+      "around": []
+    },
+    {
+      "title": "Athena Crisis が Express.js から Hono に移行、GraphQL のスループットが 7% 向上",
+      "main": "https://x.com/cnakazawa/status/2122127690946039850",
+      "body": "Athena Crisis が Express.js から Hono に移行した。移行後、GraphQL エンドポイントのスループットが 7% 上がったという。",
+      "around": []
+    },
+    {
+      "title": "Claude Code 2.1.326、Code Mode が agent teams と併用可能に",
+      "main": "https://x.com/alexmichael/status/2122453771905085477",
+      "body": "Claude Code 2.1.326 が出た。Code Mode が agent teams 有効時にも使えるようになり、Remote Control では返答が書かれるそばからスマホやブラウザにストリーミングされる。/update-config のコンテキスト消費は約 93,000 トークンから約 13,000 トークンに減り、Claude が .credentials.json などのサインイン用ファイルに書き込めなくなった。",
+      "around": [
+        {
+          "url": "https://x.com/cryptojezuz/status/2122454705741959350",
+          "name": "Jeztoshi",
+          "summary": "/status で DISABLE_TELEMETRY などにより無効化された機能が見えるように。claude purge の確認が stdout リダイレクト時も表示される"
+        },
+        {
+          "url": "https://x.com/nobrainer_tech/status/2122457308550574083",
+          "name": "nobrainer-tech",
+          "summary": "find -delete や sort -o のような削除・上書きがトランスクリプトで検索・読み取りと表示されていた問題が直った"
+        },
+        {
+          "url": "https://x.com/Amu_Lab__/status/2122466548631949353",
+          "name": "amu_lab",
+          "summary": "--allowedTools などの不完全なルールは起動時に警告されるようになった"
+        }
+      ]
+    },
+    {
+      "title": "Drizzle が v1 で Cache API を廃止へ",
+      "main": "https://x.com/DrizzleORM/status/2122465624848757142",
+      "body": "Drizzle ORM が v1 で Cache API を落とすと告知した。ORM でクエリ結果をキャッシュするのは置き場所として間違いで、最も踏みやすい落とし穴でもあり、メンテナにとっても悪夢だという理由。使っている人には代わりの方法を提案するとしている。",
+      "around": [
+        {
+          "url": "https://x.com/DrizzleORM/status/2122452977768452251",
+          "name": "Drizzle ORM",
+          "summary": "Postgres の複数行 insert を改善した、さらに速くする方法も分かっていると予告"
+        }
+      ]
+    },
+    {
+      "title": "Claude Code チームが「検証」の考え方を公開",
+      "main": "https://x.com/ClaudeDevs/status/2122457608963395586",
+      "body": "Claude Code チームが、エージェントに自分の作業を検証させる考え方をまとめた。テストやベンチマーク、E2E 実行のようにかつて高価だったチェックが今は安くなり、Claude は検証できるときにより良いコードを書くという内容。",
+      "around": [
+        {
+          "url": "https://x.com/oikon48/status/2122466018648023271",
+          "name": "Oikon | Claude Code本出しました",
+          "summary": "チーム内ではコードの約 90% を Claude が書きレビューしているため、証拠付きで検証させる「検証ループ」が重要という要約"
+        }
+      ]
+    }
+  ],
+  "quick": [
+    {
+      "title": "Rolldown は外部からの PR を歓迎、直近 30 日で 40 人から 64 件をマージ",
+      "summary": "外部 PR の受け付けをやめる OSS が増えるなか、Rolldown は直近 30 日でチーム外の 40 人から 64 件の PR をマージした。多くはバグ修正。",
+      "source": "https://x.com/hyfdev/status/2122132259096735827"
+    },
+    {
+      "title": "Claude Code デスクトップが iOS シミュレータの iPhone Duo に対応",
+      "summary": "パブリックベータとして、会話の横で Duo 上のアプリを動かし、Claude が端末を開閉してそれぞれのレイアウトを試せる。",
+      "source": "https://x.com/ClaudeDevs/status/2122439098740674839"
+    },
+    {
+      "title": "Cloudflare Artifacts がローカル開発に対応",
+      "summary": "Cloudflare の Git ホスティング Artifacts が、ローカル開発をサポートした。",
+      "source": "https://x.com/R0u9h/status/2122451881628934413"
+    },
+    {
+      "title": "Cloudflare が re:Invent から締め出され、ラスベガスでサイドイベントを開催",
+      "summary": "eastdakota さんによると、AWS に re:Invent から追い出されたため、代わりにラスベガスでサイドイベントを開く。",
+      "source": "https://x.com/eastdakota/status/2122415219792334919"
+    }
+  ]
+}
