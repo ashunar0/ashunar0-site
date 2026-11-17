@@ -1,0 +1,106 @@
+{
+  "stories": [
+    {
+      "title": "Oxlint の型を使う lint に tsrs、tsgolint の置き換えで最大 7 倍速く",
+      "main": "https://x.com/voidzerodev/status/2122721897091633169",
+      "body": "VoidZero が、Oxlint の型を使う lint で tsrs を使えるようにしたと発表。tsgolint のそのままの置き換えとして、型を使う lint と型チェックの両方に使え、最大 7 倍速く、メモリは最大 75% 少なくなる。",
+      "around": [
+        {
+          "url": "https://x.com/__syumai/status/2122722349955047609",
+          "name": "syumai",
+          "summary": "ものすごそうなのが来てる、と発表を引用"
+        }
+      ]
+    },
+    {
+      "title": "Solid 2.0 が安定版に、非同期を反応の仕組みに取り込む",
+      "main": "https://x.com/solid_js/status/2122768111774629946",
+      "body": "SolidJS が Solid 2.0 の正式リリースを発表。5 年前に Signals を広めたのに続き、今回は Async Signals を打ち出した。破壊的な変更として createResource・batch・startTransition などの API が削除され、SolidStart は廃止された。",
+      "around": [
+        {
+          "url": "https://x.com/RyanCarniato/status/2122771404412342679",
+          "name": "Ryan Carniato",
+          "summary": "関わった人たちへの感謝。概念を UI の作り方を形づくるパラダイムにできたことは光栄だった"
+        },
+        {
+          "url": "https://x.com/azu_re/status/2122829539139342482",
+          "name": "azu",
+          "summary": "createResource/batch/startTransition などの削除と SolidStart の廃止を破壊的変更としてまとめた"
+        },
+        {
+          "url": "https://x.com/shimabu_it/status/2122807540052533297",
+          "name": "しまぶー",
+          "summary": "非同期処理をリアクティブグラフに組み込む設計を評価し、最もおすすめの Web フレームワークと紹介"
+        }
+      ]
+    },
+    {
+      "title": "yusukebe さんの LT「Ramen API」の資料が公開",
+      "main": "https://x.com/yusukebe/status/2122651526581871101",
+      "body": "yusukebe さんが #FUN_LTLAB の LT で話した「Ramen API」の資料を公開した。会場ではラーメン屋を追加する PR が紹介され、参加者から PR を出すという声も上がった。",
+      "around": [
+        {
+          "url": "https://x.com/nano2_aloerina/status/2122650814405877918",
+          "name": "なのなの＠超進化すこん部VRChatter🌽",
+          "summary": "LT で紹介された、ラーメン API にラーメン屋を追加する PR の画面"
+        },
+        {
+          "url": "https://x.com/gen_shun/status/2122652204540792859",
+          "name": "ゲンシュン",
+          "summary": "すごく楽しかった、ラーメン API に絶対 PR を出す"
+        }
+      ]
+    },
+    {
+      "title": "Claude Code の Code Mode を公式が紹介、名付け親は Kenton Varda さん",
+      "main": "https://x.com/ClaudeDevs/status/2122801681939234950",
+      "body": "ClaudeDevs が、Claude Code がツールを扱う実験的な方法として Code Mode を紹介した。Claude がツールをつなぐスクリプトを書き、長いコマンドの実行中にも返答できる。CLAUDE_CODE_EXPERIMENTAL_CODE_MODE=1 で有効になる。",
+      "around": [
+        {
+          "url": "https://x.com/KentonVarda/status/2122813445645189234",
+          "name": "Kenton Varda",
+          "summary": "1 年たって主要なハーネスがどれも実装し、みんな名前もそのまま使っている"
+        },
+        {
+          "url": "https://x.com/threepointone/status/2122808869848248673",
+          "name": "sunil pai",
+          "summary": "Code Mode という名前は Kenton Varda さんが付けた"
+        }
+      ]
+    },
+    {
+      "title": "次の Vitest、Browser Mode でモジュールをキャッシュから再利用",
+      "main": "https://x.com/yusuktan/status/2122707270849143012",
+      "body": "次の Vitest では、Browser Mode の vitest run でキャッシュ済みのモジュールを再利用する。これまではテストファイルごとに全モジュールをサーバーに再検証していた。実行時間は最大 70% 減り、実プロジェクト 3 つでは 13〜27% 縮んだ。",
+      "around": [
+        {
+          "url": "https://x.com/__syumai/status/2122721115005137404",
+          "name": "syumai",
+          "summary": "VoidZero の maguro さんの投稿として引用"
+        }
+      ]
+    }
+  ],
+  "quick": [
+    {
+      "title": "yusukebe さんが 12/21 の LayerX のイベントで OSS メンテナ対談",
+      "summary": "「OSSメンテナと話す2026年の変化とこれから」がテーマ。Hono で外部からの PR の無効化を決めた今年の話をする。",
+      "source": "https://x.com/yusukebe/status/2122497445678715228"
+    },
+    {
+      "title": "Chrome 158 安定版が source map の Scopes 提案に対応",
+      "summary": "TC39 Stage 3 の Scopes 提案で、source map の新しい標準機能としては 15 年以上ぶり。デバッグ時に正確なスタックトレース、レキシカルスコープ、元の式が見られる。",
+      "source": "https://x.com/robpalmer2/status/2122772019641004436"
+    },
+    {
+      "title": "Remix Newsletter 48",
+      "summary": "Shopify の Remix 採用、プリフェッチ、CSP 対応、Remix v3.1.0 と v3.2.0、React Router v8.5.1 を取り上げている。",
+      "source": "https://x.com/remix_run/status/2122817525465379238"
+    },
+    {
+      "title": "Claude Desktop に更新の早い Latest チャネル",
+      "summary": "Windows と Mac で、設定から Latest のリリースチャネルを選べるようになった。修正や改善が早く届く代わりに Stable より不安定なことがあり、既定は Stable のまま。",
+      "source": "https://x.com/ClaudeDevs/status/2122821051910684824"
+    }
+  ]
+}
