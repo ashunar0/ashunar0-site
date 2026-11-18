@@ -1,0 +1,116 @@
+{
+  "stories": [
+    {
+      "title": "Void に Hono JSX を載せるか、ビュー機能を内蔵するかの議論が始まる",
+      "main": "https://x.com/yusukebe/status/2122920311251501154",
+      "body": "yusukebe さんが、Hono JSX を Void に組み込む方法と、Void 自体にビュー機能を持たせる案を議論していると紹介した。投稿には Void リポジトリの関連 PR が 3 本並んでいる。"
+    },
+    {
+      "title": "Cloudflare の cf CLI が 1.0 RC に、ローカル開発とデプロイのコマンドが stable",
+      "main": "https://x.com/CloudflareDev/status/2123094830045921764",
+      "body": "Cloudflare の公開 API 全体を 1 つで扱う CLI「cf」が 1.0 RC になった。ライブログを流す cf observability tail が加わり、ローカル開発とデプロイのコマンドは stable に。コーディングエージェントがコマンドを探し、入力を調べ、結果をスクリプトや自動化に使える作りになっている。",
+      "around": [
+        {
+          "url": "https://x.com/MattieTK/status/2122726377883599022",
+          "name": "Matt 'TK' Taylor",
+          "summary": "1.0 RC に到達。cf observability tail、出力の整理、API の一貫性向上。wrangler のプロジェクトでそのまま試せる"
+        },
+        {
+          "url": "https://x.com/yusukebe/status/2122946084431699969",
+          "name": "Yusuke Wada",
+          "summary": "Cloudflare を使う人に「cf CLI 使ってる？」と聞くと、必ず「すごいい」と返ってくる"
+        },
+        {
+          "url": "https://x.com/rin_montblank/status/2123064934645014813",
+          "name": "まろん｡(🌰•᎑•🌰)",
+          "summary": "beta のときから置き換えて使っている。Codex が Wrangler より cf CLI を優先して使うようになった"
+        }
+      ]
+    },
+    {
+      "title": "Vite の dev server に重大な脆弱性、8.3.7 などへの更新を呼びかけ",
+      "main": "https://x.com/vite_js/status/2122949427497165033",
+      "body": "Vite が dev server に影響する critical のセキュリティ勧告（GHSA-p4f5-76q4-ffq7）を公開し、すぐに更新するよう呼びかけた。修正版は Vite 8.3.7・8.2.5・8.1.7・7.3.8・6.4.6 と Vite+ 1.5.1。",
+      "around": [
+        {
+          "url": "https://x.com/owuzan_/status/2123068538311086338",
+          "name": "Oğuzhan Yılmaz",
+          "summary": "__vite-browser-external という仮想モジュール経由でリモートコード実行ができる問題だと解説"
+        }
+      ]
+    },
+    {
+      "title": "React Router に 7 件の CVE、v7.18.6 か v8.5.2 へ",
+      "main": "https://x.com/ReactRouter/status/2123116146006331576",
+      "body": "React Router が新たに 7 件の CVE（high 4 件、moderate 3 件）を公開し、v7.18.6 か v8.5.2 への更新を勧めた。詳細は GitHub の advisory にまとまっている。",
+      "around": [
+        {
+          "url": "https://x.com/infrastack_ai/status/2123117369249952172",
+          "name": "InfraStack",
+          "summary": "@react-router/node や @react-router/serve で配信していると、リクエスト処理の欠陥でサーバーが落ちうる（8.0.0〜8.3.1 と 7.18.6 未満）"
+        }
+      ]
+    },
+    {
+      "title": "Claude Code 2.1.327、複数ステップの作業をワークフローに分けるエージェント",
+      "main": "https://x.com/ClaudeCodeLog/status/2122835481855394129",
+      "body": "Claude Code 2.1.327 が出た。CLI の変更は 173 件で、複雑な複数ステップの作業をエージェントが状態を持つワークフローに分けて進めるようになり、/install-github-app はリポジトリを変更する前に確認を求めるようになった。",
+      "around": [
+        {
+          "url": "https://x.com/sora_reads_tech/status/2123189511169646786",
+          "name": "そら@Tech情報仕分けアプリ作ってます☁️",
+          "summary": "claude mcp add-json で MCP サーバーの JSON を標準入力から渡せ、トークンをコマンドラインに残さずに済む。/status には壊れた skill や agent、当たらない hook の matcher も出る"
+        },
+        {
+          "url": "https://x.com/ClaudeCodeLog/status/2123192695522767087",
+          "name": "Claude Code Changelog",
+          "summary": "2.1.328 がまもなくリリース"
+        }
+      ]
+    },
+    {
+      "title": "Solid 2.0 向けに shadcn の UI SDK と Solid Primitives 2.0 が登場",
+      "main": "https://x.com/shadcn/status/2123132082042151332",
+      "body": "shadcn さんが、Solid 2.0 向けに作った UI SDK を紹介した。リンク先のプロンプトをエージェントにコピーして使う形。同じ日に、月間数百万ダウンロードの Solid Primitives も 2.0 を出し、1.0 の primitives を移植した。",
+      "around": [
+        {
+          "url": "https://x.com/davedbase/status/2123076462525747521",
+          "name": "Dave Di Biase",
+          "summary": "Solid 2.0 に続いて Solid Primitives 2.0 を発表。1.0 の primitives を移植"
+        },
+        {
+          "url": "https://x.com/RyanCarniato/status/2123176291830845735",
+          "name": "Ryan Carniato",
+          "summary": "UI SDK の発表を「これはワクワクする」と引用"
+        }
+      ]
+    }
+  ],
+  "quick": [
+    {
+      "title": "Workers で request.signal が既定で有効に",
+      "summary": "11 月 17 日以降の compatibility date では request.signal が既定で有効になり、Worker がクライアントの切断を検知できる。",
+      "source": "https://x.com/danscriptscript/status/2123068721497522653"
+    },
+    {
+      "title": "OpenJDK に重大な欠陥 Java4Shell、Cloudflare が WAF ルールを追加",
+      "summary": "OpenJDK の Base64 デコーダのメモリ破壊で、リモートコード実行につながる。Cloudflare は有料プラン向けに WAF のマネージドルールを 6 つ出した（既定はログのみ）。",
+      "source": "https://x.com/Cloudflare/status/2123067084976308267"
+    },
+    {
+      "title": "Cloudflare Images が TIFF の入力に対応",
+      "summary": "印刷向けの TIFF を WebP や AVIF に変換できるようになった。",
+      "source": "https://x.com/CFchangelog/status/2123121748790964231"
+    },
+    {
+      "title": "AI Search がインデックス時にファイルの要約を作れるように",
+      "summary": "要約を有効にすると、検索精度のための文脈とキーワードが生成される。",
+      "source": "https://x.com/CFchangelog/status/2123099139521339691"
+    },
+    {
+      "title": "yusukebe さんと chimame_rt さんの Workers 本番運用トーク、アーカイブ公開",
+      "summary": "Offers のイベント「Cloudflare Workersの本番運用の勘所」のアーカイブ配信が始まった。",
+      "source": "https://x.com/Offers_jp/status/2123008141537464323"
+    }
+  ]
+}
