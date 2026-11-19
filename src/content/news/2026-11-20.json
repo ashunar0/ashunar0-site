@@ -1,0 +1,96 @@
+{
+  "stories": [
+    {
+      "title": "Hono JSX に Signals を入れる PR が出る",
+      "main": "https://x.com/yusukebe/status/2123219486602056074",
+      "body": "yusukebe さんが、Hono JSX に Signals を導入する PR を公開した。これに対し LaPh さんは、hono/jsx から hooks を外して Remix 3 の Frame のような仕組みと命令的な API を移植するブランチを示し、別の方向を提案している。",
+      "around": [
+        {
+          "url": "https://x.com/R0u9h/status/2123266551025652109",
+          "name": "LaPh",
+          "summary": "hono/jsx から hooks を消し、Remix 3 の Frame のような機構と命令的な API を移植。jsx/dom は minify 後 19.7KB→10.6KB"
+        }
+      ]
+    },
+    {
+      "title": "Claude Code 2.1.328 と 2.1.329、確認なしで進む場面が増える",
+      "main": "https://x.com/ClaudeCodeLog/status/2123546030654333070",
+      "body": "Claude Code 2.1.329 が出た。CLI の変更は 130 件で、リスクのある操作の確認をなくし、ゲートされたステップは確認なしで自動実行されるようになった。セッションの /tasks では予定タスクや /loop の起動、goal と fork が見られる。",
+      "around": [
+        {
+          "url": "https://x.com/ClaudeCodeLog/status/2123226990551445634",
+          "name": "Claude Code Changelog",
+          "summary": "前日の 2.1.328 は CLI の変更 144 件。クラウドとゲートウェイ上の Opus/Sonnet 4.6 で Auto mode が使え、mcp_tool フックに onFailure: block が追加"
+        }
+      ]
+    },
+    {
+      "title": "「エージェントにリアクティブ UI ライブラリは要らない」をめぐる議論",
+      "main": "https://x.com/mjackson/status/2123282703806304694",
+      "body": "MJ さんが、リアクティブ UI ライブラリは人間のためのもので、エージェントは hooks や signals、依存配列、stale closure の落とし穴を理解しなくてよい素の JS のほうがうまく扱える、と投稿した。Ryan Carniato さんはこれを引用し、ガベージコレクションを悪いと言うのに近い議論で、Rust のようなものが成り立つならリアクティビティでも同じことができると反論した。",
+      "around": [
+        {
+          "url": "https://x.com/RyanCarniato/status/2123457800139681914",
+          "name": "Ryan Carniato",
+          "summary": "GC を否定するような議論。Rust が成り立つなら、リアクティビティでも同じことができる"
+        },
+        {
+          "url": "https://x.com/RyanCarniato/status/2123526999952208084",
+          "name": "Ryan Carniato",
+          "summary": "誰もコードを見なくなったと言われるが、この書き方には美しさがある、と StackBlitz の例を共有"
+        }
+      ]
+    },
+    {
+      "title": "Cloudflare Spectrum が Pro と Business プランでも使えるように",
+      "main": "https://x.com/ritakozlov/status/2123523047881847056",
+      "body": "Cloudflare Spectrum が新しい見た目になり、Enterprise プランでなくても Pro と Business プランから使えるようになった。rita kozlov さんは、これで TCP の Workers アプリを作れるようになると紹介している。",
+      "around": []
+    },
+    {
+      "title": "Workers VPC が mTLS 用のカスタム CA とクライアント証明書に対応",
+      "main": "https://x.com/CFchangelog/status/2123212419803853178",
+      "body": "Workers VPC が、Wrangler 4.164.0 からカスタム CA とクライアント証明書による mTLS に対応した。厳密な検証を求めるプライベートなデータベースやオリジンにも安全に接続できる。",
+      "around": []
+    },
+    {
+      "title": "Anthropic が IPO 価格を 1 株 83 ドルに決定、Nasdaq で取引開始",
+      "main": "https://x.com/AnthropicAI/status/2123196808675405860",
+      "body": "Anthropic が IPO の価格を 1 株 83 ドルに決め、翌日から Nasdaq で取引が始まると発表した。",
+      "around": [
+        {
+          "url": "https://x.com/oikon48/status/2123426725959029201",
+          "name": "Oikon | Claude Code本出しました",
+          "summary": "Anthropic の株が公開された（$ANT）"
+        }
+      ]
+    }
+  ],
+  "quick": [
+    {
+      "title": "Vitest 5.1.1 で Browser Mode がキャッシュ済みモジュールを再利用",
+      "summary": "vitest run 中に Browser Mode がキャッシュしたモジュールを再利用する高速化が、Vitest 5.1.1 で使えるようになった。",
+      "source": "https://x.com/yusuktan/status/2123263726988271723"
+    },
+    {
+      "title": "Cloudflare が Java4Shell（CVE-2026-114938）向けの WAF ルールを追加",
+      "summary": "不正な Base64 を使った攻撃を検知する WAF ルールを 6 件追加。誤検知を避けるため、初期状態はログモード。",
+      "source": "https://x.com/CFchangelog/status/2123461597855137846"
+    },
+    {
+      "title": "Durable Objects と D1 で一部のエラーと遅延が増加",
+      "summary": "11月19日、一部の Durable Objects と D1 の利用者でストレージ操作の失敗や遅延が起き、Cloudflare が調査した。",
+      "source": "https://x.com/outageslive/status/2123402549159919946"
+    },
+    {
+      "title": "Cloudflare Images のパラメータが URL と Workers で統一",
+      "summary": "関連する設定がまとめられ、URL のインターフェースでも枠線とオーバーレイが使えるようになった。",
+      "source": "https://x.com/CFchangelog/status/2123537015333376320"
+    },
+    {
+      "title": "Workers AI の抽出モデル Clairic が正式版に、Clairic-flash も追加",
+      "summary": "Clairic がプレビューを終え、Clairic-flash が加わった。どちらもオープンウェイトで公開する。",
+      "source": "https://x.com/Cloudflare/status/2123346262288171129"
+    }
+  ]
+}
