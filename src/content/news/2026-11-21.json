@@ -1,0 +1,111 @@
+{
+  "stories": [
+    {
+      "title": "Cloudflare が Oxlint 設定 @cloudflare/oxlint-config を npm で公開",
+      "main": "https://x.com/dok2001/status/2123697396508954893",
+      "body": "Cloudflare の Dane Knecht さんが、JavaScript と TypeScript 向けの Oxlint ルール集 @cloudflare/oxlint-config を npm に公開したと発表。dillon_mulroy さんの anti-slop ルールに着想を得て、cnakazawa さんの nkzw config をベースにしている。型を使うチェックは新しい tsrs ベータで動く。",
+      "around": [
+        {
+          "url": "https://x.com/tejashaveridev/status/2123813420621529419",
+          "name": "Tejas Haveri",
+          "summary": "ドキュメントやベストプラクティスを lint にする時代が来た"
+        },
+        {
+          "url": "https://x.com/____zee___/status/2123838741509001607",
+          "name": "ZEE",
+          "summary": "tsrs と Oxlint を使っていたプロジェクトでも、このルールはずっと厳しく 19,347 件の指摘が出た（修正済み）"
+        }
+      ]
+    },
+    {
+      "title": "Workers と Containers がインバウンド TCP と双方向 gRPC をパブリックベータで対応",
+      "main": "https://x.com/CFchangelog/status/2123899414255394834",
+      "body": "Cloudflare Workers と Containers が、インバウンド TCP と双方向 gRPC にパブリックベータで対応した。Worker から Durable Object につなぎ、バイト列をそのまま転送して既存のサービスを Containers で動かせる。Spectrum がインターネットからの TCP 接続を Worker の connect() ハンドラへ渡す形。",
+      "around": [
+        {
+          "url": "https://x.com/multilayer/status/2123589010153148729",
+          "name": "multilayer",
+          "summary": "米国時間 11/19 の公開。Spectrum が TCP 接続を Worker の connect() ハンドラへ渡す仕組みを解説"
+        },
+        {
+          "url": "https://x.com/R0u9h/status/2123595055978221688",
+          "name": "LaPh",
+          "summary": "予告なしにパブリックベータになって驚いた（Cloudflare Connect では出ていた）"
+        }
+      ]
+    },
+    {
+      "title": "Claude Code 2.1.330、/loop と定期タスクが最長 30 日に",
+      "main": "https://x.com/ClaudeCodeLog/status/2123913205575496028",
+      "body": "Claude Code 2.1.330 がリリースされ、CLI の変更は 142 件、システムプロンプトの変更は 1 件。依頼するとグラフを描く組み込み mod の easel が Mac と Linux で入り、定期タスクと /loop の上限が 7 日から 30 日に延びた。Enterprise Admin Console へのサインインにも対応し、ログイン後は組織の設定が自動で適用される。",
+      "around": [
+        {
+          "url": "https://x.com/alexmichael/status/2123908705603440693",
+          "name": "Alex",
+          "summary": "easel、Enterprise Admin Console サインイン、/loop の 30 日化を主な変更として整理"
+        },
+        {
+          "url": "https://x.com/ClaudeCodeLog/status/2123913235829031077",
+          "name": "Claude Code Changelog",
+          "summary": "システムプロンプトに、取り返しのつかない操作の前に影響範囲を考えて確認を取る「measure twice, cut once」ルールが入った"
+        },
+        {
+          "url": "https://x.com/alexmichael/status/2123915189020160284",
+          "name": "Alex",
+          "summary": "「危険な操作の前に確認するポリシー」は 2.1.330 の新機能ではなく 2.1.321 で入ったものだと指摘"
+        }
+      ]
+    },
+    {
+      "title": "Effect の lint ルールが Vite+ の tsrs で動くように",
+      "main": "https://x.com/filipfalcon/status/2123770317285806254",
+      "body": "@effect/tsgo 0.73.2 で、Effect の lint ルールが Vite+ 1.7.0 以降で動くようになった。effect-tsgo が Vite+ の入れる tsrs を見つけ、oxlint-tsgolint なしで Oxlint にパッチを当てる。",
+      "around": [
+        {
+          "url": "https://x.com/pierrickdanno/status/2123813457468502132",
+          "name": "Pierrick d'Annoville",
+          "summary": "tsgo を tsrs に置き換えたら、時間が全体で 30% 減り、メモリは 50% 減った"
+        },
+        {
+          "url": "https://x.com/ericclemmons/status/2123836972724568321",
+          "name": "Eric Clemmons 🍊☁️",
+          "summary": "Effect の lint ルールを有効にして 543 件の警告が出て、エージェントと 2 日で 310 件を修正。CI では警告をエラー扱いにした"
+        }
+      ]
+    },
+    {
+      "title": "Rolldown、共通チャンクのインライン化を CSS にも広げる作業中",
+      "main": "https://x.com/hyfdev/status/2123642138126954874",
+      "body": "Rolldown の Yunfei He さんが、inline common chunks を CSS でも使えるようにする作業を進めていると投稿。今は Vite ユーザーは CSS をインライン化の対象から外す必要があり、CSS を含む共通チャンクは別ファイルのまま残る。次は CSS も JS と一緒にインライン化され、ページが読み込むファイルが減る。",
+      "around": [
+        {
+          "url": "https://x.com/mdong1909/status/2123674327224877433",
+          "name": "Michael Dong",
+          "summary": "Rolldown の新機能を追うアカウントを紹介。inline common chunks や、エージェントに起動データを渡す Perf kit が進行中"
+        }
+      ]
+    }
+  ],
+  "quick": [
+    {
+      "title": "Workers と Pages のバージョンは 30 日で消えるように",
+      "summary": "Workers と Pages のバージョンの保持期間が 30 日になった。削除されたバージョンと URL は消えるが、直近 100 件と現在のデプロイは残る。",
+      "source": "https://x.com/CFchangelog/status/2123876728485314657"
+    },
+    {
+      "title": "Browser Run の /snapshot が PDF・リンク・スクレイプ・JSON を返せるように",
+      "summary": "1 回のページ読み込みで、PDF、リンク、スクレイプ結果、JSON の 4 形式を追加で取得できる。",
+      "source": "https://x.com/CloudflareDev/status/2123678250643898671"
+    },
+    {
+      "title": "Jazz v2.0.0-alpha.69 が Durable Objects で動くように",
+      "summary": "Jazz を外部サービスなしのセルフホスト DB としてバックエンド内にデプロイでき、Vercel、Cloudflare、自前サーバーに対応した。",
+      "source": "https://x.com/jazz_tools/status/2123644231441121433"
+    },
+    {
+      "title": "Rivet Actors で Durable Objects をフォークできるように",
+      "summary": "ゼロコピーで 20ms でフォークでき、エージェントやスウォーム向けとしている。",
+      "source": "https://x.com/NathanFlurry/status/2123881156018098216"
+    }
+  ]
+}
