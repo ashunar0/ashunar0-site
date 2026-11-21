@@ -1,0 +1,94 @@
+{
+  "stories": [
+    {
+      "title": "Claude のモバイルアプリが刷新、Code タブから他デバイスの Claude Code セッションを再開",
+      "main": "https://x.com/oikon48/status/2124089867009483172",
+      "body": "Claude モバイルアプリの新しい UI が順次ロールアウトされ、下部に Chat / Projects / Code / Artifacts の 4 タブが並ぶようになった。Code タブには接続中のデバイスが一覧表示され、他のデバイスで動かしている Claude Code セッションをスマホから引き継いで再開しやすくなった。モデルピッカーはホイール形式になり、長押しで effort を選べる。",
+      "around": [
+        {
+          "url": "https://x.com/Ionkosm/status/2124228856064397811",
+          "name": "Ion",
+          "summary": "Claude アプリが Claude Code のリモコンになった。ホーム画面から自分のデバイス上でコードセッションを始められる"
+        },
+        {
+          "url": "https://x.com/currocreates/status/2124088431106281682",
+          "name": "Curro Alé",
+          "summary": "iOS と Android の全員に展開中。空き時間に修正を始められる一方、スマホで diff をレビューして信用できるかは疑問"
+        }
+      ]
+    },
+    {
+      "title": "CI を 1 分未満にした手順が話題、TypeScript 7 で型チェックが 22 秒から 6 秒に",
+      "main": "https://x.com/pontusab/status/2123750671795261748",
+      "body": "Pontus Abrahamsson さんが、CI 全体を 1 分未満にした手順を投稿。Vitest を bun test、tsc を bun check、oxlint を bun lint、oxfmt を bun fmt に置き換え、PR では diff が届くテストだけを流し、lint・型チェック・ビルド・テストを並列にした。毎週 200 時間以上の待ち時間が減ったという。",
+      "around": [
+        {
+          "url": "https://x.com/Tristan0x/status/2123802919455907947",
+          "name": "Tristan",
+          "summary": "この投稿を見てジムからスマホの Claude で 4 つの変更を入れ、フロントエンドの CI を 4 分から約 1 分に。TypeScript 7 で型チェック 22 秒→6 秒、node_modules のキャッシュでインストール 52 秒→8〜16 秒"
+        },
+        {
+          "url": "https://x.com/dewyashtwts/status/2124122462535450756",
+          "name": "Yash",
+          "summary": "diff ベースのテストは間接的な依存を見逃しうるし、並列しすぎるとランナーが詰まる。まずキュー時間とジョブ時間を測ってボトルネックを探した"
+        }
+      ]
+    },
+    {
+      "title": "Cloudflare Startup Program で PlanetScale のデータベースを Hyperdrive から直接作成できるように",
+      "main": "https://x.com/CFchangelog/status/2124171172635893919",
+      "body": "Cloudflare の Startup Program メンバーが、Hyperdrive から PlanetScale のデータベースを直接作れるようになった。Postgres か MySQL を用意して、Workers からマネージドなデータベースにすぐつなげる。",
+      "around": [
+        {
+          "url": "https://x.com/dmitriybuilds/status/2124184123635818939",
+          "name": "Dmitriy Cherchenko",
+          "summary": "Hyperdrive でつないでいる既存の PlanetScale データベースにもスタートアップクレジットは使えるのか、と質問"
+        }
+      ]
+    },
+    {
+      "title": "Browser Run に /script、Playwright や Puppeteer の関数を Worker なしで実行",
+      "main": "https://x.com/CFchangelog/status/2124156107061150187",
+      "body": "Cloudflare Browser Run に /script エンドポイントが入り、Playwright や Puppeteer で書いた関数を送るだけでブラウザ上で実行できるようになった。自分で Worker をデプロイする必要はない。",
+      "around": [
+        {
+          "url": "https://x.com/multilayer/status/2123926622869045344",
+          "name": "multilayer",
+          "summary": "米国時間 11/20 の公開。Playwright、Puppeteer、CDP の関数を 1 回の API 呼び出しで、セッションにつながる隔離された Worker 上で実行する"
+        },
+        {
+          "url": "https://x.com/SaitouWeb/status/2123997774710710431",
+          "name": "Saitou Web",
+          "summary": "手元の Playwright の関数を curl で投げたら書き換えなしで動き、日本語ページのスクショも手元と同じだった"
+        }
+      ]
+    }
+  ],
+  "quick": [
+    {
+      "title": "Durable Objects がランタイム更新の再起動前に多数派グループから自ら外れるように",
+      "summary": "再起動の前に多数派グループから先に抜けることで、書き込みの失敗を防ぎ、Internal error によるリセットの頻度を減らす。",
+      "source": "https://x.com/CFchangelog/status/2123922320645403054"
+    },
+    {
+      "title": "Hyperdrive が Workers VPC 経由でカスタム CA と mTLS 証明書に対応",
+      "summary": "Wrangler 4.164.0 で、Cloudflare Access を通さずにプライベートなデータベースへ直接つなげる。",
+      "source": "https://x.com/CFchangelog/status/2124171184455463018"
+    },
+    {
+      "title": "Cloud Connector が正式版に",
+      "summary": "Rules の式に合うリクエストを R2、S3、GCS、Azure、OCI へ振り分けられる。",
+      "source": "https://x.com/CFchangelog/status/2124088192286773398"
+    },
+    {
+      "title": "Radar Zero Wire に CVE ごとの専用ページ",
+      "summary": "公開済みの CVE ごとに、深刻度、悪用状況、修正を確認できる。",
+      "source": "https://x.com/CFchangelog/status/2124096227667001394"
+    },
+    {
+      "title": "Dispatch namespace の名前が変更できなくなる",
+      "summary": "名前を変えたいときは、新しい namespace を作って Workers を移す。",
+      "source": "https://x.com/CFchangelog/status/2124208982847840692"
+    }
+  ]
+}
