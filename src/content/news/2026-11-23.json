@@ -1,0 +1,99 @@
+{
+  "stories": [
+    {
+      "title": "Agents SDK v0.34.0 が Pi 1.6 に、Durable Object を起こしたまま待たずに人や期限を待てるツール",
+      "main": "https://x.com/CFchangelog/status/2124299526047481964",
+      "body": "Cloudflare の Agents SDK v0.34.0 が Pi 1.6 にアップグレードされた。人の応答や期限を待つツールを、Durable Object を起動したままにせずに作れるようになった。PiHarness が Pi 1.6 に移り、アプリがすでに持っている会話履歴からセッションを始めることもできる。",
+      "around": [
+        {
+          "url": "https://x.com/8zero7/status/2124574695013896682",
+          "name": "8zero7",
+          "summary": "ツールが人の承認などのシグナルや期限まで Durable Object を起こさずに待機でき、既存の会話履歴からセッションを開始できる"
+        },
+        {
+          "url": "https://x.com/_TK_YM_/status/2124318904180936757",
+          "name": "TKYM",
+          "summary": "待ちを扱えるエージェントが増えると使い方が変わってくる"
+        }
+      ]
+    },
+    {
+      "title": "Durable Objects 向けライブラリ durability が公開、エージェントに Cloudflare 上の設計を書かせる土台に",
+      "main": "https://x.com/avenceslau/status/2124524160621916190",
+      "body": "André Venceslau さんが、エージェントに自分と同じやり方で Cloudflare の Developer Platform 上を作らせるためのライブラリ durability を紹介。tanstack-db の DO 同期エンジンから、DO と KV・R2 を使った分散制御プレーンまでを対象にし、よくある落とし穴を避ける lint ルールも育てている。pnpm i durability で導入できる。",
+      "around": [
+        {
+          "url": "https://x.com/mattzcarey/status/2124436092451709357",
+          "name": "Matt Carey",
+          "summary": "Agents SDK を使わずに Durable Objects を扱うなら durability を使うべき。DO を使いこなすための教科書"
+        },
+        {
+          "url": "https://x.com/deloreyjmi/status/2124444695489388576",
+          "name": "James Delorey",
+          "summary": "Workflows で Durable Objects をスケールさせてきた数年分の経験が詰まっている。使わなくてもコードを読む価値がある"
+        }
+      ]
+    },
+    {
+      "title": "TanStack Query v6 の作業が始まる、壊す変更は最小限の方針",
+      "main": "https://x.com/TkDodo/status/2124454061789372917",
+      "body": "TkDodo さんが TanStack Query v6 の作業を始めたと告知した。破壊的変更はあるが、多くはないとしている。返信では enabled から skipToken への変更案や、codemod が用意されるかに反応が集まった。",
+      "around": [
+        {
+          "url": "https://x.com/KaziAhmedDev/status/2124495081382297746",
+          "name": "Kazi Ahmed ⚡",
+          "summary": "enabled: false とクリック時の refetch() はエクスポート処理でよく使うので、skipToken への変更案には驚いた"
+        },
+        {
+          "url": "https://x.com/clhdev/status/2124530217402110108",
+          "name": "Charlie",
+          "summary": "v5 のように codemod は出るのか。大きなコードベースではエージェント任せより決定的な codemod の方が安全"
+        }
+      ]
+    },
+    {
+      "title": "JSConf JP 2026 が開催、共有されたスライドがトークページに",
+      "main": "https://x.com/jsconfjp/status/2124465278000263570",
+      "body": "JSConf JP 2026 で共有されたスライドが、公式サイトの各トークページに反映された。右下のクリップアイコンから開ける。Vitest Browser Mode や JavaScript/TypeScript の AOT コンパイラ Oseo などの発表資料が公開されている。",
+      "around": [
+        {
+          "url": "https://x.com/yuya_presto/status/2124350651065094300",
+          "name": "ypresto (プレスト) / LayerX",
+          "summary": "Track C「The Cost of the DOM」のスライド。Vitest Browser Mode で勝ちたい話"
+        },
+        {
+          "url": "https://x.com/hongminhee/status/2124386408450457903",
+          "name": "洪 民憙 (Hong Minhee; @hongminhee@hollo.social)",
+          "summary": "Track C「Oseo：SBCL スタイルの JavaScript/TypeScript AOT コンパイラ」の発表資料"
+        },
+        {
+          "url": "https://x.com/uhyo_/status/2124368306958458949",
+          "name": "🈶うひょ🤪AI副業で月収0万円達成",
+          "summary": "Track B のトークのスライドをインタラクティブ版と Speaker Deck で共有"
+        }
+      ]
+    }
+  ],
+  "quick": [
+    {
+      "title": "Bun AOT、型によるランタイムへの影響がなくなった様子",
+      "summary": "as で値の変換が走るなど TypeScript のセマンティクスに影響していた点について、ドキュメントを見るとランタイムへの影響はなくなったようだと syumai さんが指摘。",
+      "source": "https://x.com/__syumai/status/2124567742842093651"
+    },
+    {
+      "title": "OpenOrange、Workers と Durable Objects を他のクラウドや自前サーバーで動かす",
+      "summary": "既存の Workers と Durable Objects をコード変更なしで AWS・Google Cloud・Azure やセルフホストで動かす OSS。各 Durable Object は SQLite を持つ Rivet Actor として動き、8 日で 689 スター。",
+      "source": "https://x.com/read__the__diff/status/2124606721934967098"
+    },
+    {
+      "title": "Ghostscript に Upload2Shell（CVE-2026-125396）",
+      "summary": "10.08.0 未満の Ghostscript でフォント読み込みの use-after-free により -dSAFER を突破してコードを実行できる。拡張子が .png でも中身が PostScript ならサムネイル生成が入り口になる。",
+      "source": "https://x.com/sweetduck2020/status/2124287280978280488"
+    },
+    {
+      "title": "Cloudflare のシカゴ（ORD）で Durable Objects と R2 に影響",
+      "summary": "シカゴのデータセンター（ORD）でネットワーク性能の問題が起き、Durable Objects と R2 などが Degraded になった。",
+      "source": "https://x.com/outageslive/status/2124300208892707267"
+    }
+  ]
+}
