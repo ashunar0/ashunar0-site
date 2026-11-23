@@ -1,0 +1,95 @@
+{
+  "stories": [
+    {
+      "title": "Rolldown に import defer が来る、Hono アプリの起動が workerd で 66% 短縮",
+      "main": "https://x.com/IWANABETHATGUY2/status/2124939643028381815",
+      "body": "Rolldown に `import defer` の実装が進んでいる。defer したコードは初回の利用時に同期的に評価され、`import()` と違って `await` が要らない。4 ルートを defer した Hono アプリのベンチでは、起動時間が Node.js で 46%、workerd で 66% 短くなった。`experimental.importDefer` によるオプトインで未リリース、RFC でフィードバックを募っている。",
+      "around": [
+        {
+          "url": "https://x.com/IWANABETHATGUY2/status/2124939788868616603",
+          "name": "IWANABETHATGUY",
+          "summary": "experimental.importDefer でのオプトイン、未リリース。ベンチは workerd 向け Hono アプリで手法も公開"
+        },
+        {
+          "url": "https://x.com/robpalmer2/status/2124996633595375938",
+          "name": "Rob Palmer",
+          "summary": "import defer は起動を速くする最推しの次期 JS 機能、Rolldown での実装に期待"
+        }
+      ]
+    },
+    {
+      "title": "Claude Code 2.1.331、システムプロンプトから危険操作の確認指示が消える",
+      "main": "https://x.com/ClaudeCodeLog/status/2124985109853929758",
+      "body": "Claude Code 2.1.331 がリリースされ、CLI の変更は 135 件、システムプロンプトの変更は 1 件。rm -rf や force-push、CI/CD の編集、外部への投稿などの前に確認を求める「executing actions with care」の指示がシステムプロンプトから外れた。ほかに Bedrock などクラウド各社上のターミナルセッションでの Code Mode 対応、MCP ツール呼び出しが最大 30 分止まる問題の修正、claude doctor の API 疎通チェック追加など。",
+      "around": [
+        {
+          "url": "https://x.com/ClaudeCodeLog/status/2124985141172863277",
+          "name": "Claude Code Changelog",
+          "summary": "影響範囲と可逆性を見て破壊的操作の前に確認する、というガードレールが削除された"
+        },
+        {
+          "url": "https://x.com/ClaudeCodeLog/status/2124985124466946421",
+          "name": "Claude Code Changelog",
+          "summary": "CLI 変更の一覧。Code Mode 対応、CLAUDE_CODE_DISABLE_RESPONSE_COMPRESSION、プラグインの optionalDependencies など"
+        }
+      ]
+    },
+    {
+      "title": "Claude Ship（beta）、PR のレビューから修正、承認まで Claude が担う",
+      "main": "https://x.com/ClaudeDevs/status/2124959436640858475",
+      "body": "Anthropic が Claude Ship を beta で公開した。Claude がプルリクエストをレビューし、修正を行い、チームのポリシーで許された PR は承認まで行う。書くのと同じ速さでコードを出荷することを狙いに掲げている。",
+      "around": []
+    },
+    {
+      "title": "Cloudflare、cf CLI と MCP からエージェントがフィードバックを送れるように",
+      "main": "https://x.com/MattieTK/status/2124910369680581113",
+      "body": "Cloudflare の CLI に `cf feedback` が加わり、人もコーディングエージェントもバグ報告や要望、詰まった箇所を直接送れるようになった。Cloudflare API の MCP サーバーにも `submit_feedback` ツールが入り、どちらも共有できる送信 ID を返す。エージェントがツールの主な利用者になりつつあり、摩擦はそのトレースに現れる、という位置づけ。",
+      "around": []
+    },
+    {
+      "title": "rork.com が Next.js から TanStack Start へ、ホスティングも Vercel から Cloudflare に",
+      "main": "https://x.com/ryoppippi/status/2124647435989311893",
+      "body": "ryoppippi さんが rork.com を Next.js から TanStack Start へ約 9 日で移行し、ホスティングも Vercel から Cloudflare に移した。ページスコアは 70 から 100 に上がり、ダウンタイムはゼロだったという。",
+      "around": []
+    },
+    {
+      "title": "Christoph Nakazawa へのインタビュー後半、AI 時代の OSS と Void を語る",
+      "main": "https://x.com/tech_world18/status/2124774683077939455",
+      "body": "TECH WORLD が Cloudflare のエンジニアリングディレクター Christoph Nakazawa へのインタビュー後半を公開した。AI 時代の OSS のあり方や、Cloudflare が先月公開した OSS「Void」について聞いている。",
+      "around": [
+        {
+          "url": "https://x.com/cnakazawa/status/2124779732118196389",
+          "name": "Christoph Nakazawa",
+          "summary": "インタビュー後半を YouTube で公開したと本人も告知"
+        }
+      ]
+    }
+  ],
+  "quick": [
+    {
+      "title": "Claude でコネクタとスキルが「プラグイン」に一本化",
+      "summary": "ツール接続とスキルがプラグインとしてまとまり、Free・Pro・Max・Ultra で利用可能に。Team と Enterprise は近日対応。",
+      "source": "https://x.com/claudeai/status/2124970294523945328"
+    },
+    {
+      "title": "Claude Code デスクトップのサイドパネルが刷新",
+      "summary": "Files、Changes、Terminal などがセッション横のタブで開くようになり、別ウィンドウに切り出すこともできる。まず Mac で展開。",
+      "source": "https://x.com/ClaudeDevs/status/2124978802006851961"
+    },
+    {
+      "title": "colinhacks が SQL ファーストのマイグレーションツール Reylo Migrate を公開",
+      "summary": "schema.sql による宣言的スキーマで Postgres・MySQL・SQLite に対応し、シャドウ DB でのドライランやドリフト検出ができる。",
+      "source": "https://x.com/colinhacks/status/2124920303650529704"
+    },
+    {
+      "title": "PlanetScale、アプリ側でのシャーディングを避けるべき理由を解説",
+      "summary": "シャーディングするなら正しいやり方で、とアプリレベルのシャーディングの問題を扱うブログを公開。",
+      "source": "https://x.com/PlanetScale/status/2124925271019000223"
+    },
+    {
+      "title": "Workers API とダッシュボードの設定表示で遅延・不整合",
+      "summary": "Cloudflare のステータスで Workers API とダッシュボードの Workers 設定に遅延や不整合が出ていると報告された。",
+      "source": "https://x.com/outageslive/status/2124864197158646221"
+    }
+  ]
+}
