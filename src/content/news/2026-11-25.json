@@ -1,0 +1,112 @@
+{
+  "stories": [
+    {
+      "title": "Void のルーティングが型安全に、routing.typedRoutes を追加",
+      "main": "https://x.com/voidzerodev/status/2125064791639130569",
+      "body": "VoidZero が、void.config.ts で routing.typedRoutes を有効にすると Void のルートが型安全になると発表。pages/ と routes/ から型が自動生成され、安全なリファクタリングやリンク切れの検出ができる。",
+      "around": [
+        {
+          "url": "https://x.com/mdong1909/status/2125068722645897723",
+          "name": "Michael Dong",
+          "summary": "typed routes は外部コントリビューターの yangshun さんが実装。先月の OSS 化以降、外部コントリビューターは 30 人超"
+        }
+      ]
+    },
+    {
+      "title": "MCP が 2 周年、Claude が Skills over MCP と Tasks に対応",
+      "main": "https://x.com/ClaudeDevs/status/2125289794871963935",
+      "body": "MCP の 2 周年に合わせ、Claude が Skills over MCP（beta）と Tasks（GA）に対応。MCP サーバーがツールと一緒にスキルを公開でき、スキルは必要なときだけ読み込まれ、サーバー側の更新に追従する。Tasks では長い処理やエージェントループをサーバーで走らせ、Claude は作業を続けながら結果を後で受け取れる。",
+      "around": [
+        {
+          "url": "https://x.com/ClaudeDevs/status/2125290306539253760",
+          "name": "ClaudeDevs",
+          "summary": "Tasks は GA。File Uploads も近く展開され、PDF や表、画像をコンテキストを通さずサーバーへ送れるようになる"
+        },
+        {
+          "url": "https://x.com/bcherny/status/2125292098165612585",
+          "name": "Boris Cherny",
+          "summary": "MCP サーバーが自前のスキルを同梱でき、Claude Code が最初から使い方を分かるようになる"
+        },
+        {
+          "url": "https://x.com/threepointone/status/2125303935141388351",
+          "name": "sunil pai",
+          "summary": "ツールの使い方をツールと一緒に配れる、長時間の durable なタスク、まともな elicitation の 3 点を評価"
+        },
+        {
+          "url": "https://x.com/gota_bara/status/2125346973565989326",
+          "name": "Gota",
+          "summary": "MCP のファイルアップロード対応が近いことを歓迎"
+        }
+      ]
+    },
+    {
+      "title": "Vite+ 1.8.0 リリース、vp dev が 1 プロセスに",
+      "main": "https://x.com/fengmk2/status/2125076460969029916",
+      "body": "Vite+ 1.8.0 が公開された。グローバルの vp がない場合はパッケージマネージャーをダウンロードせず PATH から使うようになり、vp dev は 1 プロセスで動くので SIGTERM でサーバーが止まりポートも解放される。vp migrate は Renovate で Vite+ の更新をまとめられるようになった。",
+      "around": [
+        {
+          "url": "https://x.com/fengmk2/status/2125076886028226940",
+          "name": "mk2.js",
+          "summary": "今回の新しいコントリビューターと修正内容の紹介"
+        }
+      ]
+    },
+    {
+      "title": "Worker Previews で CPU とヒープのプロファイリングが可能に",
+      "main": "https://x.com/CFchangelog/status/2125318735552540936",
+      "body": "Cloudflare Workers のプレビュー（Worker Previews）で CPU とヒープのプロファイリングが使えるようになった。本番に触れずに、マージ前にコードの CPU とメモリのコストを確認できる。",
+      "around": []
+    },
+    {
+      "title": "YAPC::Tokyo 2026 に Cloudflare Japan が協賛、yusukebe さんが LT",
+      "main": "https://x.com/Cloudflare_jp/status/2125187477547659324",
+      "body": "11/27〜29 開催の YAPC::Tokyo 2026 に Cloudflare Japan が Platinum Sponsor として協賛。11/29（Day2）の本編 LT に Developer Advocate の yusukebe さんが登壇する。",
+      "around": [
+        {
+          "url": "https://x.com/yusukebe/status/2125187773074469359",
+          "name": "Yusuke Wada",
+          "summary": "「よろしくお願いします！！」と告知を引用"
+        }
+      ]
+    },
+    {
+      "title": "Claude の artifact をデスクトップアプリとしてインストール可能に",
+      "main": "https://x.com/ClaudeDevs/status/2125315491522650299",
+      "body": "Claude で作った artifact を「Install as app」で Mac / Windows のデスクトップアプリとして入れられるようになった。コネクタを使え、許可すれば通知やメニューバー項目も追加できる。Claude Desktop の全プランでベータ提供で、ビルドやアプリからの Claude 呼び出しは利用上限にカウントされる。",
+      "around": [
+        {
+          "url": "https://x.com/ClaudeDevs/status/2125315493771059685",
+          "name": "ClaudeDevs",
+          "summary": "パッケージ化や署名、API キー設定は不要。Enterprise ではオーナーの有効化が必要"
+        }
+      ]
+    }
+  ],
+  "quick": [
+    {
+      "title": "Rolldown のアイドル時メモリ使用量を改善",
+      "summary": "Rolldown API で長時間バンドルする用途（Vite の cold dev など）で効く改善。",
+      "source": "https://x.com/unsafemut/status/2125171519789903991"
+    },
+    {
+      "title": "Claude Code 2.1.332 がまもなくリリース",
+      "summary": "ClaudeCodeLog が次バージョン 2.1.332 のリリースが近いと告知。",
+      "source": "https://x.com/ClaudeCodeLog/status/2125351991845024143"
+    },
+    {
+      "title": "Hono と Cloudflare Workers の Qiita Advent Calendar 2026",
+      "summary": "Hono Advent Calendar 2026 と Cloudflare Workers Advent Calendar 2026 が公開され、Workers の方はすでにかなり枠が埋まっている。",
+      "source": "https://x.com/yusukebe/status/2125190090528088200"
+    },
+    {
+      "title": "Anthropic、サンドボックス脱出の評価 Siren を公開",
+      "summary": "1,700 超のシナリオで最近の Claude はサンドボックス外を見る・触ろうとする割合が 21〜32% だったが、ルールをシステムプロンプトで説明すると約 2% 以下に下がった。Claude Code の auto mode の調整にも使われた。",
+      "source": "https://x.com/AnthropicAI/status/2125341904644763678"
+    },
+    {
+      "title": "T3 Code のテレメトリーが問題に",
+      "summary": "T3 Code のテレメトリーをめぐって議論が起き、テレメトリーをオフにしても緩い点が残るとの懸念が出ている。",
+      "source": "https://x.com/oukayuka/status/2125234155558723674"
+    }
+  ]
+}
