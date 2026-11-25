@@ -1,0 +1,111 @@
+{
+  "stories": [
+    {
+      "title": "Hono が月間約 4 億ダウンロードに、v5 も近くリリース予定",
+      "main": "https://x.com/yusukebe/status/2125380867808014779",
+      "body": "yusukebe さんが、Hono の月間ダウンロード数がほぼ 4 億（400M）に達したと投稿した。あわせて v5 を近くリリースする予定だと明かしている。",
+      "around": [
+        {
+          "url": "https://x.com/yusukebe/status/2125381045965197504",
+          "name": "Yusuke Wada",
+          "summary": "日本語でも「Hono は月間 4 億ダウンロード」と報告"
+        }
+      ]
+    },
+    {
+      "title": "Hono の API で TCP サーバーを書ける TCP Hono が登場",
+      "main": "https://x.com/yusukebe/status/2125720870220112372",
+      "body": "yusukebe さんが、inbound TCP に対応した Cloudflare Workers と Node.js で動く TCP Hono を公開した。Whois や Redis など任意の TCP サーバーを Hono の API で実装でき、追加分は preset・router・getPath だけで、ほかは Hono そのまま。同じアプリで HTTP と TCP を両方扱える。",
+      "around": [
+        {
+          "url": "https://x.com/yusukebe/status/2125721199179415592",
+          "name": "Yusuke Wada",
+          "summary": "tcp-hono が足すのは preset、router、getPath だけで残りは Hono のまま"
+        },
+        {
+          "url": "https://x.com/yusukebe/status/2125721489043521911",
+          "name": "Yusuke Wada",
+          "summary": "Redis を置かず Durable Objects だけで動く Redis 互換サーバーを Workers 上に作った"
+        },
+        {
+          "url": "https://x.com/wishee0/status/2125655739213722062",
+          "name": "vaish",
+          "summary": "Redis 8.12 を wasm にして Durable Object の中で動かす実験"
+        }
+      ]
+    },
+    {
+      "title": "Workers Free プランでも Email Sending が使えるように",
+      "main": "https://x.com/CloudflareDev/status/2125564566755291247",
+      "body": "Cloudflare の Email Sending が Workers Free プランで利用可能になった。無料プランで送れるのは、アカウントで認証済みの特定のメールアドレス宛てに限られる。",
+      "around": [
+        {
+          "url": "https://x.com/__syumai/status/2125630304018907383",
+          "name": "syumai",
+          "summary": "メール送信が無料プランでできるのはかなりすごい"
+        },
+        {
+          "url": "https://x.com/__syumai/status/2125630500371054797",
+          "name": "syumai",
+          "summary": "対象は認証済みの特定のメールアドレスだけで、実験には使えそう"
+        }
+      ]
+    },
+    {
+      "title": "Cloudflare、サイトを AI エージェントから検索可能にする Search for Agents",
+      "main": "https://x.com/Cloudflare/status/2125591595965702452",
+      "body": "トグル 1 つでサイトのコンテンツを自動でインデックスし、エージェントが自分で見つけられる検索 API を公開する機能。HTTP QUERY にもネイティブ対応する。/.well-known/search にエンドポイントが生え、返るのは AI の回答ではなく Markdown。",
+      "around": [
+        {
+          "url": "https://x.com/irvinebroque/status/2125607280876126628",
+          "name": "Brendan Irvine-Broque",
+          "summary": "Markdown for Agents と同じくワンクリックでサイトをエージェント対応にできる"
+        },
+        {
+          "url": "https://x.com/R0u9h/status/2125723886243451093",
+          "name": "LaPh",
+          "summary": "/.well-known/search が生え、返るのは Markdown なのでサイト側の対応も必要"
+        }
+      ]
+    },
+    {
+      "title": "Claude Code 2.1.332 リリース、MCP サーバーの skills に対応",
+      "main": "https://x.com/ClaudeCodeLog/status/2125406441796206946",
+      "body": "150 の CLI 変更と 1 つのシステムプロンプト変更。MCP サーバーがホストする skills（beta）が / メニューに server:skill として出るほか、skill のインラインシェルコマンドを拒否できる PreSkillShellCommand フックが追加された。システムプロンプトには、破壊的・取り消しにくい操作の前に確認を求める「execute with care」ルールが入った。",
+      "around": [
+        {
+          "url": "https://x.com/ClaudeCodeLog/status/2125406455826145354",
+          "name": "Claude Code Changelog",
+          "summary": "CLI の変更点一覧。PreSkillShellCommand フックや多数のフリーズ修正"
+        },
+        {
+          "url": "https://x.com/ClaudeCodeLog/status/2125406469155602549",
+          "name": "Claude Code Changelog",
+          "summary": "システムプロンプトに「execute with care」ルールが追加"
+        }
+      ]
+    }
+  ],
+  "quick": [
+    {
+      "title": "Polish が JPEG と PNG の AVIF 版を自動生成",
+      "summary": "Cloudflare Polish が JPEG・PNG から AVIF 版を自動で作るようになった。AVIF は WebP より小さくなることが多い。",
+      "source": "https://x.com/CFchangelog/status/2125703887793582128"
+    },
+    {
+      "title": "Cloudflare WAF が Ruby と WordPress の脆弱性に緊急ルール",
+      "summary": "ヒープオーバーフローや権限昇格の脆弱性をブロックする WAF の緊急リリースが出た。",
+      "source": "https://x.com/CFchangelog/status/2125628334994235571"
+    },
+    {
+      "title": "WAF Free Ruleset に 2 つの検知を追加",
+      "summary": "Anomaly と Authentication Bypass の攻撃を自動でブロックする検知が無料のルールセットに入った。",
+      "source": "https://x.com/CFchangelog/status/2125711443349983608"
+    },
+    {
+      "title": "Torvalds 氏、AI 生成テストを大量に含む EXT4 の PR に警告",
+      "summary": "Linux 7.4-rc5 向けの PR が 4 万 1197 行の追加を含み、大半が AI 生成の KUnit テストとバグ修正だった。安定化期間に入れる量ではないと批判しつつマージはした。",
+      "source": "https://x.com/joho_no_todai/status/2125366515931439271"
+    }
+  ]
+}
