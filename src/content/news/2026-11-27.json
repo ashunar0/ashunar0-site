@@ -1,0 +1,106 @@
+{
+  "stories": [
+    {
+      "title": "Hono にセキュリティアップデート v4.13.22",
+      "main": "https://x.com/haruo2177/status/2125769385197666548",
+      "body": "やぐちはるおさんが、Hono のセキュリティアップデートが来ていると v4.13.22 のリリースページを共有した。リリースは堅牢化（hardening）の変更をまとめたもので、アップデートが推奨されている。",
+      "around": []
+    },
+    {
+      "title": "Vite 8.4 リリース、dev サーバーのファイル配信を許可リスト方式に",
+      "main": "https://x.com/vite_js/status/2125923279797948637",
+      "body": "Vite 8.4 がリリースされ、server.fs.strict: 'extended' と server.fs.allow: [] で dev サーバーのファイル配信を許可リスト方式にできるようになった。失敗した動的インポートの再試行、CSS の url() でのサブパスインポート、dev サーバーの二重起動検出、Wasm の source phase import、SSR 向けの実験的な bundled dev も入った。",
+      "around": [
+        {
+          "url": "https://x.com/azu_re/status/2125924596163723394",
+          "name": "azu",
+          "summary": "許可リスト方式のファイル配信チェックと、動的インポート再試行時の CSS 再取得をまとめて紹介"
+        },
+        {
+          "url": "https://x.com/yoppy0123/status/2125925631301181520",
+          "name": "吉岡 裕貴",
+          "summary": "二重起動の検出で AI エージェントが dev サーバーを何個も立ち上げるのを防げる、複数起動は vite --bypass-lock で"
+        }
+      ]
+    },
+    {
+      "title": "Vite+ の型を使う lint と型チェックが tsrs で動くように",
+      "main": "https://x.com/voidzerodev/status/2125887314408714696",
+      "body": "VoidZero が、Vite+ の型を使う lint と型チェックを tsrs で動かすようにしたと発表した。tsrs は TypeScript コンパイラの Rust 移植で、Vite+ v1.7.0 以降なら設定やコマンドを変えずに速くなり、ピークメモリも減る。",
+      "around": [
+        {
+          "url": "https://x.com/aidevbird/status/2125938116749877460",
+          "name": "Ai Dev Bird",
+          "summary": "vp check が tsgolint 比で 19〜53% 速く、ピークメモリは 52〜61% 減るというベンチマークを紹介"
+        }
+      ]
+    },
+    {
+      "title": "Claude Duet のリサーチプレビューが日本などに拡大",
+      "main": "https://x.com/ahuja_karan/status/2125754729280192923",
+      "body": "Claude Duet のリサーチプレビューが米国の外に広がり、インド、ブラジル、インドネシア、日本が加わった。対象はこれらの国の Pro、Max、Ultra の加入者。",
+      "around": [
+        {
+          "url": "https://x.com/oikon48/status/2125787376182235287",
+          "name": "Oikon | Claude Code本出しました",
+          "summary": "Claude Duet が個人アカウントでも使えるようになった"
+        },
+        {
+          "url": "https://x.com/oikon48/status/2125802727078855108",
+          "name": "Oikon | Claude Code本出しました",
+          "summary": "Claude Duet が使えるようになったタイミングで、Claude の usage リセット券が追加されている"
+        },
+        {
+          "url": "https://x.com/pc_watch/status/2125817355611857237",
+          "name": "PC Watch",
+          "summary": "自律型 AI エージェント Claude Duet が日本でも利用可能に"
+        }
+      ]
+    },
+    {
+      "title": "D1 Insights がインデックスを提案するように",
+      "main": "https://x.com/CFchangelog/status/2125998331667132454",
+      "body": "D1 Insights が、D1 のクエリを速くするためのインデックスを提案するようになった。npx cf@latest d1 insights recommendations を実行すると、提案された CREATE INDEX 文が得られる。",
+      "around": []
+    },
+    {
+      "title": "Workers の workers.dev サブドメインで Images の URL 変換が使えるように",
+      "main": "https://x.com/CFchangelog/status/2126013355936678028",
+      "body": "Cloudflare Workers が workers.dev サブドメインで Images の URL インターフェースに対応した。カスタムドメインやバインディングなしで、ローカルでも本番でも最適化した画像を配信できる。",
+      "around": [
+        {
+          "url": "https://x.com/Rodev0007/status/2126037582756839734",
+          "name": "Rodev",
+          "summary": "Wrangler で url_transformations を有効にし、/cdn-cgi/image/ に変換を付けるだけで使える"
+        }
+      ]
+    }
+  ],
+  "quick": [
+    {
+      "title": "Hono v4.13.23 で TrieRouter などの脆弱性 3 件を修正",
+      "summary": "TrieRouter が __proto__ をメソッドとして扱う問題、hono/combine の except() でミドルウェアが飛ばされる問題、Bun で getPath() がパスの先頭を落とす問題を修正。該当する使い方ならアップデートが強く推奨されている。",
+      "source": "https://github.com/honojs/hono/releases/tag/v4.13.23"
+    },
+    {
+      "title": "Cloudflare の CLI と MCP から Workers Paid などを契約できるように",
+      "summary": "1.0.0-rc.5 に更新すると、ターミナルから出ずに Workers Paid、R2、Zero Trust を契約できる。",
+      "source": "https://x.com/CFchangelog/status/2125975554423660974"
+    },
+    {
+      "title": "Thariq 氏が Anthropic から OpenAI へ",
+      "summary": "Anthropic に在籍していた Thariq 氏が、OpenAI に参加したと投稿した。",
+      "source": "https://x.com/trq212/status/2125675533761671405"
+    },
+    {
+      "title": "Claude Code で次期 Opus の A/B テストが報じられる",
+      "summary": "Anthropic が Claude Code で次期 Opus モデル（Opus 5.6 とみられる）を A/B テストしていると報じられている。Anthropic からの発表はまだない。",
+      "source": "https://x.com/itsvishaltwt/status/2125780574531183093"
+    },
+    {
+      "title": "Hajime Hoshi 氏が Go 製 JavaScript エンジン Ekuma v0.1.0 を公開",
+      "summary": "pure Go の JavaScript エンジンで、ES2026 の Test262 を 99.99% 通過し、goja/Sobek より 6〜8 倍速いとしている。",
+      "source": "https://x.com/hajimehoshi/status/2125908071797113162"
+    }
+  ]
+}
