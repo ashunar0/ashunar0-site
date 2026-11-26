@@ -120,7 +120,15 @@ const contentGrid = 'lg:grid lg:grid-cols-[minmax(0,1fr)_13rem] lg:gap-10';
         Card.Body の padding は Card.Header が上にある前提で pt が狭い。
         本文だけを載せるここでは上下を揃えたいので、Root に直接 padding を置く。
       */}
-      <Card.Root variant="outline" className="max-w-3xl p-6 sm:p-8">
+      {/*
+        狭い画面では main の px-6 とカードの p-6 が重なって本文が細くなる。
+        負のマージンで画面幅まで広げ、角丸と左右の線を外して上下の線と背景色だけで区切る。
+        本文の左端は記事ヘッダーと同じ 24px に揃う。
+      */}
+      <Card.Root
+        variant="outline"
+        className="max-w-3xl p-6 sm:p-8 max-sm:-mx-6 max-sm:rounded-none max-sm:border-x-0"
+      >
         <div class="post-body">
           <Content />
         </div>
