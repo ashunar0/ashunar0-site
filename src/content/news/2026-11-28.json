@@ -1,0 +1,95 @@
+{
+  "stories": [
+    {
+      "title": "Dillon Mulroy さんが Cloudflare を離れ Anthropic の platform org へ",
+      "main": "https://x.com/dillon_mulroy/status/2126416656712790175",
+      "body": "Cloudflare で 1 年間開発を続けてきた Dillon Mulroy さんが、11 月 27 日が最終日だと投稿。次は Anthropic の platform org に加わり、AI を支えるプラットフォームづくりに携わると発表した。",
+      "around": [
+        {
+          "url": "https://x.com/katelyn_lesse/status/2126431535725494503",
+          "name": "Katelyn Lesse",
+          "summary": "Anthropic 側から歓迎。Claude の力を安全に届けるチームを作っていると投稿"
+        },
+        {
+          "url": "https://x.com/dillon_mulroy/status/2126430040686768529",
+          "name": "Dillon Mulroy",
+          "summary": "Cloudflare の Developer Platform を前に進めてきた同僚たちへ感謝"
+        }
+      ]
+    },
+    {
+      "title": "Durable Objects 上でフルの Linux カーネルが動いた",
+      "main": "https://x.com/nstlopez/status/2126418429271826772",
+      "body": "Néstor さんが Durable Objects 上でフルのカーネルを動かせたと投稿。元になっているのは、ブラウザのタブで Linux カーネルとディストリをまるごと動かす unkernel で、Néstor さんは UDP 対応の PR も出している。",
+      "around": [
+        {
+          "url": "https://x.com/rauchg/status/2126416223592473046",
+          "name": "Guillermo Rauch",
+          "summary": "unkernel はブラウザのタブで本物の Linux を動かし、コーディングエージェントや Chrome まで動くと紹介"
+        },
+        {
+          "url": "https://x.com/nstlopez/status/2126423749226565833",
+          "name": "Néstor",
+          "summary": "数日 unkernel を触っていて、UDP 対応の PR を出していると返信"
+        }
+      ]
+    },
+    {
+      "title": "YAPC Tokyo 2026 のパールスター感謝祭が Cloudflare Workers で運用",
+      "main": "https://x.com/yusukebe/status/2126254513434865815",
+      "body": "YAPC Tokyo 2026 の企画「パールスター感謝祭」が Cloudflare 上で動いていると yusukebe さんが紹介。Cloudflare は YAPC のスポンサーでもある。運営した pastak さんは Workers で問題なく回せたと投稿し、yusukebe さんは 200 人以上の同時接続を 5 ドルプランで事故なしと反応した。",
+      "around": [
+        {
+          "url": "https://x.com/pastak/status/2126331550677811257",
+          "name": "マジカルペンネくん🍝",
+          "summary": "Cloudflare Workers で運用して何も問題なくやれた"
+        },
+        {
+          "url": "https://x.com/yusukebe/status/2126335201047728396",
+          "name": "Yusuke Wada",
+          "summary": "200 人以上の同時接続を 5 ドルプランで事故なし"
+        },
+        {
+          "url": "https://x.com/__syumai/status/2126332415472013411",
+          "name": "syumai",
+          "summary": "Cloudflare Workers は便利"
+        }
+      ]
+    },
+    {
+      "title": "Claude Project からローカル PC で Claude Code セッションを起動できる",
+      "main": "https://x.com/oikon48/status/2126242162648207799",
+      "body": "Claude Project の Environment > Your computer で自分のデバイスを追加すると、そのローカル環境で Claude Code のセッションを起動できると oikon さんが紹介。既存のセッションにメッセージを送るには Remote Control 経由で中継する必要がある。",
+      "around": [
+        {
+          "url": "https://x.com/ryu_f_web/status/2126291774742401152",
+          "name": "ふくだ（fukuda ryu）",
+          "summary": "Claude Duet を実機検証した無料の Zenn Book（全 18 章）を公開"
+        }
+      ]
+    },
+    {
+      "title": "自社プロダクトを Void に載せ替えた事例",
+      "main": "https://x.com/R0u9h/status/2126314890138976382",
+      "body": "LaPh さんが自社のプロダクトを Void に載せ替えたと投稿。もともと使っていたスタックがほぼ同じだったため、影響は小さかったという。yusukebe さんもリポストしている。",
+      "around": []
+    }
+  ],
+  "quick": [
+    {
+      "title": "Vite+ への置き換えが進む流れ",
+      "summary": "nvm、npx、tsx、ESLint、Prettier、tsc、Vitest、tsup、Turbo、husky、lint-staged が次々 Vite+ に置き換わっていくと Pontus Abrahamsson さんが投稿し、VoidZero がリポストした。",
+      "source": "https://x.com/pontusab/status/2126319519157084564"
+    },
+    {
+      "title": "Cloudflare Pipelines の Sink 認証情報を直接更新できるように",
+      "summary": "トークンが切れても Sink を削除・再作成せずに認証情報を更新できる。失敗したパイプラインを更新すると自動で再起動する。",
+      "source": "https://x.com/CFchangelog/status/2126292650311451008"
+    },
+    {
+      "title": "GitHub Actions をローカルで動かす act に脆弱性、0.2.95 で修正",
+      "summary": "信頼できないリポジトリで実行すると開発者の端末で処理を実行される CVE-2026-136629。対象は 0.2.92〜0.2.94。",
+      "source": "https://x.com/MalwareBibleJP/status/2126399418832437671"
+    }
+  ]
+}
