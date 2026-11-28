@@ -234,6 +234,8 @@ body pre {
   background: #24292e; /* shiki github-dark */
   font-size: 0.875rem;
   line-height: 1.7;
+  scrollbar-width: thin;
+  scrollbar-color: rgb(255 255 255 / 0.2) transparent;
 }
 
 body pre > code {
@@ -251,6 +253,8 @@ body table {
   width: max-content;
   max-width: 100%;
   overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in oklab, var(--color-fg-muted) 30%, transparent) transparent;
   border-collapse: collapse;
   font-size: 0.9333em;
   line-height: 1.7;
